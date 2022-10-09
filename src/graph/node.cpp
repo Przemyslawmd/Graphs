@@ -4,7 +4,7 @@
 Node::Node(char key)
 {
     this->key = key;
-	state = State::NOT_VISITED;
+    state = State::NOT_VISITED;
 }
 
 
