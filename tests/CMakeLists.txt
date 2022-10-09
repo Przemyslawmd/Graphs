@@ -19,9 +19,11 @@ include_directories(googletest/include)
 
 add_executable(
   GraphTests
-  bfs/bfsTest.cpp
+  bfsTest.cpp
+  dfsTest.cpp
   graphTest.cpp
   ${SRC}/bfs/bfs.cpp
+  ${SRC}/dfs/dfs.cpp
   ${SRC}/graph/graph.cpp
   ${SRC}/graph/node.cpp
 )

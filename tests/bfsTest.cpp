@@ -1,7 +1,7 @@
 
-#include "../../src/bfs/bfs.h"
-#include "../../src/graph/Node.h"
-#include "../../src/graph/graph.h"
+#include "../src/bfs/bfs.h"
+#include "../src/graph/Node.h"
+#include "../src/graph/graph.h"
 
 #include <gtest/gtest.h>
 
