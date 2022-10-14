@@ -9,13 +9,13 @@ Node::Node(char key)
 }
 
 
-char Node::getKey()
+char Node::getKey() const
 {
     return key;
 }
 
 
-bool Node::isVisited()
+bool Node::isVisited() const
 {
     return visited;
 }
