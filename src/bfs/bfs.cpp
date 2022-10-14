@@ -22,7 +22,7 @@ void BFS::processQueue(std::vector<std::vector<char>>& adjacency, std::vector<st
     char key = nodesQueue.front();
     auto itNode = std::find_if(nodes.begin(), nodes.end(), [&](const auto& node) { return node->getKey() == key; });
 	
-    (*itNode)->setState(State::COMPLETED);
+    (*itNode)->setAsVisited();
 
     auto itNeighbours = std::find_if(adjacency.begin(), adjacency.end(), [&](const auto& vec) { return vec.at(0) == key; });
 
@@ -30,13 +30,13 @@ void BFS::processQueue(std::vector<std::vector<char>>& adjacency, std::vector<st
     std::advance(it, 1);
     while (it != itNeighbours->end()) {
         auto itNode = std::find_if(nodes.begin(),nodes.end(), [&](const auto& node) { return node->getKey() == *it; });        
-        if ((*itNode).get()->getState() == State::NOT_VISITED) {
+        if ((*itNode).get()->isVisited() == false) {
             nodesQueue.push(*it);
-            (*itNode).get()->setState(State::VISITED);
+            (*itNode).get()->setAsVisited();
         }
         it++;
     }    
     
-    (*itNode)->setState(State::COMPLETED);
     nodesQueue.pop();    
 }
+

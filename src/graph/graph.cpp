@@ -17,10 +17,8 @@ std::vector<std::unique_ptr<Node>>& Graph::getNodes()
 }
 
 
-
 std::vector<std::vector<char>>& Graph::getAdjacencyList()
 {
     return adjacencyList;
 }
-
 

@@ -1,10 +1,11 @@
 
 #include "Node.h"
 
+
 Node::Node(char key)
 {
     this->key = key;
-    state = State::NOT_VISITED;
+    visited = false;
 }
 
 
@@ -14,14 +15,14 @@ char Node::getKey()
 }
 
 
-void Node::setState(State state)
+bool Node::isVisited()
 {
-    this->state = state;
+    return visited;
 }
 
 
-State Node::getState()
+void Node::setAsVisited()
 {
-    return state;
+    visited = true;
 }
 

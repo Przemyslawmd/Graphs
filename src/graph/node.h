@@ -3,14 +3,6 @@
 #define GRAPHS_NODE_H
 
 
-enum class State
-{
-    NOT_VISITED,
-    VISITED,
-    COMPLETED
-};
-
-
 class Node
 {
 public:
@@ -18,13 +10,13 @@ public:
     explicit Node(char key);
 
     char getKey();
-    void setState(State state);
-    State getState();
+    bool isVisited();
+    void setAsVisited();
 
 protected:
 
     char key;
-    State state;
+    bool visited;
 };       
 
 #endif

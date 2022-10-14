@@ -25,15 +25,15 @@ TEST(runTestBFS, 1)
 	auto& nodes = graph.getNodes();
 		
     ASSERT_EQ(nodes.at(0)->getKey(), 'A');
-    ASSERT_EQ(nodes.at(0)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(0)->isVisited());
     ASSERT_EQ(nodes.at(1)->getKey(), 'B');
-    ASSERT_EQ(nodes.at(1)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(1)->isVisited());
     ASSERT_EQ(nodes.at(2)->getKey(), 'C');
-    ASSERT_EQ(nodes.at(2)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(2)->isVisited());
     ASSERT_EQ(nodes.at(3)->getKey(), 'D');
-    ASSERT_EQ(nodes.at(3)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(3)->isVisited());
     ASSERT_EQ(nodes.at(4)->getKey(), 'E');
-    ASSERT_EQ(nodes.at(4)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(4)->isVisited());
 }    
 
 
@@ -54,18 +54,18 @@ TEST(runTestBFS, 2)
     auto& nodes = graph.getNodes();
 
     ASSERT_EQ(nodes.at(0)->getKey(), 'A');
-    ASSERT_EQ(nodes.at(0)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(0)->isVisited());
     ASSERT_EQ(nodes.at(1)->getKey(), 'B');
-    ASSERT_EQ(nodes.at(1)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(1)->isVisited());
     ASSERT_EQ(nodes.at(2)->getKey(), 'C');
-    ASSERT_EQ(nodes.at(2)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(2)->isVisited());
     ASSERT_EQ(nodes.at(3)->getKey(), 'D');
-    ASSERT_EQ(nodes.at(3)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(3)->isVisited());
     ASSERT_EQ(nodes.at(4)->getKey(), 'E');
-    ASSERT_EQ(nodes.at(4)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(4)->isVisited());
     ASSERT_EQ(nodes.at(5)->getKey(), 'F');
-    ASSERT_EQ(nodes.at(5)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(5)->isVisited());
     ASSERT_EQ(nodes.at(6)->getKey(), 'G');
-    ASSERT_EQ(nodes.at(6)->getState(), State::COMPLETED);
+    ASSERT_TRUE(nodes.at(6)->isVisited());
 }
 
