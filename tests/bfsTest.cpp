@@ -12,7 +12,7 @@
 TEST(runTestBFS, 1)
 {
     
-	std::vector<std::vector<char>> adjacency = { { 'A', 'B' }, 
+    std::vector<std::vector<char>> adjacency = { { 'A', 'B' }, 
                                                  { 'B', 'A', 'C' }, 
                                                  { 'C', 'B', 'D', 'E'}, 
                                                  { 'D', 'C', 'E' },  
