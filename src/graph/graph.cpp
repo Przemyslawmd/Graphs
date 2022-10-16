@@ -4,14 +4,10 @@
 
 Graph::Graph(const std::vector<std::vector<char>>& adjacency)
 {
-    adjacencyList.reserve(adjacency.size() * adjacency.size());
-    adjacencyList.insert(adjacencyList.begin(), adjacency.begin(), adjacency.end());   
+    adjacencyList = adjacency;
     
-    int i = 0;
     for (auto vec : adjacency) {
-        adjacencyList.at(i).insert(adjacencyList.at(i).begin(), vec.begin(), vec.end());
-        nodes.push_back(std::make_unique<Node>(vec.at(0)));
-        i++;
+        nodes.push_back(std::make_unique<Node>(vec[0]));
     }
 }
 

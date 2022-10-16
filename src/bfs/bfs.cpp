@@ -9,7 +9,7 @@ void BFS::traverseGraph(Graph& graph)
     auto& nodes = graph.getNodes();
     auto& adjacency = graph.getAdjacencyList();
     
-    nodesQueue.push(adjacency.at(0).at(0));
+    nodesQueue.push(adjacency[0][0]);
     
     while (!nodesQueue.empty()) {
         processQueue(adjacency, nodes);
@@ -24,7 +24,7 @@ void BFS::processQueue(std::vector<std::vector<char>>& adjacency, std::vector<st
 	
     (*itNode)->setAsVisited();
 
-    auto itNeighbours = std::find_if(adjacency.begin(), adjacency.end(), [&](const auto& vec) { return vec.at(0) == key; });
+    auto itNeighbours = std::find_if(adjacency.begin(), adjacency.end(), [&](const auto& vec) { return vec[0] == key; });
 
     std::vector<char>::iterator it = itNeighbours->begin();
     std::advance(it, 1);

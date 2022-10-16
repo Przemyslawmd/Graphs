@@ -23,16 +23,16 @@ TEST(runTestDFS, 1)
 
     auto& nodes = graph.getNodes();
 
-    ASSERT_EQ(nodes.at(0)->getKey(), 'A');
-    ASSERT_TRUE(nodes.at(0)->isVisited());
-    ASSERT_EQ(nodes.at(1)->getKey(), 'B');
-    ASSERT_TRUE(nodes.at(1)->isVisited());
-    ASSERT_EQ(nodes.at(2)->getKey(), 'C');
-    ASSERT_TRUE(nodes.at(2)->isVisited());
-    ASSERT_EQ(nodes.at(3)->getKey(), 'D');
-    ASSERT_TRUE(nodes.at(3)->isVisited());
-    ASSERT_EQ(nodes.at(4)->getKey(), 'E');
-    ASSERT_TRUE(nodes.at(4)->isVisited());
+    ASSERT_EQ(nodes[0]->getKey(), 'A');
+    ASSERT_TRUE(nodes[0]->isVisited());
+    ASSERT_EQ(nodes[1]->getKey(), 'B');
+    ASSERT_TRUE(nodes[1]->isVisited());
+    ASSERT_EQ(nodes[2]->getKey(), 'C');
+    ASSERT_TRUE(nodes[2]->isVisited());
+    ASSERT_EQ(nodes[3]->getKey(), 'D');
+    ASSERT_TRUE(nodes[3]->isVisited());
+    ASSERT_EQ(nodes[4]->getKey(), 'E');
+    ASSERT_TRUE(nodes[4]->isVisited());
 }
 
 
@@ -51,19 +51,19 @@ TEST(runTestDFS, 2)
 
     auto& nodes = graph.getNodes();
 
-    ASSERT_EQ(nodes.at(0)->getKey(), 'A');
-    ASSERT_TRUE(nodes.at(0)->isVisited());
-    ASSERT_EQ(nodes.at(1)->getKey(), 'B');
-    ASSERT_TRUE(nodes.at(1)->isVisited());
-    ASSERT_EQ(nodes.at(2)->getKey(), 'C');
-    ASSERT_TRUE(nodes.at(2)->isVisited());
-    ASSERT_EQ(nodes.at(3)->getKey(), 'D');
-    ASSERT_TRUE(nodes.at(3)->isVisited());
-    ASSERT_EQ(nodes.at(4)->getKey(), 'E');
-    ASSERT_TRUE(nodes.at(4)->isVisited());
-    ASSERT_EQ(nodes.at(5)->getKey(), 'F');
-    ASSERT_TRUE(nodes.at(5)->isVisited());
-    ASSERT_EQ(nodes.at(6)->getKey(), 'G');
-    ASSERT_TRUE(nodes.at(6)->isVisited());
+    ASSERT_EQ(nodes[0]->getKey(), 'A');
+    ASSERT_TRUE(nodes[0]->isVisited());
+    ASSERT_EQ(nodes[1]->getKey(), 'B');
+    ASSERT_TRUE(nodes[1]->isVisited());
+    ASSERT_EQ(nodes[2]->getKey(), 'C');
+    ASSERT_TRUE(nodes[2]->isVisited());
+    ASSERT_EQ(nodes[3]->getKey(), 'D');
+    ASSERT_TRUE(nodes[3]->isVisited());
+    ASSERT_EQ(nodes[4]->getKey(), 'E');
+    ASSERT_TRUE(nodes[4]->isVisited());
+    ASSERT_EQ(nodes[5]->getKey(), 'F');
+    ASSERT_TRUE(nodes[5]->isVisited());
+    ASSERT_EQ(nodes[6]->getKey(), 'G');
+    ASSERT_TRUE(nodes[6]->isVisited());
 }
 
