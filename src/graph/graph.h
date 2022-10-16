@@ -7,11 +7,14 @@
 #include <memory>
 #include <vector>
 
+
 class Graph
 {
 public:
     
-    Graph(std::vector<std::vector<char>> adjacency); 
+    Graph(const std::vector<std::vector<char>>& adjacency);
+    Graph(const Graph&) = delete;
+    Graph& operator=(Graph&) = delete;
 
     std::vector<std::unique_ptr<Node>>& getNodes();
     std::vector<std::vector<char>>& getAdjacencyList();
