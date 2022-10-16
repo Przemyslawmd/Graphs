@@ -14,6 +14,10 @@ class BFS
 {
 public:
 
+    BFS() = default;
+    BFS(const BFS&) = delete;
+    BFS& operator=(BFS&) = delete;
+
     void traverseGraph(Graph& graph);
 
 private:

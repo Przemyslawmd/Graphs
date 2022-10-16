@@ -15,6 +15,8 @@ class DFS
 public:
 
     DFS(Graph&);
+    DFS(const DFS&) = delete;
+    DFS& operator=(DFS&) = delete;
 
     void traverseGraph();
 
