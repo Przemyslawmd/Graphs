@@ -9,23 +9,23 @@ DFS::DFS(GraphList& graph) : adjacency(graph.getAdjacencyList()), nodes(graph.ge
 
 void DFS::traverseGraph()
 {
-    char initialKey = adjacency.at(0).at(0);        
+    char initialKey = adjacency[0][0];        
     processNode(initialKey);   
 }
 
 
 void DFS::processNode(char key)
 {
-    auto itNode = std::find_if(nodes.begin(), nodes.end(), [&](const auto& node) { return node->getKey() == key; });
+    auto itNode = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; });
     (*itNode)->setAsVisited();
 
-    auto itNeighbours = std::find_if(adjacency.begin(), adjacency.end(), [&](const auto& vec) { return vec.at(0) == key; });
-    std::vector<char>::iterator it = itNeighbours->begin();
+    auto itNeighboursList = std::find_if(adjacency.begin(), adjacency.end(), [key](const auto& vec) { return vec[0] == key; });
+    std::vector<char>::iterator it = itNeighboursList->begin();
     std::advance(it, 1);
      
-    while (it != itNeighbours->end()) {
-        auto itNode = std::find_if(nodes.begin(), nodes.end(), [&](const auto& node) { return node->getKey() == *it; });
-        if ((*itNode).get()->isVisited() == false) {
+    while (it != itNeighboursList->end()) {
+        auto itNeighbourNode = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == *it; });
+        if ((*itNeighbourNode).get()->isVisited() == false) {
             processNode(*it);
         }
         it++;

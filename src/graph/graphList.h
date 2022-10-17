@@ -18,15 +18,11 @@ public:
     GraphList(const GraphList&) = delete;
     GraphList& operator=(GraphList&) = delete;
 
-    //std::vector<std::unique_ptr<Node>>& getNodes();
     std::vector<std::vector<char>>& getAdjacencyList();
-    //std::vector<std::vector<int>>& getAdjacencyMatrix();
 
 private:
 
-    //std::vector<std::unique_ptr<Node>> nodes;
     std::vector<std::vector<char>> adjacencyList;
-    //std::vector<std::vector<int>> adjacencyMatrix;
 };
 
 #endif

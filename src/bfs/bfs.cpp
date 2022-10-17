@@ -20,16 +20,16 @@ void BFS::traverseGraph(GraphList& graph)
 void BFS::processQueue(std::vector<std::vector<char>>& adjacency, std::vector<std::unique_ptr<Node>>& nodes)
 {
     char key = nodesQueue.front();
-    auto itNode = std::find_if(nodes.begin(), nodes.end(), [&](const auto& node) { return node->getKey() == key; });
+    auto itNode = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; });
 	
     (*itNode)->setAsVisited();
 
-    auto itNeighbours = std::find_if(adjacency.begin(), adjacency.end(), [&](const auto& vec) { return vec[0] == key; });
+    auto itNeighbours = std::find_if(adjacency.begin(), adjacency.end(), [key](const auto& vec) { return vec[0] == key; });
 
     std::vector<char>::iterator it = itNeighbours->begin();
     std::advance(it, 1);
     while (it != itNeighbours->end()) {
-        auto itNode = std::find_if(nodes.begin(),nodes.end(), [&](const auto& node) { return node->getKey() == *it; });        
+        auto itNode = std::find_if(nodes.begin(),nodes.end(), [it](const auto& node) { return node->getKey() == *it; });        
         if ((*itNode).get()->isVisited() == false) {
             nodesQueue.push(*it);
             (*itNode).get()->setAsVisited();
