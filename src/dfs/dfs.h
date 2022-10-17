@@ -3,7 +3,7 @@
 #define GRAPHS_DFS_H
 
 #include "../graph/node.h"
-#include "../graph/graph.h"
+#include "../graph/graphList.h"
 
 #include <memory>
 #include <queue>
@@ -14,7 +14,7 @@ class DFS
 {
 public:
 
-    DFS(Graph&);
+    DFS(GraphList&);
     DFS(const DFS&) = delete;
     DFS& operator=(DFS&) = delete;
 

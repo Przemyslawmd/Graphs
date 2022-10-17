@@ -1,7 +1,7 @@
 
 #include "../src/dfs/dfs.h"
 #include "../src/graph/Node.h"
-#include "../src/graph/graph.h"
+#include "../src/graph/graphList.h"
 
 #include <gtest/gtest.h>
 
@@ -17,7 +17,7 @@ TEST(runTestDFS, 1)
                                                  { 'D', 'C', 'E' },
                                                  { 'E', 'C', 'D'} };
 
-    Graph graph(adjacency);
+    GraphList graph(adjacency);
     DFS dfs(graph);         
     dfs.traverseGraph();
 
@@ -45,7 +45,7 @@ TEST(runTestDFS, 2)
                                                  { 'E', 'F'},
                                                  { 'F', 'D', 'E' },
                                                  { 'G', 'B', 'C' } };
-    Graph graph(adjacency);
+    GraphList graph(adjacency);
     DFS dfs(graph);
     dfs.traverseGraph();
 

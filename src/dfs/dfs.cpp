@@ -4,7 +4,7 @@
 #include <iterator>
 
 
-DFS::DFS(Graph& graph) : adjacency(graph.getAdjacencyList()), nodes(graph.getNodes()) {}
+DFS::DFS(GraphList& graph) : adjacency(graph.getAdjacencyList()), nodes(graph.getNodes()) {}
 
 
 void DFS::traverseGraph()

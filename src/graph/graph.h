@@ -12,17 +12,13 @@ class Graph
 {
 public:
     
-    Graph(const std::vector<std::vector<char>>& adjacency);
-    Graph(const Graph&) = delete;
-    Graph& operator=(Graph&) = delete;
+    virtual ~Graph() = 0;
 
     std::vector<std::unique_ptr<Node>>& getNodes();
-    std::vector<std::vector<char>>& getAdjacencyList();
 
-private:
+protected:
 
     std::vector<std::unique_ptr<Node>> nodes;
-    std::vector<std::vector<char>> adjacencyList;
 };
 
 #endif

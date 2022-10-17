@@ -25,6 +25,8 @@ add_executable(
   ${SRC}/bfs/bfs.cpp
   ${SRC}/dfs/dfs.cpp
   ${SRC}/graph/graph.cpp
+  ${SRC}/graph/graphList.cpp
+  ${SRC}/graph/graphMatrix.cpp
   ${SRC}/graph/node.cpp
 )
 

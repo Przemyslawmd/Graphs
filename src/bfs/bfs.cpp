@@ -4,7 +4,7 @@
 #include <iterator>
 
 
-void BFS::traverseGraph(Graph& graph)
+void BFS::traverseGraph(GraphList& graph)
 {
     auto& nodes = graph.getNodes();
     auto& adjacency = graph.getAdjacencyList();

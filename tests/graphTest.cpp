@@ -1,5 +1,6 @@
 
 #include "../src/graph/graph.h"
+#include "../src/graph/graphList.h"
 #include "../src/graph/node.h"
 
 #include <gtest/gtest.h>
@@ -16,7 +17,7 @@ TEST(runTestCreateGraph, 1)
                                                  { 'D', 'C', 'E' },  
                                                  { 'E', 'C', 'D'} }; 
 
-    Graph graph(adjacency);
+    GraphList graph(adjacency);
     auto& nodes = graph.getNodes();
     
     ASSERT_EQ(nodes[0]->getKey(), 'A');

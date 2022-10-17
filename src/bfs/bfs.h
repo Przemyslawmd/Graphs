@@ -3,7 +3,7 @@
 #define GRAPHS_BFS_H
 
 #include "../graph/node.h"
-#include "../graph/graph.h"
+#include "../graph/graphList.h"
 
 #include <memory>
 #include <queue>
@@ -18,7 +18,7 @@ public:
     BFS(const BFS&) = delete;
     BFS& operator=(BFS&) = delete;
 
-    void traverseGraph(Graph& graph);
+    void traverseGraph(GraphList& graph);
 
 private:
 
