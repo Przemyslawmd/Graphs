@@ -4,6 +4,7 @@
 
 #include "../graph/node.h"
 #include "../graph/graphList.h"
+#include "../graph/graphMatrix.h"
 
 #include <memory>
 #include <queue>
@@ -22,8 +23,8 @@ public:
 
 private:
 
-    void processQueue(std::vector<std::vector<char>>& adjacencyList, std::vector<std::unique_ptr<Node>>& nodes);
-    
+    void processQueue(std::map<char, std::list<std::tuple<char, int>>>& adjacency , std::vector<std::unique_ptr<Node>>& nodes);
+
     std::queue<char> nodesQueue;
 };
 

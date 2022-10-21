@@ -11,14 +11,20 @@
 
 TEST(runTestBFS, 1)
 {
-    
-    std::vector<std::vector<char>> adjacency = { { 'A', 'B' }, 
-                                                 { 'B', 'A', 'C' }, 
-                                                 { 'C', 'B', 'D', 'E'}, 
-                                                 { 'D', 'C', 'E' },  
-                                                 { 'E', 'C', 'D'} }; 
-    
-    GraphList graph(adjacency);
+    GraphList graph;
+    graph.addNodes(std::vector<char> { 'A', 'B', 'C', 'D', 'E' });    
+
+    graph.addEdge('A', 'B');
+    graph.addEdge('B', 'A');
+    graph.addEdge('B', 'C');
+    graph.addEdge('C', 'B');
+    graph.addEdge('C', 'D');
+    graph.addEdge('C', 'E');
+    graph.addEdge('D', 'C');
+    graph.addEdge('D', 'E');
+    graph.addEdge('E', 'C');
+    graph.addEdge('E', 'D');
+
     BFS bfs;
     bfs.traverseGraph(graph);
 
@@ -37,17 +43,28 @@ TEST(runTestBFS, 1)
 }    
 
 
-TEST(runTestBFS, 2)
+TEST(runTestBFS, 4)
 {
+    GraphList graph;
+    graph.addNodes(std::vector<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G' });   
 
-    std::vector<std::vector<char>> adjacency = { { 'A', 'B', 'D' }, 
-                                                 { 'B', 'A', 'C', 'D', 'G' }, 
-                                                 { 'C', 'B', 'G' }, 
-                                                 { 'D', 'A', 'B', 'F' },  
-                                                 { 'E', 'F'},
-                                                 { 'F', 'D', 'E' },
-                                                 { 'G', 'B', 'C' } }; 
-    GraphList graph(adjacency);
+    graph.addEdge('A', 'B');
+    graph.addEdge('A', 'D');
+    graph.addEdge('B', 'A');
+    graph.addEdge('B', 'C');
+    graph.addEdge('B', 'D');
+    graph.addEdge('B', 'G');
+    graph.addEdge('C', 'B');
+    graph.addEdge('C', 'G');
+    graph.addEdge('D', 'A');
+    graph.addEdge('D', 'B');
+    graph.addEdge('D', 'F');
+    graph.addEdge('E', 'F');
+    graph.addEdge('F', 'D');
+    graph.addEdge('F', 'E');
+    graph.addEdge('G', 'B');
+    graph.addEdge('G', 'C');
+
     BFS bfs;
     bfs.traverseGraph(graph);
     
