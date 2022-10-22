@@ -13,8 +13,14 @@ std::vector<std::unique_ptr<Node>>& Graph::getNodes()
 
 void Graph::addNode(char key)
 {
-    if (std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; } ) == nodes.end()) {
+    if (isNodeNotExist(key)) {
         nodes.push_back(std::make_unique<Node>(key));
     }
+}
+
+
+bool Graph::isNodeNotExist(char key)
+{
+    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; } ) == nodes.end();    
 }
 

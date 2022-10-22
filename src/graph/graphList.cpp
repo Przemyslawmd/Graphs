@@ -28,10 +28,10 @@ void GraphList::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 
 void GraphList::addEdge(char srcKey, char dstKey)
 {
-    if (std::find_if(nodes.begin(), nodes.end(), [srcKey](const auto& node) { return node->getKey() == srcKey; } ) == nodes.end()) {
+    if (isNodeNotExist(srcKey)) {
         return;    
     }
-    if (std::find_if(nodes.begin(), nodes.end(), [dstKey](const auto& node) { return node->getKey() == dstKey; } ) == nodes.end()) {
+    if (isNodeNotExist(dstKey)) {
         return;
     }
     
