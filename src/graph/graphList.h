@@ -25,12 +25,10 @@ public:
     void addEdge(char key1, char key2);
     void addNodes(std::vector<char>& nodeKeys);
 
-    std::vector<std::vector<char>>& getAdjacencyList();
     std::map<char, std::list<std::tuple<char, int>>>& getAdjacency();
 
 private:
 
-    std::vector<std::vector<char>> adjacencyList;
     std::map<char, std::list<std::tuple<char, int>>> adjacency;
 };
 

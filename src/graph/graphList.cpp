@@ -3,21 +3,6 @@
 #include <algorithm>
 #include <iostream>
 
-GraphList::GraphList(const std::vector<std::vector<char>>& adjacency)
-{
-    adjacencyList = adjacency;
-    
-    for (auto vec : adjacency) {
-        nodes.push_back(std::make_unique<Node>(vec[0]));
-    }
-}
-
-
-std::vector<std::vector<char>>& GraphList::getAdjacencyList()
-{
-    return adjacencyList;
-}
-
 
 std::map<char, std::list<std::tuple<char, int>>>& GraphList::getAdjacency()
 {
@@ -27,7 +12,7 @@ std::map<char, std::list<std::tuple<char, int>>>& GraphList::getAdjacency()
 
  void GraphList::addNodes(std::vector<char>& nodeKeys)
  {
-        for (auto vec : nodeKeys) {
+    for (auto vec : nodeKeys) {
         nodes.push_back(std::make_unique<Node>(vec));
     }
  }
