@@ -9,7 +9,7 @@
 #include <vector>
     
 
-void checkAdjacency(std::map<char, std::list<std::tuple<char, int>>>& adjacency, char key, std::vector<char>& neighbours)
+void checkAdjacency(std::map<char, std::list<std::tuple<char, int>>>& adjacency, char key, const std::vector<char>& neighbours)
 {
     ASSERT_EQ(adjacency[key].size(), neighbours.size());
     
@@ -48,11 +48,11 @@ TEST(TestCreateGraph, 1)
         ASSERT_EQ(adjacency.count(key), 1);    
     }
 
-    checkAdjacency(adjacency, 'A', std::vector<char> { 'B' });
-    checkAdjacency(adjacency, 'B', std::vector<char> { 'A', 'C' });
-    checkAdjacency(adjacency, 'C', std::vector<char> { 'B', 'D', 'E' });
-    checkAdjacency(adjacency, 'D', std::vector<char> { 'C', 'E' });
-    checkAdjacency(adjacency, 'E', std::vector<char> { 'C', 'D' });
+    checkAdjacency(adjacency, 'A', { 'B' });
+    checkAdjacency(adjacency, 'B', { 'A', 'C' });
+    checkAdjacency(adjacency, 'C', { 'B', 'D', 'E' });
+    checkAdjacency(adjacency, 'D', { 'C', 'E' });
+    checkAdjacency(adjacency, 'E', { 'C', 'D' });
 }
 
 
@@ -86,10 +86,10 @@ TEST(TestCreateGraph, 2)
         ASSERT_EQ(adjacency.count(key), 1);    
     }
     
-    checkAdjacency(adjacency, 'A', std::vector<char> { 'B' });
-    checkAdjacency(adjacency, 'B', std::vector<char> { 'A', 'C' });
-    checkAdjacency(adjacency, 'C', std::vector<char> { 'B', 'D', 'E' });
-    checkAdjacency(adjacency, 'D', std::vector<char> { 'C', 'E' });
-    checkAdjacency(adjacency, 'E', std::vector<char> { 'C', 'D' });
+    checkAdjacency(adjacency, 'A', { 'B' });
+    checkAdjacency(adjacency, 'B', { 'A', 'C' });
+    checkAdjacency(adjacency, 'C', { 'B', 'D', 'E' });
+    checkAdjacency(adjacency, 'D', { 'C', 'E' });
+    checkAdjacency(adjacency, 'E', { 'C', 'D' });
 }
 

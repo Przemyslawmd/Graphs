@@ -12,7 +12,7 @@
 TEST(TestBFS, 1)
 {
     GraphList graph;
-    graph.addNodes(std::vector<char> { 'A', 'B', 'C', 'D', 'E' });    
+    graph.addNodes({ 'A', 'B', 'C', 'D', 'E' });    
 
     graph.addEdge('A', 'B');
     graph.addEdges('B', { 'A', 'C' });
@@ -41,7 +41,7 @@ TEST(TestBFS, 1)
 TEST(TestBFS, 2)
 {
     GraphList graph;
-    graph.addNodes(std::vector<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G' });   
+    graph.addNodes({ 'A', 'B', 'C', 'D', 'E', 'F', 'G' });   
 
     graph.addEdges('A', { 'B', 'D' });
     graph.addEdges('B', { 'A', 'C', 'D', 'G' });

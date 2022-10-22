@@ -23,7 +23,7 @@ public:
     
     void addEdge(char srcKey, char dstKey);
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
-    void addNodes(std::vector<char>& nodeKeys);
+    void addNodes(const std::vector<char>& nodeKeys);
 
     std::map<char, std::list<std::tuple<char, int>>>& getAdjacency();
 
