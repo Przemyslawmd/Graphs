@@ -15,28 +15,23 @@ void checkAdjacency(std::map<char, std::list<std::tuple<char, int>>>& adjacency,
     
     auto it = adjacency[key].begin();
     for (char neighbour : neighbours) {
-        ASSERT_EQ(std::get<0>(*it), neighbour);
+        EXPECT_EQ(std::get<0>(*it), neighbour);
         std::advance(it, 1);
     }
 }
 
 
-TEST(runTestCreateGraph, 1)
+TEST(TestCreateGraph, 1)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
     GraphList graph;
     graph.addNodes(keys);
 
     graph.addEdge('A', 'B');
-    graph.addEdge('B', 'A');
-    graph.addEdge('B', 'C');
-    graph.addEdge('C', 'B');
-    graph.addEdge('C', 'D');
-    graph.addEdge('C', 'E');
-    graph.addEdge('D', 'C');
-    graph.addEdge('D', 'E');
-    graph.addEdge('E', 'C');
-    graph.addEdge('E', 'D');
+    graph.addEdges('B', { 'A', 'C' });
+    graph.addEdges('C', { 'B', 'D', 'E' });
+    graph.addEdges('D', { 'C', 'E' } );
+    graph.addEdges('E', { 'C', 'D' });
 
     auto& nodes = graph.getNodes();
     
@@ -49,11 +44,9 @@ TEST(runTestCreateGraph, 1)
     auto& adjacency = graph.getAdjacency();
 
     ASSERT_EQ(adjacency.size(), 5);
-    ASSERT_EQ(adjacency.count('A'), 1);
-    ASSERT_EQ(adjacency.count('B'), 1);
-    ASSERT_EQ(adjacency.count('C'), 1);
-    ASSERT_EQ(adjacency.count('D'), 1);
-    ASSERT_EQ(adjacency.count('E'), 1);
+    for (char key : keys) {
+        ASSERT_EQ(adjacency.count(key), 1);    
+    }
 
     checkAdjacency(adjacency, 'A', std::vector<char> { 'B' });
     checkAdjacency(adjacency, 'B', std::vector<char> { 'A', 'C' });
@@ -63,28 +56,20 @@ TEST(runTestCreateGraph, 1)
 }
 
 
-TEST(runTestCreateGraph, 2)
+TEST(TestCreateGraph, 2)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
     GraphList graph;
     graph.addNodes(keys);
 
     graph.addEdge('A', 'B');
-    graph.addEdge('B', 'A');
-    graph.addEdge('B', 'C');
-    graph.addEdge('C', 'B');
-    graph.addEdge('C', 'D');
-    graph.addEdge('C', 'E');
-    // repeat edge
-    graph.addEdge('A', 'B');
-    graph.addEdge('D', 'C');
-    graph.addEdge('D', 'E');
-    // improper source key
-    graph.addEdge('F', 'E');
-    graph.addEdge('E', 'C');
-    graph.addEdge('E', 'D');
-    // improper destination key
-    graph.addEdge('D', 'G');
+    graph.addEdges('B', { 'A', 'C' });
+    graph.addEdges('C', { 'B', 'D', 'E' });
+    graph.addEdge('A', 'B');                // repeat edge
+    graph.addEdges('D', { 'C', 'E' } );
+    graph.addEdge('F', 'E');                // improper source key
+    graph.addEdges('E', {'C', 'D'});
+    graph.addEdge('D', 'G');                // improper destination key
 
     auto& nodes = graph.getNodes();
     
@@ -97,12 +82,10 @@ TEST(runTestCreateGraph, 2)
     auto& adjacency = graph.getAdjacency();
 
     ASSERT_EQ(adjacency.size(), 5);
-    ASSERT_EQ(adjacency.count('A'), 1);
-    ASSERT_EQ(adjacency.count('B'), 1);
-    ASSERT_EQ(adjacency.count('C'), 1);
-    ASSERT_EQ(adjacency.count('D'), 1);
-    ASSERT_EQ(adjacency.count('E'), 1);
-
+    for (char key : keys) {
+        ASSERT_EQ(adjacency.count(key), 1);    
+    }
+    
     checkAdjacency(adjacency, 'A', std::vector<char> { 'B' });
     checkAdjacency(adjacency, 'B', std::vector<char> { 'A', 'C' });
     checkAdjacency(adjacency, 'C', std::vector<char> { 'B', 'D', 'E' });

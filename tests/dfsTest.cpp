@@ -9,80 +9,66 @@
 #include <vector>
 
 
-TEST(runTestDFS, 1)
+TEST(TestDFS, 1)
 {
     GraphList graph;
     graph.addNodes(std::vector<char> { 'A', 'B', 'C', 'D', 'E' });    
 
     graph.addEdge('A', 'B');
-    graph.addEdge('B', 'A');
-    graph.addEdge('B', 'C');
-    graph.addEdge('C', 'B');
-    graph.addEdge('C', 'D');
-    graph.addEdge('C', 'E');
-    graph.addEdge('D', 'C');
-    graph.addEdge('D', 'E');
-    graph.addEdge('E', 'C');
-    graph.addEdge('E', 'D');
+    graph.addEdges('B', { 'A', 'C' });
+    graph.addEdges('C', { 'B', 'D', 'E' });
+    graph.addEdges('D', { 'C', 'E' });
+    graph.addEdges('E', { 'C', 'D' });
 
     DFS dfs(graph);
     dfs.traverseGraph();
 
 	auto& nodes = graph.getNodes();
 		
-    ASSERT_EQ(nodes[0]->getKey(), 'A');
-    ASSERT_TRUE(nodes[0]->isVisited());
-    ASSERT_EQ(nodes[1]->getKey(), 'B');
-    ASSERT_TRUE(nodes[1]->isVisited());
-    ASSERT_EQ(nodes[2]->getKey(), 'C');
-    ASSERT_TRUE(nodes[2]->isVisited());
-    ASSERT_EQ(nodes[3]->getKey(), 'D');
-    ASSERT_TRUE(nodes[3]->isVisited());
-    ASSERT_EQ(nodes[4]->getKey(), 'E');
-    ASSERT_TRUE(nodes[4]->isVisited());
+    EXPECT_EQ(nodes[0]->getKey(), 'A');
+    EXPECT_TRUE(nodes[0]->isVisited());
+    EXPECT_EQ(nodes[1]->getKey(), 'B');
+    EXPECT_TRUE(nodes[1]->isVisited());
+    EXPECT_EQ(nodes[2]->getKey(), 'C');
+    EXPECT_TRUE(nodes[2]->isVisited());
+    EXPECT_EQ(nodes[3]->getKey(), 'D');
+    EXPECT_TRUE(nodes[3]->isVisited());
+    EXPECT_EQ(nodes[4]->getKey(), 'E');
+    EXPECT_TRUE(nodes[4]->isVisited());
 }    
 
 
-TEST(runTestDFS, 2)
+TEST(TestDFS, 2)
 {
     GraphList graph;
     graph.addNodes(std::vector<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G' });   
 
-    graph.addEdge('A', 'B');
-    graph.addEdge('A', 'D');
-    graph.addEdge('B', 'A');
-    graph.addEdge('B', 'C');
-    graph.addEdge('B', 'D');
-    graph.addEdge('B', 'G');
-    graph.addEdge('C', 'B');
-    graph.addEdge('C', 'G');
-    graph.addEdge('D', 'A');
-    graph.addEdge('D', 'B');
-    graph.addEdge('D', 'F');
+    graph.addEdges('A', { 'B', 'D' });
+    graph.addEdges('B', { 'A', 'C', 'D', 'G' });
+    graph.addEdges('C', { 'B', 'G' });
+    graph.addEdges('D', { 'A', 'B', 'F' });
     graph.addEdge('E', 'F');
-    graph.addEdge('F', 'D');
-    graph.addEdge('F', 'E');
-    graph.addEdge('G', 'B');
-    graph.addEdge('G', 'C');
+    graph.addEdges('F', { 'D', 'E' });
+    graph.addEdges('G', { 'B', 'C' });
 
     DFS dfs(graph);
     dfs.traverseGraph();
     
     auto& nodes = graph.getNodes();
 
-    ASSERT_EQ(nodes[0]->getKey(), 'A');
-    ASSERT_TRUE(nodes[0]->isVisited());
-    ASSERT_EQ(nodes[1]->getKey(), 'B');
-    ASSERT_TRUE(nodes[1]->isVisited());
-    ASSERT_EQ(nodes[2]->getKey(), 'C');
-    ASSERT_TRUE(nodes[2]->isVisited());
-    ASSERT_EQ(nodes[3]->getKey(), 'D');
-    ASSERT_TRUE(nodes[3]->isVisited());
-    ASSERT_EQ(nodes[4]->getKey(), 'E');
-    ASSERT_TRUE(nodes[4]->isVisited());
-    ASSERT_EQ(nodes[5]->getKey(), 'F');
-    ASSERT_TRUE(nodes[5]->isVisited());
-    ASSERT_EQ(nodes[6]->getKey(), 'G');
-    ASSERT_TRUE(nodes[6]->isVisited());
+    EXPECT_EQ(nodes[0]->getKey(), 'A');
+    EXPECT_TRUE(nodes[0]->isVisited());
+    EXPECT_EQ(nodes[1]->getKey(), 'B');
+    EXPECT_TRUE(nodes[1]->isVisited());
+    EXPECT_EQ(nodes[2]->getKey(), 'C');
+    EXPECT_TRUE(nodes[2]->isVisited());
+    EXPECT_EQ(nodes[3]->getKey(), 'D');
+    EXPECT_TRUE(nodes[3]->isVisited());
+    EXPECT_EQ(nodes[4]->getKey(), 'E');
+    EXPECT_TRUE(nodes[4]->isVisited());
+    EXPECT_EQ(nodes[5]->getKey(), 'F');
+    EXPECT_TRUE(nodes[5]->isVisited());
+    EXPECT_EQ(nodes[6]->getKey(), 'G');
+    EXPECT_TRUE(nodes[6]->isVisited());
 }
 
