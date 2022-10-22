@@ -23,7 +23,7 @@ TEST(TestDFS, 1)
     DFS dfs(graph);
     dfs.traverseGraph();
 
-	auto& nodes = graph.getNodes();
+    auto& nodes = graph.getNodes();
 		
     EXPECT_EQ(nodes[0]->getKey(), 'A');
     EXPECT_TRUE(nodes[0]->isVisited());
