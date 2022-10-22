@@ -24,7 +24,7 @@ private:
 
     void processNode(char key);
 
-    std::vector<std::vector<char>>& adjacency;
+    std::map<char, std::list<std::tuple<char, int>>>& adjacency;
     std::vector<std::unique_ptr<Node>>& nodes;
 };
 
