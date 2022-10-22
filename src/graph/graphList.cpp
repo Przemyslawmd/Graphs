@@ -10,33 +10,40 @@ std::map<char, std::list<std::tuple<char, int>>>& GraphList::getAdjacency()
 }
 
 
- void GraphList::addNodes(std::vector<char>& nodeKeys)
- {
-    for (auto vec : nodeKeys) {
-        nodes.push_back(std::make_unique<Node>(vec));
+void GraphList::addNodes(std::vector<char>& keysVec)
+{
+    for (auto key : keysVec) {
+        nodes.push_back(std::make_unique<Node>(key));
     }
- }
+}
+
+
+void GraphList::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
+{
+    for (char dstKey : dstKeysVec) {
+        addEdge(srcKey, dstKey);
+    }
+}
 
 
 void GraphList::addEdge(char srcKey, char dstKey)
 {
-    if (std::find_if(nodes.begin(), nodes.end(), [srcKey](const auto& node) { return node.get()->getKey() == srcKey; } ) == nodes.end()) {
+    if (std::find_if(nodes.begin(), nodes.end(), [srcKey](const auto& node) { return node->getKey() == srcKey; } ) == nodes.end()) {
         return;    
-    }
-    if (std::find_if(nodes.begin(), nodes.end(), [dstKey](const auto& node) { return node.get()->getKey() == dstKey; } ) == nodes.end()) {
+    }      
+    if (std::find_if(nodes.begin(), nodes.end(), [dstKey](const auto& node) { return node->getKey() == dstKey; } ) == nodes.end()) {
         return;    
     }
     
-    auto itMap = adjacency.find(srcKey);
-
-    if (itMap != adjacency.end()) {
-        auto& itList = itMap->second;
-        if (std::find_if(itList.begin(), itList.end(), [dstKey](const auto& tup) { return std::get<0>(tup) == dstKey; }) != itList.end()) {
-            return;
-        }
-        itList.push_back(std::make_tuple(dstKey, 1));
-        return;  
+    auto srcKeyAdjacency = adjacency.find(srcKey);
+    if (srcKeyAdjacency == adjacency.end()) {
+        adjacency.insert( { srcKey, { std::make_tuple(dstKey, 1) } } );
+        return;    
     }
-    adjacency.insert( { srcKey, { std::make_tuple(dstKey, 1) } } );
+        
+    auto& adjacencyList = srcKeyAdjacency->second;
+    if (std::find_if(adjacencyList.begin(), adjacencyList.end(), [dstKey](const auto& tuple) { return std::get<0>(tuple) == dstKey; }) == adjacencyList.end()) {
+        adjacencyList.push_back(std::make_tuple(dstKey, 1));
+    }
 }
 

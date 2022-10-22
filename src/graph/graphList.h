@@ -7,7 +7,6 @@
 
 #include <list>
 #include <map>
-#include <memory>
 #include <tuple>
 #include <vector>
 
@@ -21,8 +20,9 @@ public:
     GraphList(const std::vector<std::vector<char>>& adjacency);
     GraphList(const GraphList&) = delete;
     GraphList& operator=(GraphList&) = delete;
-
-    void addEdge(char key1, char key2);
+    
+    void addEdge(char srcKey, char dstKey);
+    void addEdges(char srcKey, const std::vector<char>& dstKeys);
     void addNodes(std::vector<char>& nodeKeys);
 
     std::map<char, std::list<std::tuple<char, int>>>& getAdjacency();
