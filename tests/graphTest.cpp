@@ -27,7 +27,7 @@ TEST(TestCreateGraph, 1)
     GraphList graph;
     graph.addNodes(keys);
 
-    graph.addEdge('A', 'B');
+    graph.addEdges('A',  { 'B' });
     graph.addEdges('B', { 'A', 'C' });
     graph.addEdges('C', { 'B', 'D', 'E' });
     graph.addEdges('D', { 'C', 'E' } );
@@ -62,14 +62,14 @@ TEST(TestCreateGraph, 2)
     GraphList graph;
     graph.addNodes(keys);
 
-    graph.addEdge('A', 'B');
+    graph.addEdges('A', { 'B' });
     graph.addEdges('B', { 'A', 'C' });
     graph.addEdges('C', { 'B', 'D', 'E' });
-    graph.addEdge('A', 'B');                // repeat edge
+    graph.addEdges('A', { 'B' });                // repeat edge
     graph.addEdges('D', { 'C', 'E' } );
-    graph.addEdge('F', 'E');                // improper source key
+    graph.addEdges('F', { 'E' });                // improper source key
     graph.addEdges('E', {'C', 'D'});
-    graph.addEdge('D', 'G');                // improper destination key
+    graph.addEdges('D', { 'G' });                // improper destination key
 
     auto& nodes = graph.getNodes();
     

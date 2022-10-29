@@ -14,7 +14,7 @@ TEST(TestBFS, 1)
     GraphList graph;
     graph.addNodes({ 'A', 'B', 'C', 'D', 'E' });    
 
-    graph.addEdge('A', 'B');
+    graph.addEdges('A', { 'B' });
     graph.addEdges('B', { 'A', 'C' });
     graph.addEdges('C', { 'B', 'D', 'E' });
     graph.addEdges('D', { 'C', 'E' });
@@ -47,7 +47,7 @@ TEST(TestBFS, 2)
     graph.addEdges('B', { 'A', 'C', 'D', 'G' });
     graph.addEdges('C', { 'B', 'G' });
     graph.addEdges('D', { 'A', 'B', 'F' });
-    graph.addEdge('E', 'F');
+    graph.addEdges('E', { 'F' });
     graph.addEdges('F', { 'D', 'E' });
     graph.addEdges('G', { 'B', 'C' });
 

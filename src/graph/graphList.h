@@ -20,8 +20,7 @@ public:
     GraphList(const std::vector<std::vector<char>>& adjacency);
     GraphList(const GraphList&) = delete;
     GraphList& operator=(GraphList&) = delete;
-    
-    void addEdge(char srcKey, char dstKey);
+        
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
     void addNodes(const std::vector<char>& nodeKeys);
 
@@ -29,6 +28,8 @@ public:
 
 private:
 
+    void addEdge(char srcKey, char dstKey);
+    
     std::map<char, std::list<std::tuple<char, int>>> adjacency;
 };
 
