@@ -22,8 +22,8 @@ add_executable(
   bfsTest.cpp
   dfsTest.cpp
   graphTest.cpp
-  ${SRC}/bfs/bfs.cpp
-  ${SRC}/dfs/dfs.cpp
+  ${SRC}/algo/bfs.cpp
+  ${SRC}/algo/dfs.cpp
   ${SRC}/graph/graph.cpp
   ${SRC}/graph/graphList.cpp
   ${SRC}/graph/graphMatrix.cpp

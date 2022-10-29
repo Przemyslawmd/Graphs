@@ -1,5 +1,5 @@
 
-#include "../src/bfs/bfs.h"
+#include "../src/algo/bfs.h"
 #include "../src/graph/Node.h"
 #include "../src/graph/graphList.h"
 

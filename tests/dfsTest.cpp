@@ -1,5 +1,5 @@
 
-#include "../src/dfs/dfs.h"
+#include "../src/algo/dfs.h"
 #include "../src/graph/Node.h"
 #include "../src/graph/graphList.h"
 
