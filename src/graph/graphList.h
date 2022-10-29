@@ -22,13 +22,14 @@ public:
     GraphList& operator=(GraphList&) = delete;
         
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
+    void addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edges);
     void addNodes(const std::vector<char>& nodeKeys);
 
     std::map<char, std::list<std::tuple<char, int>>>& getAdjacency();
 
 private:
 
-    void addEdge(char srcKey, char dstKey);
+    void addEdge(char srcKey, char dstKey, int weight);
     
     std::map<char, std::list<std::tuple<char, int>>> adjacency;
 };

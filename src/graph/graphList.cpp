@@ -21,12 +21,20 @@ void GraphList::addNodes(const std::vector<char>& keysVec)
 void GraphList::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 {
     for (char dstKey : dstKeysVec) {
-        addEdge(srcKey, dstKey);
+        addEdge(srcKey, dstKey, 1);
     }
 }
 
 
-void GraphList::addEdge(char srcKey, char dstKey)
+void GraphList::addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edgesVec)
+{
+    for (const auto& edge : edgesVec) {
+        addEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
+    }
+}
+
+
+void GraphList::addEdge(char srcKey, char dstKey, int weight)
 {
     if (isNodeNotExist(srcKey)) {
         return;    
@@ -37,13 +45,13 @@ void GraphList::addEdge(char srcKey, char dstKey)
     
     auto srcKeyAdjacency = adjacency.find(srcKey);
     if (srcKeyAdjacency == adjacency.end()) {
-        adjacency.insert( { srcKey, { std::make_tuple(dstKey, 1) } } );
+        adjacency.insert( { srcKey, { std::make_tuple(dstKey, weight) }});
         return;
     }
     
     auto& adjacencyList = srcKeyAdjacency->second;
     if (std::find_if(adjacencyList.begin(), adjacencyList.end(), [dstKey](const auto& tuple) { return std::get<0>(tuple) == dstKey; }) == adjacencyList.end()) {
-        adjacencyList.push_back(std::make_tuple(dstKey, 1));
+        adjacencyList.push_back(std::make_tuple(dstKey, weight));
     }
 }
 

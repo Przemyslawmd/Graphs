@@ -47,7 +47,7 @@ TEST(TestDFS, 2)
     graph.addEdges('B', { 'A', 'C', 'D', 'G' });
     graph.addEdges('C', { 'B', 'G' });
     graph.addEdges('D', { 'A', 'B', 'F' });
-    graph.addEdges('E',  { 'F' });
+    graph.addEdges('E', { 'F' });
     graph.addEdges('F', { 'D', 'E' });
     graph.addEdges('G', { 'B', 'C' });
 
