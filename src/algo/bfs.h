@@ -23,7 +23,7 @@ public:
 
 private:
 
-    void processQueue(std::map<char, std::list<std::tuple<char, int>>>& adjacency , std::vector<std::unique_ptr<Node>>& nodes);
+    void processQueue(std::map<char, std::list<std::tuple<char, int>>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes);
 
     std::queue<char> nodesQueue;
 };

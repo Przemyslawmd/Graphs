@@ -17,7 +17,7 @@ public:
     void addNode(char key);
     bool isNodeNotExist(char key);
         
-    std::vector<std::unique_ptr<Node>>& getNodes();
+    const std::vector<std::unique_ptr<Node>>& getNodes();
 
 protected:
 

@@ -46,7 +46,7 @@ TEST(TestCreateGraph, FirstTest)
     graph.addEdges('D', { 'C', 'E' } );
     graph.addEdges('E', { 'C', 'D' });
 
-    auto& nodes = graph.getNodes();
+    const auto& nodes = graph.getNodes();
     
     ASSERT_EQ(nodes[0]->getKey(), 'A');
     ASSERT_EQ(nodes[1]->getKey(), 'B');
@@ -84,7 +84,7 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
     graph.addEdges('E', { 'C', 'D'});
     graph.addEdges('D', { 'G' });                // improper destination key
 
-    auto& nodes = graph.getNodes();
+    const auto& nodes = graph.getNodes();
     
     ASSERT_EQ(nodes[0]->getKey(), 'A');
     ASSERT_EQ(nodes[1]->getKey(), 'B');
@@ -119,7 +119,7 @@ TEST(TestCreateGraph, ThirdTestGraphWithWeights)
     graph.addEdgesWithWeight('D', {{ 'C', 5  }, { 'E', 12  }});
     graph.addEdgesWithWeight('E', {{ 'C', 3  }, { 'D', 101 }});
 
-    auto& nodes = graph.getNodes();
+    const auto& nodes = graph.getNodes();
     
     ASSERT_EQ(nodes[0]->getKey(), 'A');
     ASSERT_EQ(nodes[1]->getKey(), 'B');

@@ -23,7 +23,7 @@ TEST(TestBFS, 1)
     BFS bfs;
     bfs.traverseGraph(graph);
 
-    auto& nodes = graph.getNodes();
+    const auto& nodes = graph.getNodes();
 		
     EXPECT_EQ(nodes[0]->getKey(), 'A');
     EXPECT_TRUE(nodes[0]->isVisited());
@@ -54,7 +54,7 @@ TEST(TestBFS, 2)
     BFS bfs;
     bfs.traverseGraph(graph);
     
-    auto& nodes = graph.getNodes();
+    const auto& nodes = graph.getNodes();
 
     EXPECT_EQ(nodes[0]->getKey(), 'A');
     EXPECT_TRUE(nodes[0]->isVisited());

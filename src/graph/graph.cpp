@@ -5,7 +5,7 @@
 Graph::~Graph() {}
 
 
-std::vector<std::unique_ptr<Node>>& Graph::getNodes()
+const std::vector<std::unique_ptr<Node>>& Graph::getNodes()
 {
     return nodes;
 }
@@ -21,6 +21,6 @@ void Graph::addNode(char key)
 
 bool Graph::isNodeNotExist(char key)
 {
-    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; } ) == nodes.end();    
+    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; }) == nodes.end();    
 }
 
