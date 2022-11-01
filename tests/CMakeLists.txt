@@ -21,9 +21,11 @@ add_executable(
   GraphTests
   bfsTest.cpp
   dfsTest.cpp
+  dijkstraTest.cpp
   graphTest.cpp
   ${SRC}/algo/bfs.cpp
   ${SRC}/algo/dfs.cpp
+  ${SRC}/algo/dijkstra.cpp
   ${SRC}/graph/graph.cpp
   ${SRC}/graph/graphList.cpp
   ${SRC}/graph/graphMatrix.cpp
