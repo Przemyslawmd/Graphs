@@ -15,7 +15,7 @@ public:
     virtual ~Graph() = 0;
 
     void addNode(char key);
-    bool isNodeNotExist(char key);
+    bool isNodeExist(char key);
         
     const std::vector<std::unique_ptr<Node>>& getNodes();
 

@@ -36,10 +36,10 @@ void GraphList::addEdgesWithWeight(char srcKey, const std::vector<std::tuple<cha
 
 void GraphList::addEdge(char srcKey, char dstKey, int weight)
 {
-    if (isNodeNotExist(srcKey)) {
+    if (isNodeExist(srcKey) == false) {
         return;    
     }
-    if (isNodeNotExist(dstKey)) {
+    if (isNodeExist(dstKey) == false) {
         return;
     }
     
