@@ -29,8 +29,8 @@ TEST(TestDijkstra, FirstTest)
     ASSERT_EQ(nodes[2]->getKey(), 'C');
     ASSERT_EQ(nodes[3]->getKey(), 'D');
     ASSERT_EQ(nodes[4]->getKey(), 'E');
-    ASSERT_EQ(nodes[4]->getKey(), 'F');
-    ASSERT_EQ(nodes[4]->getKey(), 'G');
+    ASSERT_EQ(nodes[5]->getKey(), 'F');
+    ASSERT_EQ(nodes[6]->getKey(), 'G');
 
 
     auto& adjacency = graph.getAdjacency();

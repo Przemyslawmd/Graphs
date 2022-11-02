@@ -2,6 +2,7 @@
 #ifndef GRAPHS_BFS_H
 #define GRAPHS_BFS_H
 
+#include "../graph/edge.h"
 #include "../graph/node.h"
 #include "../graph/graphList.h"
 #include "../graph/graphMatrix.h"
@@ -23,7 +24,7 @@ public:
 
 private:
 
-    void processQueue(std::map<char, std::list<std::tuple<char, int>>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes);
+    void processQueue(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes);
 
     std::queue<char> nodesQueue;
 };

@@ -22,7 +22,7 @@ void Dijkstra::traverseGraph(GraphList& graph)
 }
 
 
-void Dijkstra::processQueue(std::map<char, std::list<std::tuple<char, int>>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes)
+void Dijkstra::processQueue(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes)
 {
 
 }

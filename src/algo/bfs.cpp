@@ -16,8 +16,7 @@ void BFS::traverseGraph(GraphList& graph)
     }
 }
 
-
-void BFS::processQueue(std::map<char, std::list<std::tuple<char, int>>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes)
+void BFS::processQueue(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes)
 {
     char key = nodesQueue.front();
     auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; });
@@ -27,9 +26,9 @@ void BFS::processQueue(std::map<char, std::list<std::tuple<char, int>>>& adjacen
 
     auto it = neighbours.begin();
     while (it != neighbours.end()) {
-        auto neighbour = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == std::get<0>(*it); });        
+        auto neighbour = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->dstKey; });        
         if ((*neighbour).get()->isVisited() == false) {
-            nodesQueue.push(std::get<0>(*it));
+            nodesQueue.push(it->dstKey);
             (*neighbour).get()->setAsVisited();
         }
         it++;

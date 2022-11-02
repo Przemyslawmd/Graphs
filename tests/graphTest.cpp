@@ -1,4 +1,5 @@
 
+#include "../src/graph/edge.h"
 #include "../src/graph/graph.h"
 #include "../src/graph/graphList.h"
 #include "../src/graph/node.h"
@@ -7,28 +8,28 @@
 
 #include <memory>
 #include <vector>
-    
+ 
 
-void checkAdjacency(std::map<char, std::list<std::tuple<char, int>>>& adjacency, char key, const std::vector<char>& neighboursVec)
+void checkAdjacency(std::map<char, std::list<Edge>>& adjacency, char key, const std::vector<char>& neighboursVec)
 {
     ASSERT_EQ(adjacency[key].size(), neighboursVec.size());
     
     auto it = adjacency[key].begin();
     for (char neighbour : neighboursVec) {
-        EXPECT_EQ(std::get<0>(*it), neighbour);
+        EXPECT_EQ(it->dstKey, neighbour);
         std::advance(it, 1);
     }
 }
 
 
-void checkAdjacencyWithWeight(std::map<char, std::list<std::tuple<char, int>>>& adjacency, char key, const std::vector<std::tuple<char, int>>& edgesVec)
+void checkAdjacencyWithWeight(std::map<char, std::list<Edge>>& adjacency, char key, const std::vector<std::tuple<char, int>>& edgesVec)
 {
     ASSERT_EQ(adjacency[key].size(), edgesVec.size());
     
     auto it = adjacency[key].begin();
     for (const auto& edge : edgesVec) {
-        EXPECT_EQ(std::get<0>(*it), std::get<0>(edge));
-        EXPECT_EQ(std::get<1>(*it), std::get<1>(edge));
+        EXPECT_EQ(it->dstKey, std::get<0>(edge));
+        EXPECT_EQ(it->weight, std::get<1>(edge));
         std::advance(it, 1);
     }
 }

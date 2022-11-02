@@ -23,9 +23,9 @@ void DFS::processNode(char key)
     auto it = itNeighboursList.begin();
      
     while (it != itNeighboursList.end()) {
-        auto itNeighbourNode = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == std::get<0>(*it); });
+        auto itNeighbourNode = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->dstKey; });
         if ((*itNeighbourNode).get()->isVisited() == false) {
-            processNode(std::get<0>(*it));
+            processNode(it->dstKey);
         }
         it++;
     }

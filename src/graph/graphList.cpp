@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-std::map<char, std::list<std::tuple<char, int>>>& GraphList::getAdjacency()
+std::map<char, std::list<Edge>>& GraphList::getAdjacency()
 {
     return adjacency;
 }
@@ -45,13 +45,13 @@ void GraphList::addEdge(char srcKey, char dstKey, int weight)
     
     auto srcKeyAdjacency = adjacency.find(srcKey);
     if (srcKeyAdjacency == adjacency.end()) {
-        adjacency.insert( { srcKey, { std::make_tuple(dstKey, weight) }});
+        adjacency.insert({ srcKey, { Edge{ dstKey, weight }}});
         return;
     }
     
     auto& adjacencyList = srcKeyAdjacency->second;
-    if (std::find_if(adjacencyList.begin(), adjacencyList.end(), [dstKey](const auto& tuple) { return std::get<0>(tuple) == dstKey; }) == adjacencyList.end()) {
-        adjacencyList.push_back(std::make_tuple(dstKey, weight));
+    if (std::find_if(adjacencyList.begin(), adjacencyList.end(), [dstKey](const auto& edge) { return edge.dstKey == dstKey; }) == adjacencyList.end()) {
+        adjacencyList.push_back(Edge{ dstKey, weight });
     }
 }
 
