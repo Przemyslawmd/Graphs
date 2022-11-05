@@ -11,7 +11,7 @@ typedef struct
 {
     int distance;
     char predecessor;
-} direction;
+} route;
 
 
 class Dijkstra
@@ -22,13 +22,15 @@ public:
     Dijkstra(const Dijkstra&) = delete;
     Dijkstra& operator=(Dijkstra&) = delete;
 
-    void traverseGraph(GraphList&);
+    void traverseGraph(GraphList&, char srcKey);
+    const std::map<char, route>& getRoutes();
 
 private:
 
-    void processQueue(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes);
+    void processDirectionTable(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes, char key);
+    char findNodeToProcess(std::map<char, route>& directionTable, const std::vector<std::unique_ptr<Node>>& nodes);
     
-    std::map<char, direction> directionTable;
+    std::map<char, route> routes;
 };
 
 #endif
