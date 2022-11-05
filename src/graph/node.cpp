@@ -21,8 +21,8 @@ bool Node::isVisited() const
 }
 
 
-void Node::setAsVisited()
+void Node::setVisited(bool isVisited)
 {
-    visited = true;
+    visited = isVisited;
 }
 

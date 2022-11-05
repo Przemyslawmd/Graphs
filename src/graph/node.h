@@ -13,7 +13,7 @@ public:
 
     char getKey() const;
     bool isVisited() const;
-    void setAsVisited();
+    void setVisited(bool isVisited);
 
 protected:
 

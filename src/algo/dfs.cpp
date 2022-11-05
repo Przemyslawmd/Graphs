@@ -17,7 +17,7 @@ void DFS::traverseGraph()
 void DFS::processNode(char key)
 {
     auto itNode = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; });
-    (*itNode)->setAsVisited();
+    (*itNode)->setVisited(true);
 
     auto& itNeighboursList = adjacency[key];
     auto it = itNeighboursList.begin();

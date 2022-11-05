@@ -20,7 +20,7 @@ void BFS::processQueue(std::map<char, std::list<Edge>>& adjacency, const std::ve
 {
     char key = nodesQueue.front();
     auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; });
-    (*node)->setAsVisited();    
+    (*node)->setVisited(true);
 
     auto& neighbours = adjacency[key];
 
@@ -29,7 +29,7 @@ void BFS::processQueue(std::map<char, std::list<Edge>>& adjacency, const std::ve
         auto neighbour = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->dstKey; });        
         if ((*neighbour).get()->isVisited() == false) {
             nodesQueue.push(it->dstKey);
-            (*neighbour).get()->setAsVisited();
+            (*neighbour).get()->setVisited(true);
         }
         it++;
     }    

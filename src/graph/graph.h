@@ -16,7 +16,8 @@ public:
 
     void addNode(char key);
     bool isNodeExist(char key);
-        
+    void resetNodes();
+
     const std::vector<std::unique_ptr<Node>>& getNodes();
 
 protected:

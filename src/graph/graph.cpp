@@ -24,3 +24,11 @@ bool Graph::isNodeExist(char key)
     return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; }) != nodes.end();    
 }
 
+
+void Graph::resetNodes()
+{
+    for (auto& node : nodes) {
+        node->setVisited(false);
+    }
+}
+
