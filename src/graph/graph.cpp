@@ -32,6 +32,13 @@ bool Graph::isNodeVisited(char key)
 }
 
 
+void Graph::setNodeVisit(char key, bool isVisited)
+{
+    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; });
+    node->get()->setVisited(isVisited);
+}
+
+
 void Graph::resetNodes()
 {
     for (auto& node : nodes) {

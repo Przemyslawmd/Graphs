@@ -6,6 +6,9 @@
 #include "../graph/node.h"
 #include "../graph/graphList.h"
 
+#include <list>
+#include <map>
+
  
 typedef struct 
 {
@@ -27,7 +30,7 @@ public:
 
 private:
 
-    void processRoutesTable(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes, char key);
+    void processRoutesTable(std::map<char, std::list<Edge>>& adjacency, char key);
     char findNodeToProcess();
     
     GraphList& graph;

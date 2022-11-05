@@ -18,19 +18,16 @@ void Dijkstra::traverseGraph(char srcKey)
         routes[node->getKey()] = route{ distance, '\0' };
     }
 
-    while (true) {
-        char key = findNodeToProcess();
-        if (key == '\0') {
-            break;
-        }
-        auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; }); 
-        (*node)->setVisited(true);
-        processRoutesTable(adjacency, nodes, key);
+    char key = findNodeToProcess();
+    while (key != '\0') {
+        graph.setNodeVisit(key, true);
+        processRoutesTable(adjacency, key);
+        key = findNodeToProcess();
     }
 }
 
 
-void Dijkstra::processRoutesTable(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes, char key)
+void Dijkstra::processRoutesTable(std::map<char, std::list<Edge>>& adjacency, char key)
 {
     auto& adjacentNodes = adjacency[key];
 

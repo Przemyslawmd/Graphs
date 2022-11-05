@@ -18,6 +18,7 @@ public:
     bool isNodeExist(char key);
 
     bool isNodeVisited(char key);
+    void setNodeVisit(char key, bool isVisited);
     void resetNodes();
 
     const std::vector<std::unique_ptr<Node>>& getNodes();
