@@ -2,8 +2,10 @@
 #include "dijkstra.h"
 
 
+Dijkstra::Dijkstra(GraphList& graph) : graph(graph) {}
 
-void Dijkstra::traverseGraph(GraphList& graph, char srcKey)
+
+void Dijkstra::traverseGraph(char srcKey)
 {
     const auto& nodes = graph.getNodes();
     auto& adjacency = graph.getAdjacency();
@@ -17,7 +19,7 @@ void Dijkstra::traverseGraph(GraphList& graph, char srcKey)
     }
 
     while (true) {
-        char key = findNodeToProcess(nodes);
+        char key = findNodeToProcess();
         if (key == '\0') {
             break;
         }
@@ -32,27 +34,23 @@ void Dijkstra::processRoutesTable(std::map<char, std::list<Edge>>& adjacency, co
 {
     auto& adjacentNodes = adjacency[key];
 
-    auto it = adjacentNodes.begin();
-    while (it != adjacentNodes.end()) {
-        auto node = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->dstKey; });        
-        if ((*node).get()->isVisited() == false) {
-            if (routes[it->dstKey].distance > routes[key].distance + it->weight)
-            routes[it->dstKey] = route{ it->weight + routes[key].distance, key };
+    for (auto node = adjacentNodes.begin(); node != adjacentNodes.end(); node++) {
+        if (graph.isNodeVisited(node->dstKey) == false) {
+            if (routes[node->dstKey].distance > routes[key].distance + node->weight)
+            routes[node->dstKey] = route{ node->weight + routes[key].distance, key };
         }
-        it++;
     }   
 }
 
 
-char Dijkstra::findNodeToProcess(const std::vector<std::unique_ptr<Node>>& nodes)
+char Dijkstra::findNodeToProcess()
 {
     int initial = INT_MAX;
     char key = '\0';
-    for (auto it = routes.begin(); it != routes.end(); it++) {
-        auto itNode = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->first; });    
-        if (itNode->get()->isVisited() == false && it->second.distance < initial) {
-            initial = it->second.distance;
-            key = it->first;
+    for (auto route = routes.begin(); route != routes.end(); route++) {
+        if (graph.isNodeVisited(route->first) == false && route->second.distance < initial) {
+            initial = route->second.distance;
+            key = route->first;
         }
     } 
     return key;
