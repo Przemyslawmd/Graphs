@@ -16,16 +16,17 @@ class BFS
 {
 public:
 
-    BFS() = default;
+    BFS(GraphList&);
     BFS(const BFS&) = delete;
     BFS& operator=(BFS&) = delete;
 
-    void traverseGraph(GraphList& graph);
+    void traverseGraph();
 
 private:
 
-    void processQueue(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes);
+    void processQueue(std::map<char, std::list<Edge>>& adjacency);
 
+    GraphList& graph;
     std::queue<char> nodesQueue;
 };
 

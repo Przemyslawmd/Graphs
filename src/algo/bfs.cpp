@@ -4,34 +4,30 @@
 #include <iterator>
 
 
-void BFS::traverseGraph(GraphList& graph)
+BFS::BFS(GraphList& graph) : graph(graph) {}
+
+
+void BFS::traverseGraph()
 {
-    const auto& nodes = graph.getNodes();
     auto& adjacency = graph.getAdjacency();
-    
     nodesQueue.push(adjacency.begin()->first);
     
     while (!nodesQueue.empty()) {
-        processQueue(adjacency, nodes);
+        processQueue(adjacency);
     }
 }
 
-void BFS::processQueue(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes)
+void BFS::processQueue(std::map<char, std::list<Edge>>& adjacency)
 {
     char key = nodesQueue.front();
-    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; });
-    (*node)->setVisited(true);
+    graph.setNodeVisit(key, true);
 
     auto& neighbours = adjacency[key];
-
-    auto it = neighbours.begin();
-    while (it != neighbours.end()) {
-        auto neighbour = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->dstKey; });        
-        if ((*neighbour).get()->isVisited() == false) {
+    for (auto it = neighbours.begin(); it != neighbours.end(); it++) {
+        if (graph.isNodeVisited(it->dstKey) == false) {
             nodesQueue.push(it->dstKey);
-            (*neighbour).get()->setVisited(true);
+            graph.setNodeVisit(it->dstKey, true);
         }
-        it++;
     }    
     
     nodesQueue.pop();  

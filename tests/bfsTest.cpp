@@ -20,8 +20,8 @@ TEST(TestBFS, 1)
     graph.addEdges('D', { 'C', 'E' });
     graph.addEdges('E', { 'C', 'D' });
 
-    BFS bfs;
-    bfs.traverseGraph(graph);
+    BFS bfs(graph);
+    bfs.traverseGraph();
 
     const auto& nodes = graph.getNodes();
 		
@@ -51,8 +51,8 @@ TEST(TestBFS, 2)
     graph.addEdges('F', { 'D', 'E' });
     graph.addEdges('G', { 'B', 'C' });
 
-    BFS bfs;
-    bfs.traverseGraph(graph);
+    BFS bfs(graph);
+    bfs.traverseGraph();
     
     const auto& nodes = graph.getNodes();
 
