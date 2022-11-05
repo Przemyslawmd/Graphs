@@ -4,11 +4,12 @@
 #include <iterator>
 
 
-DFS::DFS(GraphList& graph) : nodes(graph.getNodes()), adjacency(graph.getAdjacency()) {}
+DFS::DFS(GraphList& graph) : graph(graph) {}
 
 
 void DFS::traverseGraph()
 {
+    const auto& adjacency = graph.getAdjacency();
     char initialKey = adjacency.begin()->first;        
     processNode(initialKey);   
 }
@@ -16,18 +17,13 @@ void DFS::traverseGraph()
 
 void DFS::processNode(char key)
 {
-    auto itNode = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; });
-    (*itNode)->setVisited(true);
+    graph.setNodeVisit(key, true);
+    auto& adjacentNodesList = graph.getAdjacency()[key];
 
-    auto& itNeighboursList = adjacency[key];
-    auto it = itNeighboursList.begin();
-     
-    while (it != itNeighboursList.end()) {
-        auto itNeighbourNode = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->dstKey; });
-        if ((*itNeighbourNode).get()->isVisited() == false) {
+    for (auto it = adjacentNodesList.begin(); it != adjacentNodesList.end(); it++) {
+        if (graph.isNodeVisited(it->dstKey) == false) {
             processNode(it->dstKey);
         }
-        it++;
     }
 }
 
