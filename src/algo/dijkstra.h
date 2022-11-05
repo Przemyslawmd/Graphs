@@ -27,8 +27,8 @@ public:
 
 private:
 
-    void processDirectionTable(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes, char key);
-    char findNodeToProcess(std::map<char, route>& directionTable, const std::vector<std::unique_ptr<Node>>& nodes);
+    void processRoutesTable(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes, char key);
+    char findNodeToProcess(const std::vector<std::unique_ptr<Node>>& nodes);
     
     std::map<char, route> routes;
 };

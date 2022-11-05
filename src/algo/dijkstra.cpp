@@ -1,8 +1,7 @@
 
 #include "dijkstra.h"
 
-#include <queue>
-#include <iostream>
+
 
 void Dijkstra::traverseGraph(GraphList& graph, char srcKey)
 {
@@ -18,18 +17,18 @@ void Dijkstra::traverseGraph(GraphList& graph, char srcKey)
     }
 
     while (true) {
-        char key = findNodeToProcess(routes, nodes);
+        char key = findNodeToProcess(nodes);
         if (key == '\0') {
             break;
         }
         auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->getKey() == key; }); 
         (*node)->setVisited(true);
-        processDirectionTable(adjacency, nodes, key);
+        processRoutesTable(adjacency, nodes, key);
     }
 }
 
 
-void Dijkstra::processDirectionTable(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes, char key)
+void Dijkstra::processRoutesTable(std::map<char, std::list<Edge>>& adjacency, const std::vector<std::unique_ptr<Node>>& nodes, char key)
 {
     auto& adjacentNodes = adjacency[key];
 
@@ -45,19 +44,16 @@ void Dijkstra::processDirectionTable(std::map<char, std::list<Edge>>& adjacency,
 }
 
 
-char Dijkstra::findNodeToProcess(std::map<char, route>& table, const std::vector<std::unique_ptr<Node>>& nodes)
+char Dijkstra::findNodeToProcess(const std::vector<std::unique_ptr<Node>>& nodes)
 {
-    std::cout << "Find Node to Process: Enter" << std::endl; 
     int initial = INT_MAX;
     char key = '\0';
-    auto it = table.begin();
-    while (it != table.end()) {
+    for (auto it = routes.begin(); it != routes.end(); it++) {
         auto itNode = std::find_if(nodes.begin(), nodes.end(), [it](const auto& node) { return node->getKey() == it->first; });    
         if (itNode->get()->isVisited() == false && it->second.distance < initial) {
             initial = it->second.distance;
             key = it->first;
         }
-        it++;
     } 
     return key;
 }
