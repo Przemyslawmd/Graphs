@@ -2,13 +2,7 @@
 #ifndef GRAPHS_DFS_H
 #define GRAPHS_DFS_H
 
-#include "../graph/edge.h"
-#include "../graph/node.h"
 #include "../graph/graphList.h"
-
-#include <memory>
-#include <queue>
-#include <vector>
 
 
 class DFS

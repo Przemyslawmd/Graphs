@@ -3,9 +3,7 @@
 #define GRAPHS_BFS_H
 
 #include "../graph/edge.h"
-#include "../graph/node.h"
 #include "../graph/graphList.h"
-#include "../graph/graphMatrix.h"
 
 #include <queue>
 
