@@ -7,9 +7,7 @@
 #include "../graph/graphList.h"
 #include "../graph/graphMatrix.h"
 
-#include <memory>
 #include <queue>
-#include <vector>
 
 
 class BFS

@@ -17,16 +17,17 @@ void BFS::traverseGraph()
     }
 }
 
+
 void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
 {
     char key = nodesQueue.front();
     graph.setNodeVisit(key, true);
 
-    auto& neighbours = adjacency.at(key);
-    for (auto it = neighbours.begin(); it != neighbours.end(); it++) {
-        if (graph.isNodeVisited(it->dstKey) == false) {
-            nodesQueue.push(it->dstKey);
-            graph.setNodeVisit(it->dstKey, true);
+    const auto& adjacentNodes = adjacency.at(key);
+    for (auto itNode = adjacentNodes.begin(); itNode != adjacentNodes.end(); itNode++) {
+        if (graph.isNodeVisited(itNode->dstKey) == false) {
+            nodesQueue.push(itNode->dstKey);
+            graph.setNodeVisit(itNode->dstKey, true);
         }
     }    
     
