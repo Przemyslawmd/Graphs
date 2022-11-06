@@ -30,7 +30,7 @@ public:
 
 private:
 
-    void processRoutesTable(std::map<char, std::list<Edge>>& adjacency, char key);
+    void processRoutesTable(const std::map<char, std::list<Edge>>& adjacency, char key);
     char findNodeToProcess();
     
     GraphList& graph;

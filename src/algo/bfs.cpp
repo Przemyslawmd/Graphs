@@ -9,7 +9,7 @@ BFS::BFS(GraphList& graph) : graph(graph) {}
 
 void BFS::traverseGraph()
 {
-    auto& adjacency = graph.getAdjacency();
+    const auto& adjacency = graph.getAdjacency();
     nodesQueue.push(adjacency.begin()->first);
     
     while (!nodesQueue.empty()) {
@@ -17,12 +17,12 @@ void BFS::traverseGraph()
     }
 }
 
-void BFS::processQueue(std::map<char, std::list<Edge>>& adjacency)
+void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
 {
     char key = nodesQueue.front();
     graph.setNodeVisit(key, true);
 
-    auto& neighbours = adjacency[key];
+    auto& neighbours = adjacency.at(key);
     for (auto it = neighbours.begin(); it != neighbours.end(); it++) {
         if (graph.isNodeVisited(it->dstKey) == false) {
             nodesQueue.push(it->dstKey);

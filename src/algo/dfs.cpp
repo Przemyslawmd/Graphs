@@ -18,7 +18,7 @@ void DFS::traverseGraph()
 void DFS::processNode(char key)
 {
     graph.setNodeVisit(key, true);
-    auto& adjacentNodesList = graph.getAdjacency()[key];
+    const auto& adjacentNodesList = graph.getAdjacency().at(key);
 
     for (auto it = adjacentNodesList.begin(); it != adjacentNodesList.end(); it++) {
         if (graph.isNodeVisited(it->dstKey) == false) {

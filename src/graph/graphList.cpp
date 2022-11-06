@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-std::map<char, std::list<Edge>>& GraphList::getAdjacency()
+const std::map<char, std::list<Edge>>& GraphList::getAdjacency()
 {
     return adjacency;
 }

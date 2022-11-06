@@ -8,7 +8,7 @@ Dijkstra::Dijkstra(GraphList& graph) : graph(graph) {}
 void Dijkstra::traverseGraph(char srcKey)
 {
     const auto& nodes = graph.getNodes();
-    auto& adjacency = graph.getAdjacency();
+    const auto& adjacency = graph.getAdjacency();
     
     if (routes.empty() == false) {
         routes.clear(); 
@@ -27,9 +27,12 @@ void Dijkstra::traverseGraph(char srcKey)
 }
 
 
-void Dijkstra::processRoutesTable(std::map<char, std::list<Edge>>& adjacency, char key)
+void Dijkstra::processRoutesTable(const std::map<char, std::list<Edge>>& adjacency, char key)
 {
-    auto& adjacentNodes = adjacency[key];
+    if (adjacency.count(key) != 1) {
+        return;
+    }
+    auto& adjacentNodes = adjacency.at(key);
 
     for (auto node = adjacentNodes.begin(); node != adjacentNodes.end(); node++) {
         if (graph.isNodeVisited(node->dstKey) == false) {

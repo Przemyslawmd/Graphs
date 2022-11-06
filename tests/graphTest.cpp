@@ -10,11 +10,13 @@
 #include <vector>
  
 
-void checkAdjacency(std::map<char, std::list<Edge>>& adjacency, char key, const std::vector<char>& neighboursVec)
+void checkAdjacency(const std::map<char, std::list<Edge>>& adjacency,
+                    char key,
+                    const std::vector<char>& neighboursVec)
 {
-    ASSERT_EQ(adjacency[key].size(), neighboursVec.size());
+    ASSERT_EQ(adjacency.at(key).size(), neighboursVec.size());
     
-    auto it = adjacency[key].begin();
+    auto it = adjacency.at(key).begin();
     for (char neighbour : neighboursVec) {
         EXPECT_EQ(it->dstKey, neighbour);
         std::advance(it, 1);
@@ -22,11 +24,13 @@ void checkAdjacency(std::map<char, std::list<Edge>>& adjacency, char key, const 
 }
 
 
-void checkAdjacencyWithWeight(std::map<char, std::list<Edge>>& adjacency, char key, const std::vector<std::tuple<char, int>>& edgesVec)
+void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency, 
+                              char key,
+                              const std::vector<std::tuple<char, int>>& edgesVec)
 {
-    ASSERT_EQ(adjacency[key].size(), edgesVec.size());
+    ASSERT_EQ(adjacency.at(key).size(), edgesVec.size());
     
-    auto it = adjacency[key].begin();
+    auto it = adjacency.at(key).begin();
     for (const auto& edge : edgesVec) {
         EXPECT_EQ(it->dstKey, std::get<0>(edge));
         EXPECT_EQ(it->weight, std::get<1>(edge));
@@ -55,7 +59,7 @@ TEST(TestCreateGraph, FirstTest)
     ASSERT_EQ(nodes[3]->getKey(), 'D');
     ASSERT_EQ(nodes[4]->getKey(), 'E');
 
-    auto& adjacency = graph.getAdjacency();
+    const auto& adjacency = graph.getAdjacency();
 
     ASSERT_EQ(adjacency.size(), 5);
     for (char key : keys) {
@@ -93,7 +97,7 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
     ASSERT_EQ(nodes[3]->getKey(), 'D');
     ASSERT_EQ(nodes[4]->getKey(), 'E');
 
-    auto& adjacency = graph.getAdjacency();
+    const auto& adjacency = graph.getAdjacency();
 
     ASSERT_EQ(adjacency.size(), 5);
     for (char key : keys) {
@@ -128,7 +132,7 @@ TEST(TestCreateGraph, ThirdTestGraphWithWeights)
     ASSERT_EQ(nodes[3]->getKey(), 'D');
     ASSERT_EQ(nodes[4]->getKey(), 'E');
 
-    auto& adjacency = graph.getAdjacency();
+    const auto& adjacency = graph.getAdjacency();
 
     ASSERT_EQ(adjacency.size(), 5);
     for (char key : keys) {

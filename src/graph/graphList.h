@@ -26,7 +26,7 @@ public:
     void addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edges);
     void addNodes(const std::vector<char>& nodeKeys);
 
-    std::map<char, std::list<Edge>>& getAdjacency();
+    const std::map<char, std::list<Edge>>& getAdjacency();
 
 private:
 

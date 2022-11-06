@@ -24,7 +24,7 @@ public:
 
 private:
 
-    void processQueue(std::map<char, std::list<Edge>>& adjacency);
+    void processQueue(const std::map<char, std::list<Edge>>& adjacency);
 
     GraphList& graph;
     std::queue<char> nodesQueue;
