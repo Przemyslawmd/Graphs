@@ -1,7 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
-project(GraphTests)
 
-set(CMAKE_CXX_STANDARD 17)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 set(SRC "../src/")
 
