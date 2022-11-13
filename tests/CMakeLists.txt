@@ -1,6 +1,7 @@
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-set(SRC "../src/")
+set(SRC_GRAPH "../src/graph")
+set(SRC_ALGO "../src/algo")
 
 include(FetchContent)
 FetchContent_Declare(
@@ -20,13 +21,13 @@ add_executable(
   dfsTest.cpp
   dijkstraTest.cpp
   graphTest.cpp
-  ${SRC}/algo/bfs.cpp
-  ${SRC}/algo/dfs.cpp
-  ${SRC}/algo/dijkstra.cpp
-  ${SRC}/graph/graph.cpp
-  ${SRC}/graph/graphList.cpp
-  ${SRC}/graph/graphMatrix.cpp
-  ${SRC}/graph/node.cpp
+  ${SRC_ALGO}/bfs.cpp
+  ${SRC_ALGO}/dfs.cpp
+  ${SRC_ALGO}/dijkstra.cpp
+  ${SRC_GRAPH}/graph.cpp
+  ${SRC_GRAPH}/graphList.cpp
+  ${SRC_GRAPH}/graphMatrix.cpp
+  ${SRC_GRAPH}/node.cpp
 )
 
 target_link_libraries(
