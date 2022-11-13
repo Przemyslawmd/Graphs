@@ -28,9 +28,9 @@ TEST(TestDijkstra, FirstTest)
     graph.addEdgesWithWeight('A', {{ 'B', 1 }, { 'D', 3 }});
     graph.addEdgesWithWeight('B', {{ 'C', 5 }, { 'D', 2 }});
 
-    Dijkstra dikstra(graph);
-    dikstra.traverseGraph('A');
-    const auto& routes = dikstra.getRoutes();
+    Dijkstra dijkstra(graph);
+    dijkstra.traverseGraph('A');
+    const auto& routes = dijkstra.getRoutes();
     
     checkRoute(routes, 'A', std::nullopt, 0);
     checkRoute(routes, 'B', 'A', 1);
