@@ -8,12 +8,13 @@
 
 #include <list>
 #include <map>
-
+#include <optional>
  
+
 typedef struct 
 {
     int distance;
-    char predecessor;
+    std::optional<char> predecessor;
 } route;
 
 
@@ -31,7 +32,7 @@ public:
 private:
 
     void processRoutesTable(const std::map<char, std::list<Edge>>& adjacency, char key);
-    char findNodeToProcess();
+    std::optional<char> findNodeToProcess();
     
     GraphList& graph;
     std::map<char, route> routes;

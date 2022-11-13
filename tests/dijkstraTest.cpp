@@ -7,10 +7,11 @@
 #include <gtest/gtest.h>
 
 #include <memory>
+#include <optional>
 #include <vector>
 
 
-void checkRoute(const std::map<char, route>& routes, char dstKey, char viaKey, int distance)
+void checkRoute(const std::map<char, route>& routes, char dstKey, std::optional<char> viaKey, int distance)
 {
     ASSERT_TRUE(routes.find(dstKey) != routes.end());
     EXPECT_EQ(routes.at(dstKey).distance, distance);
@@ -31,10 +32,10 @@ TEST(TestDijkstra, FirstTest)
     dikstra.traverseGraph('A');
     const auto& routes = dikstra.getRoutes();
     
-    checkRoute(routes, 'A', '\0', 0);
-    checkRoute(routes, 'B',  'A', 1);
-    checkRoute(routes, 'C',  'B', 6);
-    checkRoute(routes, 'D',  'A', 3);
+    checkRoute(routes, 'A', std::nullopt, 0);
+    checkRoute(routes, 'B', 'A', 1);
+    checkRoute(routes, 'C', 'B', 6);
+    checkRoute(routes, 'D', 'A', 3);
 }
 
 
@@ -54,12 +55,12 @@ TEST(TestDijkstra, SecondTest)
     dijkstra.traverseGraph('A');
     const auto& routesA = dijkstra.getRoutes();
     
-    checkRoute(routesA, 'A', '\0', 0);
-    checkRoute(routesA, 'B',  'E', 6);
-    checkRoute(routesA, 'C',  'E', 4);
-    checkRoute(routesA, 'D',  'A', 5);
-    checkRoute(routesA, 'E',  'A', 2);
-    checkRoute(routesA, 'F',  'E', 3);
+    checkRoute(routesA, 'A', std::nullopt, 0);
+    checkRoute(routesA, 'B', 'E', 6);
+    checkRoute(routesA, 'C', 'E', 4);
+    checkRoute(routesA, 'D', 'A', 5);
+    checkRoute(routesA, 'E', 'A', 2);
+    checkRoute(routesA, 'F', 'E', 3);
     
     
     graph.resetNodes();
@@ -70,7 +71,7 @@ TEST(TestDijkstra, SecondTest)
     checkRoute(routesE, 'B',  'E', 4);
     checkRoute(routesE, 'C',  'E', 2);
     checkRoute(routesE, 'D',  'A', 13);
-    checkRoute(routesE, 'E', '\0', 0);
+    checkRoute(routesE, 'E',  std::nullopt, 0);
     checkRoute(routesE, 'F',  'E', 1);
 }
 
