@@ -23,14 +23,13 @@ void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
     char key = nodesQueue.front();
     graph.setNodeVisit(key, true);
 
-    const auto& adjacentNodes = adjacency.at(key);
-    for (auto itNode = adjacentNodes.begin(); itNode != adjacentNodes.end(); itNode++) {
-        if (graph.isNodeVisited(itNode->dstKey) == false) {
-            nodesQueue.push(itNode->dstKey);
-            graph.setNodeVisit(itNode->dstKey, true);
+    for (auto& edge : adjacency.at(key)) {
+        if (graph.isNodeVisited(edge.dstKey) == false) {
+            nodesQueue.push(edge.dstKey);
+            graph.setNodeVisit(edge.dstKey, true);
         }
-    }    
-    
+    }
+
     nodesQueue.pop();  
 }
 

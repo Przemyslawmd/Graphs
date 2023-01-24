@@ -49,7 +49,8 @@ void GraphList::addEdge(char srcKey, char dstKey, int weight)
     }
     
     auto& adjacentNodes = adjacency.at(srcKey);
-    if (std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dstKey](const auto& edge) { return edge.dstKey == dstKey; }) == adjacentNodes.end()) {
+    auto it = std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dstKey](const auto& edge) { return edge.dstKey == dstKey; });
+    if (it == adjacentNodes.end()) {
         adjacentNodes.push_back(Edge{ dstKey, weight });
     }
 }

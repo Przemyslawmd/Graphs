@@ -18,11 +18,11 @@ void DFS::traverseGraph()
 void DFS::processNode(char key)
 {
     graph.setNodeVisit(key, true);
-    const auto& adjacentNodes = graph.getAdjacency().at(key);
 
-    for (auto itNode = adjacentNodes.begin(); itNode != adjacentNodes.end(); itNode++) {
-        if (graph.isNodeVisited(itNode->dstKey) == false) {
-            processNode(itNode->dstKey);
+    const auto& adjacentNodes = graph.getAdjacency().at(key);
+    for (auto& edge : adjacentNodes) {
+        if (graph.isNodeVisited(edge.dstKey) == false) {
+            processNode(edge.dstKey);
         }
     }
 }
