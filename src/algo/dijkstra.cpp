@@ -1,6 +1,8 @@
 
 #include "dijkstra.h"
 
+#include <bits/stdc++.h>
+
 
 Dijkstra::Dijkstra(GraphList& graph) : graph(graph) {}
 

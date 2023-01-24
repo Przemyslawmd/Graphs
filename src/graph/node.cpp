@@ -1,12 +1,8 @@
 
-#include "Node.h"
+#include "node.h"
 
 
-Node::Node(char key)
-{
-    this->key = key;
-    visited = false;
-}
+Node::Node(char key) : key(key), visited(false) {}
 
 
 char Node::getKey() const
