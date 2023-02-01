@@ -37,9 +37,9 @@ void Dijkstra::processRoutesTable(const std::map<char, std::list<Edge>>& adjacen
     auto& adjacentNodes = adjacency.at(key);
 
     for (auto node = adjacentNodes.begin(); node != adjacentNodes.end(); node++) {
-        if (graph.isNodeVisited(node->dstKey) == false) {
-            if (routes[node->dstKey].distance > routes[key].distance + node->weight)
-            routes[node->dstKey] = route{ node->weight + routes[key].distance, std::optional<char>{ key }};
+        if (graph.isNodeVisited(node->dst) == false) {
+            if (routes[node->dst].distance > routes[key].distance + node->weight)
+            routes[node->dst] = route{ node->weight + routes[key].distance, std::optional<char>{ key }};
         }
     }   
 }

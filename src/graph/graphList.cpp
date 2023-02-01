@@ -44,14 +44,14 @@ void GraphList::addEdge(char srcKey, char dstKey, int weight)
     }
     
     if (adjacency.count(srcKey) != 1) {
-        adjacency.insert({ srcKey, { Edge{ dstKey, weight }}});
+        adjacency.insert({ srcKey, { Edge{ srcKey, dstKey, weight }}});
         return;
     }
     
     auto& adjacentNodes = adjacency.at(srcKey);
-    auto it = std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dstKey](const auto& edge) { return edge.dstKey == dstKey; });
+    auto it = std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dstKey](const auto& edge) { return edge.dst == dstKey; });
     if (it == adjacentNodes.end()) {
-        adjacentNodes.push_back(Edge{ dstKey, weight });
+        adjacentNodes.push_back(Edge{ srcKey, dstKey, weight });
     }
 }
 

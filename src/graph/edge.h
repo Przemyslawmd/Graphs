@@ -5,7 +5,10 @@
 
 struct Edge 
 {
-    char dstKey;
+    Edge(char src, char dst, int weight) : src(src), dst(dst), weight(weight) {}
+
+    char src;
+    char dst;
     int weight;
 };
 

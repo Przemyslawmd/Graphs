@@ -24,9 +24,9 @@ void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
     graph.setNodeVisit(key, true);
 
     for (auto& edge : adjacency.at(key)) {
-        if (graph.isNodeVisited(edge.dstKey) == false) {
-            nodesQueue.push(edge.dstKey);
-            graph.setNodeVisit(edge.dstKey, true);
+        if (graph.isNodeVisited(edge.dst) == false) {
+            nodesQueue.push(edge.dst);
+            graph.setNodeVisit(edge.dst, true);
         }
     }
 

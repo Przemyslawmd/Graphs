@@ -18,7 +18,7 @@ void checkAdjacency(const std::map<char, std::list<Edge>>& adjacency,
     
     auto it = adjacency.at(key).begin();
     for (char neighbour : neighboursVec) {
-        EXPECT_EQ(it->dstKey, neighbour);
+        EXPECT_EQ(it->dst, neighbour);
         std::advance(it, 1);
     }
 }
@@ -32,7 +32,7 @@ void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency,
     
     auto it = adjacency.at(key).begin();
     for (const auto& edge : edgesVec) {
-        EXPECT_EQ(it->dstKey, std::get<0>(edge));
+        EXPECT_EQ(it->dst, std::get<0>(edge));
         EXPECT_EQ(it->weight, std::get<1>(edge));
         std::advance(it, 1);
     }
