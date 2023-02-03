@@ -3,6 +3,7 @@
 #define GRAPHS_KRUSKAL_H
 
 #include "../graph/graphList.h"
+#include "../graph/edge.h"
 
 #include <memory>
 
@@ -17,11 +18,11 @@ public:
 
     std::unique_ptr<GraphList> makeMinSpanningTree();
 
-private:
+    void sortEdges();
 
+    std::list<Edge> sortedEdges;
     GraphList& graph;
-
-}
+};
 
 #endif
 
