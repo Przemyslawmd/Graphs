@@ -28,11 +28,9 @@ public:
 
 private:
 
-    void sortEdges();
-    void initializePartialTrees();
+    std::unique_ptr<std::list<Edge>> sortEdges();
+    std::unique_ptr<std::vector<PartialTree>> initializePartialTrees();
 
-    std::list<Edge> sortedEdges;
-    std::vector<PartialTree> trees;
     GraphList& graph;
 };
 
