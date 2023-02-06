@@ -21,9 +21,11 @@ add_executable(
   dfsTest.cpp
   dijkstraTest.cpp
   graphTest.cpp
+  kruskalTest.cpp
   ${SRC_ALGO}/bfs.cpp
   ${SRC_ALGO}/dfs.cpp
   ${SRC_ALGO}/dijkstra.cpp
+  ${SRC_ALGO}/kruskal.cpp
   ${SRC_GRAPH}/graph.cpp
   ${SRC_GRAPH}/graphList.cpp
   ${SRC_GRAPH}/graphMatrix.cpp
