@@ -20,6 +20,11 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
     int lastPartialTree = 0;
 
     while (sortedEdges->empty() == false) {
+
+        if (std::find_if (trees->begin(), trees->end(), [](const auto& tree) { return tree.treeNumber != 1; })  == trees->end()) {
+            break;
+        }
+
         Edge edge = sortedEdges->back();
         sortedEdges->pop_back();
 
