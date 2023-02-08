@@ -16,12 +16,16 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
     auto sortedEdges = sortEdges();
     auto trees = initializePartialTrees();
 
-    auto edges = std::make_unique<std::vector<Edge>>();
+    auto spanningTreeEdges = std::make_unique<std::vector<Edge>>();
     int lastPartialTree = 0;
+
+    const auto& BothEdgesAttachedInTheSameTree = [] (int t_1, int t_2) { return t_1 == t_2 && t_1 != NOT_ATTACHED; };
+    const auto& BothEdgesAttachedInDifferentTrees = [] (int t_1, int t_2) { return t_1 != t_2 && t_1 != NOT_ATTACHED && t_2 != NOT_ATTACHED; };
+    const auto& BothEdgesNotAttached = [] (int t_1, int t_2) { return t_1 == NOT_ATTACHED && t_2 == NOT_ATTACHED; };
 
     while (sortedEdges->empty() == false) {
 
-        if (std::find_if (trees->begin(), trees->end(), [](const auto& tree) { return tree.treeNumber != 1; })  == trees->end()) {
+        if (std::find_if (trees->begin(), trees->end(), [](const auto& tree) { return tree.treeNumber != 1; }) == trees->end()) {
             break;
         }
 
@@ -31,34 +35,32 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
         auto srcEdge = std::find_if(trees->begin(), trees->end(), [&edge](const auto& tree) { return tree.key == edge.src; });
         auto dstEdge = std::find_if(trees->begin(), trees->end(), [&edge](const auto& tree) { return tree.key == edge.dst; });
 
-        if (srcEdge->treeNumber == dstEdge->treeNumber && srcEdge->treeNumber != NOT_ATTACHED) {
+        if (BothEdgesAttachedInTheSameTree(srcEdge->treeNumber, dstEdge->treeNumber)) {
             continue;
         }
-        if (srcEdge->treeNumber == NOT_ATTACHED && dstEdge->treeNumber == NOT_ATTACHED) {
+        else if (BothEdgesNotAttached(srcEdge->treeNumber, dstEdge->treeNumber)) {
             lastPartialTree++;
             srcEdge->treeNumber = lastPartialTree;
             dstEdge->treeNumber = lastPartialTree;
         }
-        else if (srcEdge->treeNumber == NOT_ATTACHED || dstEdge->treeNumber == NOT_ATTACHED) {
-            if (srcEdge->treeNumber == NOT_ATTACHED) {
-                srcEdge->treeNumber = dstEdge->treeNumber;
-            }
-            else {
-                dstEdge->treeNumber = srcEdge->treeNumber;
-            }
-        }
-        else {
-            int numberExtended = srcEdge->treeNumber < dstEdge->treeNumber ? srcEdge->treeNumber : dstEdge->treeNumber;
-            int numberDeleted = numberExtended == srcEdge->treeNumber ? dstEdge->treeNumber : srcEdge->treeNumber;
+        else if (BothEdgesAttachedInDifferentTrees(srcEdge->treeNumber, dstEdge->treeNumber)) {
+            int treeExtended = srcEdge->treeNumber < dstEdge->treeNumber ? srcEdge->treeNumber : dstEdge->treeNumber;
+            int treeDeleted = treeExtended == srcEdge->treeNumber ? dstEdge->treeNumber : srcEdge->treeNumber;
             for (auto& tree : *trees) {
-                if (tree.treeNumber == numberDeleted) {
-                    tree.treeNumber = numberExtended;
+                if (tree.treeNumber == treeDeleted) {
+                    tree.treeNumber = treeExtended;
                 }
             }
         }
-        edges->push_back(edge);
+        else if (srcEdge->treeNumber == NOT_ATTACHED) {
+            srcEdge->treeNumber = dstEdge->treeNumber;
+        }
+        else {
+            dstEdge->treeNumber = srcEdge->treeNumber;
+        }
+        spanningTreeEdges->push_back(edge);
     }
-    return edges;
+    return spanningTreeEdges;
 }
 
 
