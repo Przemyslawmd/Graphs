@@ -1,7 +1,6 @@
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-set(SRC_GRAPH "../src/graph")
-set(SRC_ALGO "../src/algo")
+set(LIB_BUILD "../build/src")
 
 include(FetchContent)
 FetchContent_Declare(
@@ -13,8 +12,6 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-include_directories(googletest/include) 
-
 add_executable(
   GraphTests
   bfsTest.cpp
@@ -22,20 +19,21 @@ add_executable(
   dijkstraTest.cpp
   graphTest.cpp
   kruskalTest.cpp
-  ${SRC_ALGO}/bfs.cpp
-  ${SRC_ALGO}/dfs.cpp
-  ${SRC_ALGO}/dijkstra.cpp
-  ${SRC_ALGO}/kruskal.cpp
-  ${SRC_GRAPH}/graph.cpp
-  ${SRC_GRAPH}/graphList.cpp
-  ${SRC_GRAPH}/graphMatrix.cpp
-  ${SRC_GRAPH}/node.cpp
 )
+
+target_include_directories(
+  GraphTests 
+  PRIVATE 
+  googletest/include 
+  ${LIB_BUILD}
+) 
 
 target_link_libraries(
   GraphTests
   GTest::gtest_main
+  GraphsLib
 )
 
 include(GoogleTest)
 gtest_discover_tests(GraphTests)
+
