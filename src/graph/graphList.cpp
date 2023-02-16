@@ -10,14 +10,6 @@ const std::map<char, std::list<Edge>>& GraphList::getAdjacency()
 }
 
 
-void GraphList::addNodes(const std::vector<char>& keysVec)
-{
-    for (auto key : keysVec) {
-        nodes.push_back(std::make_unique<Node>(key));
-    }
-}
-
-
 void GraphList::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 {
     for (char dstKey : dstKeysVec) {

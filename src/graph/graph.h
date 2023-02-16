@@ -14,7 +14,11 @@ public:
     
     virtual ~Graph() = 0;
 
+    virtual void addEdges(char srcKey, const std::vector<char>& dstKeys) = 0;
+    virtual void addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edges) = 0;
+
     void addNode(char key);
+    void addNodes(const std::vector<char>& keys);
     bool isNodeExist(char key);
 
     bool isNodeVisited(char key);

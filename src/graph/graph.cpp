@@ -21,6 +21,14 @@ void Graph::addNode(char key)
 }
 
 
+void Graph::addNodes(const std::vector<char>& keys)
+{
+    for (auto key : keys) {
+        nodes.push_back(std::make_unique<Node>(key));
+    }
+}
+
+
 bool Graph::isNodeExist(char key)
 {
     return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; }) != nodes.end();
