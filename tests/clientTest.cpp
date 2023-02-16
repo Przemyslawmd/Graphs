@@ -1,0 +1,20 @@
+
+#include "../src/graphclient.h"
+#include "../src/graph/graphList.h"
+#include "../src/graph/node.h"
+#include "../src/graphclient.h"
+
+#include <gtest/gtest.h>
+
+#include <memory>
+#include <vector>
+ 
+
+
+TEST(TestClient, FirstTest)
+{
+    GraphClient client;
+
+    ASSERT_EQ(2,2);
+}
+
