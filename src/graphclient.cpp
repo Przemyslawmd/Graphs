@@ -4,7 +4,7 @@
 
 GraphClient::GraphClient() 
 {
-    graph = std::make_unique<GraphList>();
+    graph = std::make_unique<Graph>();
 }
 
 

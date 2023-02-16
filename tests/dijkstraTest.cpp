@@ -2,7 +2,7 @@
 #include "../src/algo/dijkstra.h"
 #include "../src/graph/edge.h"
 #include "../src/graph/node.h"
-#include "../src/graph/graphList.h"
+#include "../src/graph/graph.h"
 
 #include <gtest/gtest.h>
 
@@ -22,7 +22,7 @@ void checkRoute(const std::map<char, route>& routes, char dstKey, std::optional<
 TEST(TestDijkstra, FirstTest)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D' }; 
-    GraphList graph;
+    Graph graph;
     graph.addNodes(keys);
 
     graph.addEdgesWithWeight('A', {{ 'B', 1 }, { 'D', 3 }});
@@ -42,7 +42,7 @@ TEST(TestDijkstra, FirstTest)
 TEST(TestDijkstra, SecondTest)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E', 'F' }; 
-    GraphList graph;
+    Graph graph;
     graph.addNodes(keys);
 
     graph.addEdgesWithWeight('A', {{ 'D', 5 }, { 'E', 2 }, { 'F', 8 }});

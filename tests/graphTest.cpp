@@ -1,6 +1,6 @@
 
 #include "../src/graph/edge.h"
-#include "../src/graph/graphList.h"
+#include "../src/graph/graph.h"
 #include "../src/graph/node.h"
 
 #include <gtest/gtest.h>
@@ -41,7 +41,7 @@ void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency,
 TEST(TestCreateGraph, FirstTest)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
-    GraphList graph;
+    Graph graph;
     graph.addNodes(keys);
 
     graph.addEdges('A', { 'B' });
@@ -76,7 +76,7 @@ TEST(TestCreateGraph, FirstTest)
 TEST(TestCreateGraph, SecondTestImproperEdges)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
-    GraphList graph;
+    Graph graph;
     graph.addNodes(keys);
 
     graph.addEdges('A', { 'B' });
@@ -114,7 +114,7 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
 TEST(TestCreateGraph, ThirdTestGraphWithWeights)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
-    GraphList graph;
+    Graph graph;
     graph.addNodes(keys);
 
     graph.addEdgesWithWeight('A', {{ 'B', 1  }});

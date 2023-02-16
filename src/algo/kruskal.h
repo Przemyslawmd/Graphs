@@ -2,7 +2,7 @@
 #ifndef GRAPHS_KRUSKAL_H
 #define GRAPHS_KRUSKAL_H
 
-#include "../graph/graphList.h"
+#include "../graph/graph.h"
 #include "../graph/edge.h"
 
 #include <list>
@@ -20,7 +20,7 @@ class Kruskal
 {
 public:
 
-    Kruskal(GraphList&);
+    Kruskal(Graph&);
     Kruskal(const Kruskal&) = delete;
     Kruskal& operator=(Kruskal&) = delete;
 
@@ -31,7 +31,7 @@ private:
     std::unique_ptr<std::list<Edge>> sortEdges();
     std::unique_ptr<std::vector<PartialTree>> initializePartialTrees();
 
-    GraphList& graph;
+    Graph& graph;
 };
 
 #endif

@@ -4,7 +4,7 @@
 
 #include "../graph/edge.h"
 #include "../graph/node.h"
-#include "../graph/graphList.h"
+#include "../graph/graph.h"
 
 #include <list>
 #include <map>
@@ -22,7 +22,7 @@ class Dijkstra
 {
 public:
 
-    Dijkstra(GraphList&);
+    Dijkstra(Graph&);
     Dijkstra(const Dijkstra&) = delete;
     Dijkstra& operator=(Dijkstra&) = delete;
 
@@ -34,7 +34,7 @@ private:
     void processRoutesTable(const std::map<char, std::list<Edge>>& adjacency, char key);
     std::optional<char> findNodeToProcess();
     
-    GraphList& graph;
+    Graph& graph;
     std::map<char, route> routes;
 };
 

@@ -8,7 +8,7 @@
 constexpr int NOT_ATTACHED = 0;
 
 
-Kruskal::Kruskal(GraphList& graph) : graph(graph) {}
+Kruskal::Kruskal(Graph& graph) : graph(graph) {}
 
 
 std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()

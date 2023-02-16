@@ -2,7 +2,7 @@
 #include "../src/algo/kruskal.h"
 #include "../src/graph/edge.h"
 #include "../src/graph/node.h"
-#include "../src/graph/graphList.h"
+#include "../src/graph/graph.h"
 
 #include <gtest/gtest.h>
 
@@ -21,7 +21,7 @@ void checkEdge(const Edge& edge, char src, char dst, int weight)
 TEST(TestKruskal, FirstTest)
 {
     std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e', }; 
-    GraphList graph;
+    Graph graph;
     graph.addNodes(keys);
 
     graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'c', 7 }});

@@ -12,15 +12,14 @@
 #include <vector>
 
 
-class GraphList
+class Graph
 {
 public:
     
-    virtual ~GraphList() {};
-    GraphList() = default;
-    GraphList(const std::vector<std::vector<char>>& adjacency);
-    GraphList(const GraphList&) = delete;
-    GraphList& operator=(GraphList&) = delete;
+    Graph() = default;
+    Graph(const std::vector<std::vector<char>>& adjacency);
+    Graph(const Graph&) = delete;
+    Graph& operator=(Graph&) = delete;
         
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);

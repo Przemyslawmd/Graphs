@@ -1,6 +1,6 @@
 
 #include "../src/graphclient.h"
-#include "../src/graph/graphList.h"
+#include "../src/graph/graph.h"
 #include "../src/graph/node.h"
 #include "../src/graphclient.h"
 

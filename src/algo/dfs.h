@@ -2,14 +2,14 @@
 #ifndef GRAPHS_DFS_H
 #define GRAPHS_DFS_H
 
-#include "../graph/graphList.h"
+#include "../graph/graph.h"
 
 
 class DFS
 {
 public:
 
-    DFS(GraphList&);
+    DFS(Graph&);
     DFS(const DFS&) = delete;
     DFS& operator=(DFS&) = delete;
 
@@ -19,7 +19,7 @@ private:
 
     void processNode(char key);
 
-    GraphList& graph;
+    Graph& graph;
 };
 
 #endif

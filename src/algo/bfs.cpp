@@ -4,7 +4,7 @@
 #include <iterator>
 
 
-BFS::BFS(GraphList& graph) : graph(graph) {}
+BFS::BFS(Graph& graph) : graph(graph) {}
 
 
 void BFS::traverseGraph()

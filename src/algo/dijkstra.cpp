@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 
 
-Dijkstra::Dijkstra(GraphList& graph) : graph(graph) {}
+Dijkstra::Dijkstra(Graph& graph) : graph(graph) {}
 
 
 void Dijkstra::traverseGraph(char srcKey)

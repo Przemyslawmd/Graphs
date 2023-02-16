@@ -1,7 +1,7 @@
 
 #include "../src/algo/bfs.h"
 #include "../src/graph/node.h"
-#include "../src/graph/graphList.h"
+#include "../src/graph/graph.h"
 
 #include <gtest/gtest.h>
 
@@ -11,7 +11,7 @@
 
 TEST(TestBFS, 1)
 {
-    GraphList graph;
+    Graph graph;
     graph.addNodes({ 'A', 'B', 'C', 'D', 'E' });    
 
     graph.addEdges('A', { 'B' });
@@ -40,7 +40,7 @@ TEST(TestBFS, 1)
 
 TEST(TestBFS, 2)
 {
-    GraphList graph;
+    Graph graph;
     graph.addNodes({ 'A', 'B', 'C', 'D', 'E', 'F', 'G' });   
 
     graph.addEdges('A', { 'B', 'D' });

@@ -4,7 +4,7 @@
 #include <iterator>
 
 
-DFS::DFS(GraphList& graph) : graph(graph) {}
+DFS::DFS(Graph& graph) : graph(graph) {}
 
 
 void DFS::traverseGraph()
