@@ -4,6 +4,34 @@
 #include <iostream>
 
 
+const std::vector<std::unique_ptr<Node>>& GraphList::getNodes()
+{
+    return nodes;
+}
+
+
+void GraphList::addNode(char key)
+{
+    if (isNodeExist(key) == false) {
+        nodes.push_back(std::make_unique<Node>(key));
+    }
+}
+
+
+void GraphList::addNodes(const std::vector<char>& keys)
+{
+    for (auto key : keys) {
+        nodes.push_back(std::make_unique<Node>(key));
+    }
+}
+
+
+bool GraphList::isNodeExist(char key)
+{
+    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; }) != nodes.end();
+}
+
+
 const std::map<char, std::list<Edge>>& GraphList::getAdjacency()
 {
     return adjacency;
@@ -47,3 +75,24 @@ void GraphList::addEdge(char srcKey, char dstKey, int weight)
     }
 }
 
+
+bool GraphList::isNodeVisited(char key)
+{
+    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; });
+    return node->get()->isVisited();
+}
+
+
+void GraphList::setNodeVisit(char key, bool isVisited)
+{
+    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; });
+    node->get()->setVisited(isVisited);
+}
+
+
+void GraphList::resetNodes()
+{
+    for (auto& node : nodes) {
+        node->setVisited(false);
+    }
+}

@@ -8,7 +8,6 @@ set(ALGO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/algo/")
 add_library(
     GraphsLib 
     STATIC 
-    ${GRAPH_DIR}graph.cpp 
     ${GRAPH_DIR}graphList.cpp 
     ${GRAPH_DIR}node.cpp
     ${ALGO_DIR}bfs.cpp 

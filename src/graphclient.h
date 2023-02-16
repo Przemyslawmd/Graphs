@@ -3,7 +3,6 @@
 #define GRAPHS_GRAPH_CLIENT_H
 
 #include "algo/dijkstra.h"
-#include "graph/graph.h"
 #include "graph/graphList.h"
 
 
@@ -21,7 +20,7 @@ public:
 
 private:
 
-    std::unique_ptr<Graph> graph;
+    std::unique_ptr<GraphList> graph;
 };
 
 #endif
