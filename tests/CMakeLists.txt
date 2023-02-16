@@ -14,6 +14,7 @@ enable_testing()
 
 add_executable(
   GraphTests
+  clientTest.cpp
   bfsTest.cpp
   dfsTest.cpp
   dijkstraTest.cpp
@@ -36,4 +37,3 @@ target_link_libraries(
 
 include(GoogleTest)
 gtest_discover_tests(GraphTests)
-

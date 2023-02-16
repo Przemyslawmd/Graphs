@@ -16,5 +16,6 @@ add_library(
     ${ALGO_DIR}dfs.cpp 
     ${ALGO_DIR}dijkstra.cpp 
     ${ALGO_DIR}kruskal.cpp
+    graphclient.cpp
 )
 
