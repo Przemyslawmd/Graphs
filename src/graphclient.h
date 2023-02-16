@@ -5,20 +5,13 @@
 #include "algo/dijkstra.h"
 #include "graph/graph.h"
 #include "graph/graphList.h"
-#include "graph/graphMatrix.h"
-
-
-enum class GraphMode {
-    Matrix,
-    List
-};
 
 
 class GraphClient
 {
 public:
-    
-    GraphClient(GraphMode mode);
+
+    GraphClient();
 
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);

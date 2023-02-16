@@ -1,17 +1,10 @@
 
 #include "graphclient.h"
 
-#include <iostream>
 
-
-GraphClient::GraphClient(GraphMode mode) 
+GraphClient::GraphClient() 
 {
-    if (mode == GraphMode::List) {
-        graph = std::make_unique<GraphList>();
-    } 
-    else {
-        graph = nullptr;
-    }
+    graph = std::make_unique<GraphList>();
 }
 
 
