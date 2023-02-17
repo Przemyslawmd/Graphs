@@ -21,57 +21,57 @@ void checkRoute(const std::map<char, route>& routes, char dstKey, std::optional<
 
 TEST(TestDijkstra, FirstTest)
 {
-    std::vector<char> keys = { 'A', 'B', 'C', 'D' }; 
-    Graph graph;
+    std::vector<char> keys = { 'a', 'b', 'c', 'd' };
+    Graph graph{ true };
     graph.addNodes(keys);
 
-    graph.addEdgesWithWeight('A', {{ 'B', 1 }, { 'D', 3 }});
-    graph.addEdgesWithWeight('B', {{ 'C', 5 }, { 'D', 2 }});
+    graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'd', 3 }});
+    graph.addEdgesWithWeight('b', {{ 'c', 5 }, { 'd', 2 }});
 
     Dijkstra dijkstra(graph);
-    dijkstra.traverseGraph('A');
+    dijkstra.traverseGraph('a');
     const auto& routes = dijkstra.getRoutes();
     
-    checkRoute(routes, 'A', std::nullopt, 0);
-    checkRoute(routes, 'B', 'A', 1);
-    checkRoute(routes, 'C', 'B', 6);
-    checkRoute(routes, 'D', 'A', 3);
+    checkRoute(routes, 'a', std::nullopt, 0);
+    checkRoute(routes, 'b', 'a', 1);
+    checkRoute(routes, 'c', 'b', 6);
+    checkRoute(routes, 'd', 'a', 3);
 }
 
 
 TEST(TestDijkstra, SecondTest)
 {
-    std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E', 'F' }; 
-    Graph graph;
+    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e', 'f' };
+    Graph graph{ true } ;
     graph.addNodes(keys);
 
-    graph.addEdgesWithWeight('A', {{ 'D', 5 }, { 'E', 2 }, { 'F', 8 }});
-    graph.addEdgesWithWeight('B', {{ 'A', 4 }, { 'C', 5 }});
-    graph.addEdgesWithWeight('D', {{ 'E', 2 }});
-    graph.addEdgesWithWeight('E', {{ 'B', 4 }, { 'C', 2 }, { 'F', 1 }});
-    graph.addEdgesWithWeight('F', {{ 'C', 6 }});
+    graph.addEdgesWithWeight('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
+    graph.addEdgesWithWeight('b', {{ 'a', 4 }, { 'c', 5 }});
+    graph.addEdgesWithWeight('d', {{ 'e', 2 }});
+    graph.addEdgesWithWeight('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
+    graph.addEdgesWithWeight('f', {{ 'c', 6 }});
 
     Dijkstra dijkstra(graph);
-    dijkstra.traverseGraph('A');
+    dijkstra.traverseGraph('a');
     const auto& routesA = dijkstra.getRoutes();
     
-    checkRoute(routesA, 'A', std::nullopt, 0);
-    checkRoute(routesA, 'B', 'E', 6);
-    checkRoute(routesA, 'C', 'E', 4);
-    checkRoute(routesA, 'D', 'A', 5);
-    checkRoute(routesA, 'E', 'A', 2);
-    checkRoute(routesA, 'F', 'E', 3);
+    checkRoute(routesA, 'a', std::nullopt, 0);
+    checkRoute(routesA, 'b', 'e', 6);
+    checkRoute(routesA, 'c', 'e', 4);
+    checkRoute(routesA, 'd', 'a', 5);
+    checkRoute(routesA, 'e', 'a', 2);
+    checkRoute(routesA, 'f', 'e', 3);
     
     
     graph.resetNodes();
-    dijkstra.traverseGraph('E');
+    dijkstra.traverseGraph('e');
     const auto& routesE = dijkstra.getRoutes();
     
-    checkRoute(routesE, 'A',  'B', 8);
-    checkRoute(routesE, 'B',  'E', 4);
-    checkRoute(routesE, 'C',  'E', 2);
-    checkRoute(routesE, 'D',  'A', 13);
-    checkRoute(routesE, 'E',  std::nullopt, 0);
-    checkRoute(routesE, 'F',  'E', 1);
+    checkRoute(routesE, 'a',  'b', 8);
+    checkRoute(routesE, 'b',  'e', 4);
+    checkRoute(routesE, 'c',  'e', 2);
+    checkRoute(routesE, 'd',  'a', 13);
+    checkRoute(routesE, 'e',  std::nullopt, 0);
+    checkRoute(routesE, 'f',  'e', 1);
 }
 

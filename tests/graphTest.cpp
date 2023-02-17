@@ -14,7 +14,7 @@ void checkAdjacency(const std::map<char, std::list<Edge>>& adjacency,
                     const std::vector<char>& neighboursVec)
 {
     ASSERT_EQ(adjacency.at(key).size(), neighboursVec.size());
-    
+
     auto it = adjacency.at(key).begin();
     for (char neighbour : neighboursVec) {
         EXPECT_EQ(it->dst, neighbour);
@@ -28,7 +28,7 @@ void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency,
                               const std::vector<std::tuple<char, int>>& edgesVec)
 {
     ASSERT_EQ(adjacency.at(key).size(), edgesVec.size());
-    
+
     auto it = adjacency.at(key).begin();
     for (const auto& edge : edgesVec) {
         EXPECT_EQ(it->dst, std::get<0>(edge));
@@ -40,36 +40,36 @@ void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency,
 
 TEST(TestCreateGraph, FirstTest)
 {
-    std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
+    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph;
     graph.addNodes(keys);
 
-    graph.addEdges('A', { 'B' });
-    graph.addEdges('B', { 'A', 'C' });
-    graph.addEdges('C', { 'B', 'D', 'E' });
-    graph.addEdges('D', { 'C', 'E' } );
-    graph.addEdges('E', { 'C', 'D' });
+    graph.addEdges('a', { 'b' });
+    graph.addEdges('b', { 'a', 'c' });
+    graph.addEdges('c', { 'b', 'd', 'e' });
+    graph.addEdges('d', { 'c', 'e' } );
+    graph.addEdges('e', { 'c', 'd' });
 
     const auto& nodes = graph.getNodes();
-    
-    ASSERT_EQ(nodes[0]->getKey(), 'A');
-    ASSERT_EQ(nodes[1]->getKey(), 'B');
-    ASSERT_EQ(nodes[2]->getKey(), 'C');
-    ASSERT_EQ(nodes[3]->getKey(), 'D');
-    ASSERT_EQ(nodes[4]->getKey(), 'E');
+
+    ASSERT_EQ(nodes[0]->getKey(), 'a');
+    ASSERT_EQ(nodes[1]->getKey(), 'b');
+    ASSERT_EQ(nodes[2]->getKey(), 'c');
+    ASSERT_EQ(nodes[3]->getKey(), 'd');
+    ASSERT_EQ(nodes[4]->getKey(), 'e');
 
     const auto& adjacency = graph.getAdjacency();
 
     ASSERT_EQ(adjacency.size(), 5);
     for (char key : keys) {
-        ASSERT_EQ(adjacency.count(key), 1);    
+        ASSERT_EQ(adjacency.count(key), 1);
     }
 
-    checkAdjacency(adjacency, 'A', { 'B' });
-    checkAdjacency(adjacency, 'B', { 'A', 'C' });
-    checkAdjacency(adjacency, 'C', { 'B', 'D', 'E' });
-    checkAdjacency(adjacency, 'D', { 'C', 'E' });
-    checkAdjacency(adjacency, 'E', { 'C', 'D' });
+    checkAdjacency(adjacency, 'a', { 'b' });
+    checkAdjacency(adjacency, 'b', { 'a', 'c' });
+    checkAdjacency(adjacency, 'c', { 'b', 'd', 'e' });
+    checkAdjacency(adjacency, 'd', { 'c', 'e' });
+    checkAdjacency(adjacency, 'e', { 'c', 'd' });
 }
 
 
@@ -114,7 +114,7 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
 TEST(TestCreateGraph, ThirdTestGraphWithWeights)
 {
     std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
-    Graph graph;
+    Graph graph{ true };
     graph.addNodes(keys);
 
     graph.addEdgesWithWeight('A', {{ 'B', 1  }});

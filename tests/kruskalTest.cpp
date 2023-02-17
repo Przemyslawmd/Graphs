@@ -21,7 +21,7 @@ void checkEdge(const Edge& edge, char src, char dst, int weight)
 TEST(TestKruskal, FirstTest)
 {
     std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e', }; 
-    Graph graph;
+    Graph graph{ true } ;
     graph.addNodes(keys);
 
     graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'c', 7 }});

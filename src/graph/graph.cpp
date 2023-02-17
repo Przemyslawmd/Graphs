@@ -5,10 +5,7 @@
 #include <iostream>
 
 
-const std::vector<std::unique_ptr<Node>>& Graph::getNodes()
-{
-    return nodes;
-}
+Graph::Graph(bool isWeight): isWeight(isWeight) {}
 
 
 void Graph::addNode(char key)
@@ -33,6 +30,12 @@ bool Graph::isNodeExist(char key)
 }
 
 
+const std::vector<std::unique_ptr<Node>>& Graph::getNodes()
+{
+    return nodes;
+}
+
+
 const std::map<char, std::list<Edge>>& Graph::getAdjacency()
 {
     return adjacency;
@@ -41,6 +44,10 @@ const std::map<char, std::list<Edge>>& Graph::getAdjacency()
 
 void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 {
+    if (isWeight) {
+        std::cout << "Graph is weighted, use addEdgesWithWeight" << std::endl;
+        return;
+    }
     for (char dstKey : dstKeysVec) {
         addEdge(srcKey, dstKey, 1);
     }
@@ -49,6 +56,10 @@ void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 
 void Graph::addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edgesVec)
 {
+    if (isWeight == false) {
+        std::cout << "Graph is not weighted, use addEdges" << std::endl;
+        return;
+    }
     for (const auto& edge : edgesVec) {
         addEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
     }

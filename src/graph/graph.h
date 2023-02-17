@@ -1,6 +1,6 @@
 
-#ifndef GRAPHS_GRAPHLIST_H
-#define GRAPHS_GRAPHLIST_H
+#ifndef GRAPHS_GRAPH_H
+#define GRAPHS_GRAPH_H
 
 #include "edge.h"
 #include "node.h"
@@ -16,7 +16,7 @@ class Graph
 {
 public:
     
-    Graph() = default;
+    Graph(bool isWeight = false);
     Graph(const std::vector<std::vector<char>>& adjacency);
     Graph(const Graph&) = delete;
     Graph& operator=(Graph&) = delete;
@@ -38,6 +38,8 @@ public:
 private:
 
     void addEdge(char srcKey, char dstKey, int weight);
+
+    const bool isWeight;
 
     std::vector<std::unique_ptr<Node>> nodes;
     std::map<char, std::list<Edge>> adjacency;
