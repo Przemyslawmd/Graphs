@@ -1,5 +1,8 @@
 
 #include "graphclient.h"
+#include "algo/dijkstra.h"
+#include "algo/kruskal.h"
+
 #include <bits/stdc++.h>
 
 
@@ -45,5 +48,19 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
         predecessor = routes.at(predecessor.value()).predecessor;
     }
     return std::make_unique<std::vector<char>>(nodesList->begin(), nodesList->end());
+}
+
+
+std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinimumSpanningTree()
+{
+    Kruskal kruskal{ *(graph.get()) };
+    auto edges = kruskal.makeMinSpanningTree();
+    auto edgesTuple  = std::make_unique<std::vector<std::tuple<char, char>>>();
+
+    for (const Edge& edge : *edges) {
+        edgesTuple->push_back(std::tuple<char, char>{ edge.src, edge.dst });
+    }
+
+    return edgesTuple;
 }
 

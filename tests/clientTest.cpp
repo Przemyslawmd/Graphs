@@ -7,6 +7,7 @@
 #include <gtest/gtest.h>
 
 #include <memory>
+#include <tuple>
 #include <vector>
 
 
@@ -35,5 +36,34 @@ TEST(TestClient, FindShortestPath)
     ASSERT_EQ(path->at(1), 'b');
     ASSERT_EQ(path->at(2), 'a');
     ASSERT_EQ(path->at(3), 'd');
+}
+
+
+TEST(TestClient, FindMinSpanningTree)
+{
+    GraphClient client;
+    client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
+
+    client.addEdgesWithWeight('a', {{ 'b', 1 }, { 'c', 7 }});
+    client.addEdgesWithWeight('b', {{ 'a', 1 }, { 'c', 5 }, { 'd', 4 }});
+    client.addEdgesWithWeight('c', {{ 'a', 7 }, { 'e', 6 }});
+    client.addEdgesWithWeight('d', {{ 'e', 2 }, { 'b', 4 }});
+    client.addEdgesWithWeight('e', {{ 'b', 3 } });
+
+    auto edges = client.findMinimumSpanningTree();
+
+    ASSERT_EQ(edges->size(), 4);
+
+    ASSERT_EQ(std::get<0>(edges->at(0)), 'a');
+    ASSERT_EQ(std::get<1>(edges->at(0)), 'b');
+
+    ASSERT_EQ(std::get<0>(edges->at(1)), 'd');
+    ASSERT_EQ(std::get<1>(edges->at(1)), 'e');
+
+    ASSERT_EQ(std::get<0>(edges->at(2)), 'e');
+    ASSERT_EQ(std::get<1>(edges->at(2)), 'b');
+
+    ASSERT_EQ(std::get<0>(edges->at(3)), 'b');
+    ASSERT_EQ(std::get<1>(edges->at(3)), 'c');
 }
 

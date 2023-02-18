@@ -2,7 +2,6 @@
 #ifndef GRAPHS_GRAPH_CLIENT_H
 #define GRAPHS_GRAPH_CLIENT_H
 
-#include "algo/dijkstra.h"
 #include "graph/graph.h"
 
 #include <map>
@@ -22,6 +21,7 @@ public:
     void addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edges);
 
     std::unique_ptr<std::vector<char>> findShortestPath(char src, char dst);
+    std::unique_ptr<std::vector<std::tuple<char, char>>> findMinimumSpanningTree();
 
 private:
 
