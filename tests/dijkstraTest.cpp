@@ -27,7 +27,7 @@ TEST(TestDijkstra, FirstTest)
     graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'd', 3 }});
     graph.addEdgesWithWeight('b', {{ 'c', 5 }, { 'd', 2 }});
 
-    Dijkstra dijkstra(graph);
+    Dijkstra dijkstra{ graph };
     dijkstra.traverseGraph('a');
     const auto& routes = dijkstra.getRoutes();
     
@@ -49,7 +49,7 @@ TEST(TestDijkstra, SecondTest)
     graph.addEdgesWithWeight('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
     graph.addEdgesWithWeight('f', {{ 'c', 6 }});
 
-    Dijkstra dijkstra(graph);
+    Dijkstra dijkstra{ graph };
     dijkstra.traverseGraph('a');
     const auto& routesA = dijkstra.getRoutes();
     

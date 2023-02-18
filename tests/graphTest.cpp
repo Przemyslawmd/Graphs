@@ -9,7 +9,8 @@
 #include <vector>
  
 
-void checkAdjacency(const std::map<char, std::list<Edge>>& adjacency,
+void checkAdjacency(const std::map<char, 
+                    std::list<Edge>>& adjacency,
                     char key,
                     const std::vector<char>& neighboursVec)
 {
@@ -23,7 +24,8 @@ void checkAdjacency(const std::map<char, std::list<Edge>>& adjacency,
 }
 
 
-void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency, 
+void checkAdjacencyWithWeight(const std::map<char, 
+                              std::list<Edge>>& adjacency, 
                               char key,
                               const std::vector<std::tuple<char, int>>& edgesVec)
 {

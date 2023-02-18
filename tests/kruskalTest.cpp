@@ -29,7 +29,7 @@ TEST(TestKruskal, FirstTest)
     graph.addEdgesWithWeight('d', {{ 'e', 2 }, { 'b', 4 }});
     graph.addEdgesWithWeight('e', {{ 'b', 3 } });
 
-    Kruskal kruskal(graph);
+    Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
 
     EXPECT_EQ(edges.get()->size(), 4);

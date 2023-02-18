@@ -9,7 +9,7 @@
 #include <vector>
 
 
-TEST(TestBFS, 1)
+TEST(TestBFS, FirstTest)
 {
     Graph graph{ false, false };
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
@@ -20,7 +20,7 @@ TEST(TestBFS, 1)
     graph.addEdges('d', { 'c', 'e' });
     graph.addEdges('e', { 'c', 'd' });
 
-    BFS bfs(graph);
+    BFS bfs{ graph };
     bfs.traverseGraph();
 
     const auto& nodes = graph.getNodes();
@@ -35,7 +35,7 @@ TEST(TestBFS, 1)
     EXPECT_TRUE(nodes[3]->isVisited());
     EXPECT_EQ(nodes[4]->getKey(), 'e');
     EXPECT_TRUE(nodes[4]->isVisited());
-}    
+}
 
 
 TEST(TestBFS, 2)
@@ -51,9 +51,9 @@ TEST(TestBFS, 2)
     graph.addEdges('f', { 'd', 'e' });
     graph.addEdges('g', { 'b', 'c' });
 
-    BFS bfs(graph);
+    BFS bfs{ graph };
     bfs.traverseGraph();
-    
+
     const auto& nodes = graph.getNodes();
 
     EXPECT_EQ(nodes[0]->getKey(), 'a');

@@ -20,11 +20,11 @@ TEST(TestDFS, 1)
     graph.addEdges('d', { 'c', 'e' });
     graph.addEdges('e', { 'c', 'd' });
 
-    DFS dfs(graph);
+    DFS dfs{ graph };
     dfs.traverseGraph();
 
     const auto& nodes = graph.getNodes();
-		
+
     EXPECT_EQ(nodes[0]->getKey(), 'a');
     EXPECT_TRUE(nodes[0]->isVisited());
     EXPECT_EQ(nodes[1]->getKey(), 'b');
@@ -51,7 +51,7 @@ TEST(TestDFS, 2)
     graph.addEdges('f', { 'd', 'e' });
     graph.addEdges('g', { 'b', 'c' });
 
-    DFS dfs(graph);
+    DFS dfs{ graph };
     dfs.traverseGraph();
     
     const auto& nodes = graph.getNodes();
