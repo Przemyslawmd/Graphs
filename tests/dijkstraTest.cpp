@@ -21,9 +21,8 @@ void checkRoute(const std::map<char, route>& routes, char dstKey, std::optional<
 
 TEST(TestDijkstra, FirstTest)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd' };
-    Graph graph{ true };
-    graph.addNodes(keys);
+    Graph graph{ false, true };
+    graph.addNodes({ 'a', 'b', 'c', 'd' });
 
     graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'd', 3 }});
     graph.addEdgesWithWeight('b', {{ 'c', 5 }, { 'd', 2 }});
@@ -41,9 +40,8 @@ TEST(TestDijkstra, FirstTest)
 
 TEST(TestDijkstra, SecondTest)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e', 'f' };
-    Graph graph{ true } ;
-    graph.addNodes(keys);
+    Graph graph{ false, true } ;
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     graph.addEdgesWithWeight('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
     graph.addEdgesWithWeight('b', {{ 'a', 4 }, { 'c', 5 }});

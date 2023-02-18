@@ -12,28 +12,28 @@
 TEST(TestBFS, 1)
 {
     Graph graph;
-    graph.addNodes({ 'A', 'B', 'C', 'D', 'E' });    
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
 
-    graph.addEdges('A', { 'B' });
-    graph.addEdges('B', { 'A', 'C' });
-    graph.addEdges('C', { 'B', 'D', 'E' });
-    graph.addEdges('D', { 'C', 'E' });
-    graph.addEdges('E', { 'C', 'D' });
+    graph.addEdges('a', { 'b' });
+    graph.addEdges('b', { 'a', 'c' });
+    graph.addEdges('c', { 'b', 'd', 'e' });
+    graph.addEdges('d', { 'c', 'e' });
+    graph.addEdges('e', { 'c', 'd' });
 
     BFS bfs(graph);
     bfs.traverseGraph();
 
     const auto& nodes = graph.getNodes();
 		
-    EXPECT_EQ(nodes[0]->getKey(), 'A');
+    EXPECT_EQ(nodes[0]->getKey(), 'a');
     EXPECT_TRUE(nodes[0]->isVisited());
-    EXPECT_EQ(nodes[1]->getKey(), 'B');
+    EXPECT_EQ(nodes[1]->getKey(), 'b');
     EXPECT_TRUE(nodes[1]->isVisited());
-    EXPECT_EQ(nodes[2]->getKey(), 'C');
+    EXPECT_EQ(nodes[2]->getKey(), 'c');
     EXPECT_TRUE(nodes[2]->isVisited());
-    EXPECT_EQ(nodes[3]->getKey(), 'D');
+    EXPECT_EQ(nodes[3]->getKey(), 'd');
     EXPECT_TRUE(nodes[3]->isVisited());
-    EXPECT_EQ(nodes[4]->getKey(), 'E');
+    EXPECT_EQ(nodes[4]->getKey(), 'e');
     EXPECT_TRUE(nodes[4]->isVisited());
 }    
 
@@ -41,34 +41,34 @@ TEST(TestBFS, 1)
 TEST(TestBFS, 2)
 {
     Graph graph;
-    graph.addNodes({ 'A', 'B', 'C', 'D', 'E', 'F', 'G' });   
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f', 'g' });
 
-    graph.addEdges('A', { 'B', 'D' });
-    graph.addEdges('B', { 'A', 'C', 'D', 'G' });
-    graph.addEdges('C', { 'B', 'G' });
-    graph.addEdges('D', { 'A', 'B', 'F' });
-    graph.addEdges('E', { 'F' });
-    graph.addEdges('F', { 'D', 'E' });
-    graph.addEdges('G', { 'B', 'C' });
+    graph.addEdges('a', { 'b', 'd' });
+    graph.addEdges('b', { 'a', 'c', 'd', 'g' });
+    graph.addEdges('c', { 'b', 'g' });
+    graph.addEdges('d', { 'a', 'b', 'f' });
+    graph.addEdges('e', { 'f' });
+    graph.addEdges('f', { 'd', 'e' });
+    graph.addEdges('g', { 'b', 'c' });
 
     BFS bfs(graph);
     bfs.traverseGraph();
     
     const auto& nodes = graph.getNodes();
 
-    EXPECT_EQ(nodes[0]->getKey(), 'A');
+    EXPECT_EQ(nodes[0]->getKey(), 'a');
     EXPECT_TRUE(nodes[0]->isVisited());
-    EXPECT_EQ(nodes[1]->getKey(), 'B');
+    EXPECT_EQ(nodes[1]->getKey(), 'b');
     EXPECT_TRUE(nodes[1]->isVisited());
-    EXPECT_EQ(nodes[2]->getKey(), 'C');
+    EXPECT_EQ(nodes[2]->getKey(), 'c');
     EXPECT_TRUE(nodes[2]->isVisited());
-    EXPECT_EQ(nodes[3]->getKey(), 'D');
+    EXPECT_EQ(nodes[3]->getKey(), 'd');
     EXPECT_TRUE(nodes[3]->isVisited());
-    EXPECT_EQ(nodes[4]->getKey(), 'E');
+    EXPECT_EQ(nodes[4]->getKey(), 'e');
     EXPECT_TRUE(nodes[4]->isVisited());
-    EXPECT_EQ(nodes[5]->getKey(), 'F');
+    EXPECT_EQ(nodes[5]->getKey(), 'f');
     EXPECT_TRUE(nodes[5]->isVisited());
-    EXPECT_EQ(nodes[6]->getKey(), 'G');
+    EXPECT_EQ(nodes[6]->getKey(), 'g');
     EXPECT_TRUE(nodes[6]->isVisited());
 }
 

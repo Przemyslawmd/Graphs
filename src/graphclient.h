@@ -5,6 +5,9 @@
 #include "algo/dijkstra.h"
 #include "graph/graph.h"
 
+#include <map>
+#include <tuple>
+
 
 class GraphClient
 {
@@ -17,6 +20,8 @@ public:
 
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
     void addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edges);
+
+    const std::list<char>& findShortestPath(char src, char dst);
 
 private:
 

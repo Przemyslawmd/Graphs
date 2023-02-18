@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-Graph::Graph(bool isWeight): isWeight(isWeight) {}
+Graph::Graph(bool isDirected, bool isWeighted): isDirected(isDirected), isWeighted(isWeighted) {}
 
 
 void Graph::addNode(char key)
@@ -44,7 +44,7 @@ const std::map<char, std::list<Edge>>& Graph::getAdjacency()
 
 void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 {
-    if (isWeight) {
+    if (isWeighted) {
         std::cout << "Graph is weighted, use addEdgesWithWeight" << std::endl;
         return;
     }
@@ -56,7 +56,7 @@ void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 
 void Graph::addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edgesVec)
 {
-    if (isWeight == false) {
+    if (isWeighted == false) {
         std::cout << "Graph is not weighted, use addEdges" << std::endl;
         return;
     }

@@ -14,6 +14,7 @@
 TEST(TestClient, FirstTest)
 {
     GraphClient client;
+    client.findShortestPath('A', 'B');
 
     ASSERT_EQ(2,2);
 }

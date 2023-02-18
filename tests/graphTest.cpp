@@ -75,26 +75,26 @@ TEST(TestCreateGraph, FirstTest)
 
 TEST(TestCreateGraph, SecondTestImproperEdges)
 {
-    std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
+    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph;
     graph.addNodes(keys);
 
-    graph.addEdges('A', { 'B' });
-    graph.addEdges('B', { 'A', 'C' });
-    graph.addEdges('C', { 'B', 'D', 'E' });
-    graph.addEdges('A', { 'B' });                // repeat edge
-    graph.addEdges('D', { 'C', 'E' });
-    graph.addEdges('F', { 'E' });                // improper source key
-    graph.addEdges('E', { 'C', 'D'});
-    graph.addEdges('D', { 'G' });                // improper destination key
+    graph.addEdges('a', { 'b' });
+    graph.addEdges('b', { 'a', 'c' });
+    graph.addEdges('c', { 'b', 'd', 'e' });
+    graph.addEdges('a', { 'b' });                // repeat edge
+    graph.addEdges('d', { 'c', 'e' });
+    graph.addEdges('F', { 'e' });                // improper source key
+    graph.addEdges('e', { 'c', 'd'});
+    graph.addEdges('d', { 'G' });                // improper destination key
 
     const auto& nodes = graph.getNodes();
     
-    ASSERT_EQ(nodes[0]->getKey(), 'A');
-    ASSERT_EQ(nodes[1]->getKey(), 'B');
-    ASSERT_EQ(nodes[2]->getKey(), 'C');
-    ASSERT_EQ(nodes[3]->getKey(), 'D');
-    ASSERT_EQ(nodes[4]->getKey(), 'E');
+    ASSERT_EQ(nodes[0]->getKey(), 'a');
+    ASSERT_EQ(nodes[1]->getKey(), 'b');
+    ASSERT_EQ(nodes[2]->getKey(), 'c');
+    ASSERT_EQ(nodes[3]->getKey(), 'd');
+    ASSERT_EQ(nodes[4]->getKey(), 'e');
 
     const auto& adjacency = graph.getAdjacency();
 
@@ -103,45 +103,45 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
         ASSERT_EQ(adjacency.count(key), 1);    
     }
     
-    checkAdjacency(adjacency, 'A', { 'B' });
-    checkAdjacency(adjacency, 'B', { 'A', 'C' });
-    checkAdjacency(adjacency, 'C', { 'B', 'D', 'E' });
-    checkAdjacency(adjacency, 'D', { 'C', 'E' });
-    checkAdjacency(adjacency, 'E', { 'C', 'D' });
+    checkAdjacency(adjacency, 'a', { 'b' });
+    checkAdjacency(adjacency, 'b', { 'a', 'c' });
+    checkAdjacency(adjacency, 'c', { 'b', 'd', 'e' });
+    checkAdjacency(adjacency, 'd', { 'c', 'e' });
+    checkAdjacency(adjacency, 'e', { 'c', 'd' });
 }
 
 
 TEST(TestCreateGraph, ThirdTestGraphWithWeights)
 {
-    std::vector<char> keys = { 'A', 'B', 'C', 'D', 'E' }; 
-    Graph graph{ true };
+    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
+    Graph graph{ false, true };
     graph.addNodes(keys);
 
-    graph.addEdgesWithWeight('A', {{ 'B', 1  }});
-    graph.addEdgesWithWeight('B', {{ 'A', 2  }, { 'C', 4   }});
-    graph.addEdgesWithWeight('C', {{ 'B', 10 }, { 'D', 4   }, { 'E', 1 }});
-    graph.addEdgesWithWeight('D', {{ 'C', 5  }, { 'E', 12  }});
-    graph.addEdgesWithWeight('E', {{ 'C', 3  }, { 'D', 101 }});
+    graph.addEdgesWithWeight('a', {{ 'b', 1  }});
+    graph.addEdgesWithWeight('b', {{ 'a', 2  }, { 'c', 4   }});
+    graph.addEdgesWithWeight('c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 }});
+    graph.addEdgesWithWeight('d', {{ 'c', 5  }, { 'e', 12  }});
+    graph.addEdgesWithWeight('e', {{ 'c', 3  }, { 'd', 101 }});
 
     const auto& nodes = graph.getNodes();
     
-    ASSERT_EQ(nodes[0]->getKey(), 'A');
-    ASSERT_EQ(nodes[1]->getKey(), 'B');
-    ASSERT_EQ(nodes[2]->getKey(), 'C');
-    ASSERT_EQ(nodes[3]->getKey(), 'D');
-    ASSERT_EQ(nodes[4]->getKey(), 'E');
+    ASSERT_EQ(nodes[0]->getKey(), 'a');
+    ASSERT_EQ(nodes[1]->getKey(), 'b');
+    ASSERT_EQ(nodes[2]->getKey(), 'c');
+    ASSERT_EQ(nodes[3]->getKey(), 'd');
+    ASSERT_EQ(nodes[4]->getKey(), 'e');
 
     const auto& adjacency = graph.getAdjacency();
 
     ASSERT_EQ(adjacency.size(), 5);
     for (char key : keys) {
-        ASSERT_EQ(adjacency.count(key), 1);    
+        ASSERT_EQ(adjacency.count(key), 1);
     }
 
-    checkAdjacencyWithWeight(adjacency, 'A', {{ 'B', 1  }});
-    checkAdjacencyWithWeight(adjacency, 'B', {{ 'A', 2  }, { 'C', 4   }});
-    checkAdjacencyWithWeight(adjacency, 'C', {{ 'B', 10 }, { 'D', 4   }, { 'E', 1 }});
-    checkAdjacencyWithWeight(adjacency, 'D', {{ 'C', 5  }, { 'E', 12  }});
-    checkAdjacencyWithWeight(adjacency, 'E', {{ 'C', 3  }, { 'D', 101 }});
+    checkAdjacencyWithWeight(adjacency, 'a', {{ 'b', 1  }});
+    checkAdjacencyWithWeight(adjacency, 'b', {{ 'a', 2  }, { 'c', 4   }});
+    checkAdjacencyWithWeight(adjacency, 'c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 }});
+    checkAdjacencyWithWeight(adjacency, 'd', {{ 'c', 5  }, { 'e', 12  }});
+    checkAdjacencyWithWeight(adjacency, 'e', {{ 'c', 3  }, { 'd', 101 }});
 }
 

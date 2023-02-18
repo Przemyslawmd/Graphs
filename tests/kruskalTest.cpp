@@ -20,9 +20,8 @@ void checkEdge(const Edge& edge, char src, char dst, int weight)
 
 TEST(TestKruskal, FirstTest)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e', }; 
-    Graph graph{ true } ;
-    graph.addNodes(keys);
+    Graph graph{ false, true } ;
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e', });
 
     graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'c', 7 }});
     graph.addEdgesWithWeight('b', {{ 'a', 1 }, { 'c', 5 }, { 'd', 4 }});
