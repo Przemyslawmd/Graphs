@@ -74,7 +74,15 @@ void Graph::addEdge(char srcKey, char dstKey, int weight)
     if (isNodeExist(dstKey) == false) {
         return;
     }
+    updateAdjacency(srcKey, dstKey, weight);
+    if (isDirected == false) {
+        updateAdjacency(dstKey, srcKey, weight);
+    } 
+}
 
+
+void Graph::updateAdjacency(char srcKey, char dstKey, int weight)
+{
     if (adjacency.count(srcKey) != 1) {
         adjacency.insert({ srcKey, { Edge{ srcKey, dstKey, weight }}});
         return;

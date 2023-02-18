@@ -16,7 +16,7 @@ class Graph
 {
 public:
     
-    Graph(bool isDirected = false, bool isWeighted = false);
+    Graph(bool isDirected = true, bool isWeighted = true);
     Graph(const std::vector<std::vector<char>>& adjacency);
     Graph(const Graph&) = delete;
     Graph& operator=(Graph&) = delete;
@@ -38,6 +38,7 @@ public:
 private:
 
     void addEdge(char srcKey, char dstKey, int weight);
+    void updateAdjacency(char srcKey, char dstKey, int weight);
 
     const bool isWeighted;
     const bool isDirected;

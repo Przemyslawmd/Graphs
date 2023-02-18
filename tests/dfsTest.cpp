@@ -11,7 +11,7 @@
 
 TEST(TestDFS, 1)
 {
-    Graph graph;
+    Graph graph{ false, false };
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
 
     graph.addEdges('a', { 'b' });
@@ -40,7 +40,7 @@ TEST(TestDFS, 1)
 
 TEST(TestDFS, 2)
 {
-    Graph graph;
+    Graph graph{ false, false };
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f', 'g' });
 
     graph.addEdges('a', { 'b', 'd' });

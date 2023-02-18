@@ -40,7 +40,7 @@ TEST(TestDijkstra, FirstTest)
 
 TEST(TestDijkstra, SecondTest)
 {
-    Graph graph{ false, true } ;
+    Graph graph{ true, true } ;
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     graph.addEdgesWithWeight('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});

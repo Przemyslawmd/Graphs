@@ -41,7 +41,7 @@ void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency,
 TEST(TestCreateGraph, FirstTest)
 {
     std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
-    Graph graph;
+    Graph graph{ false, false };
     graph.addNodes(keys);
 
     graph.addEdges('a', { 'b' });
@@ -76,7 +76,7 @@ TEST(TestCreateGraph, FirstTest)
 TEST(TestCreateGraph, SecondTestImproperEdges)
 {
     std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
-    Graph graph;
+    Graph graph{ false, false };
     graph.addNodes(keys);
 
     graph.addEdges('a', { 'b' });
@@ -114,7 +114,7 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
 TEST(TestCreateGraph, ThirdTestGraphWithWeights)
 {
     std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
-    Graph graph{ false, true };
+    Graph graph{ true, true };
     graph.addNodes(keys);
 
     graph.addEdgesWithWeight('a', {{ 'b', 1  }});

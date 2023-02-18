@@ -20,7 +20,7 @@ void checkEdge(const Edge& edge, char src, char dst, int weight)
 
 TEST(TestKruskal, FirstTest)
 {
-    Graph graph{ false, true } ;
+    Graph graph{ true, true } ;
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', });
 
     graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'c', 7 }});
