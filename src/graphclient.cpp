@@ -1,5 +1,6 @@
 
 #include "graphclient.h"
+#include <bits/stdc++.h>
 
 
 GraphClient::GraphClient() : graph(std::make_unique<Graph>()) {}
@@ -29,9 +30,20 @@ void GraphClient::addEdgesWithWeight(char srcKey, const std::vector<std::tuple<c
 }
 
 
-const std::list<char>& GraphClient::findShortestPath(char src, char dst)
+std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char dst)
 {
+    auto nodesList = std::make_unique<std::list<char>>();
+    nodesList->push_front(dst);
     Dijkstra dijkstra{ *(graph.get()) };
     dijkstra.traverseGraph(src);
     const std::map<char, route>& routes = dijkstra.getRoutes();
+
+    std::optional<char> predecessor;
+    predecessor = routes.at(dst).predecessor;
+    while (predecessor != std::nullopt) {
+        nodesList->push_front(predecessor.value());
+        predecessor = routes.at(predecessor.value()).predecessor;
+    }
+    return std::make_unique<std::vector<char>>(nodesList->begin(), nodesList->end());
 }
+
