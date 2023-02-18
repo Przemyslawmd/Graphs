@@ -19,7 +19,7 @@ void Graph::addNode(char key)
 void Graph::addNodes(const std::vector<char>& keys)
 {
     for (auto key : keys) {
-        nodes.push_back(std::make_unique<Node>(key));
+        addNode(key);
     }
 }
 
@@ -54,13 +54,13 @@ void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 }
 
 
-void Graph::addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edgesVec)
+void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges)
 {
     if (isWeighted == false) {
         std::cout << "Graph is not weighted, use addEdges" << std::endl;
         return;
     }
-    for (const auto& edge : edgesVec) {
+    for (const auto& edge : edges) {
         addEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
     }
 }

@@ -23,11 +23,11 @@ TEST(TestKruskal, FirstTest)
     Graph graph{ true, true } ;
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', });
 
-    graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'c', 7 }});
-    graph.addEdgesWithWeight('b', {{ 'a', 1 }, { 'c', 5 }, { 'd', 4 }});
-    graph.addEdgesWithWeight('c', {{ 'a', 7 }, { 'e', 6 }});
-    graph.addEdgesWithWeight('d', {{ 'e', 2 }, { 'b', 4 }});
-    graph.addEdgesWithWeight('e', {{ 'b', 3 } });
+    graph.addEdgesWeighted('a', {{ 'b', 1 }, { 'c', 7 }});
+    graph.addEdgesWeighted('b', {{ 'a', 1 }, { 'c', 5 }, { 'd', 4 }});
+    graph.addEdgesWeighted('c', {{ 'a', 7 }, { 'e', 6 }});
+    graph.addEdgesWeighted('d', {{ 'e', 2 }, { 'b', 4 }});
+    graph.addEdgesWeighted('e', {{ 'b', 3 } });
 
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();

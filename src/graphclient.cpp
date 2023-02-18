@@ -27,9 +27,9 @@ void GraphClient::addEdges(char srcKey, const std::vector<char>& dstKeys)
 }
 
 
-void GraphClient::addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edges)
+void GraphClient::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges)
 {
-    graph->addEdgesWithWeight(srcKey, edges);
+    graph->addEdgesWeighted(srcKey, edges);
 }
 
 
@@ -51,7 +51,7 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
 }
 
 
-std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinimumSpanningTree()
+std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpanningTree()
 {
     Kruskal kruskal{ *(graph.get()) };
     auto edges = kruskal.makeMinSpanningTree();

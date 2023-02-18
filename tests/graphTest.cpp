@@ -119,11 +119,11 @@ TEST(TestCreateGraph, ThirdTestGraphWithWeights)
     Graph graph{ true, true };
     graph.addNodes(keys);
 
-    graph.addEdgesWithWeight('a', {{ 'b', 1  }});
-    graph.addEdgesWithWeight('b', {{ 'a', 2  }, { 'c', 4   }});
-    graph.addEdgesWithWeight('c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 }});
-    graph.addEdgesWithWeight('d', {{ 'c', 5  }, { 'e', 12  }});
-    graph.addEdgesWithWeight('e', {{ 'c', 3  }, { 'd', 101 }});
+    graph.addEdgesWeighted('a', {{ 'b', 1  }});
+    graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   }});
+    graph.addEdgesWeighted('c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 }});
+    graph.addEdgesWeighted('d', {{ 'c', 5  }, { 'e', 12  }});
+    graph.addEdgesWeighted('e', {{ 'c', 3  }, { 'd', 101 }});
 
     const auto& nodes = graph.getNodes();
     

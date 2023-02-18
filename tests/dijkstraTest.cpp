@@ -24,8 +24,8 @@ TEST(TestDijkstra, FirstTest)
     Graph graph{ false, true };
     graph.addNodes({ 'a', 'b', 'c', 'd' });
 
-    graph.addEdgesWithWeight('a', {{ 'b', 1 }, { 'd', 3 }});
-    graph.addEdgesWithWeight('b', {{ 'c', 5 }, { 'd', 2 }});
+    graph.addEdgesWeighted('a', {{ 'b', 1 }, { 'd', 3 }});
+    graph.addEdgesWeighted('b', {{ 'c', 5 }, { 'd', 2 }});
 
     Dijkstra dijkstra{ graph };
     dijkstra.traverseGraph('a');
@@ -43,11 +43,11 @@ TEST(TestDijkstra, SecondTest)
     Graph graph;
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
-    graph.addEdgesWithWeight('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
-    graph.addEdgesWithWeight('b', {{ 'a', 4 }, { 'c', 5 }});
-    graph.addEdgesWithWeight('d', {{ 'e', 2 }});
-    graph.addEdgesWithWeight('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
-    graph.addEdgesWithWeight('f', {{ 'c', 6 }});
+    graph.addEdgesWeighted('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
+    graph.addEdgesWeighted('b', {{ 'a', 4 }, { 'c', 5 }});
+    graph.addEdgesWeighted('d', {{ 'e', 2 }});
+    graph.addEdgesWeighted('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
+    graph.addEdgesWeighted('f', {{ 'c', 6 }});
 
     Dijkstra dijkstra{ graph };
     dijkstra.traverseGraph('a');

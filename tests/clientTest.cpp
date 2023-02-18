@@ -16,11 +16,11 @@ TEST(TestClient, FindShortestPath)
     GraphClient client;
     client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
-    client.addEdgesWithWeight('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
-    client.addEdgesWithWeight('b', {{ 'a', 4 }, { 'c', 5 }});
-    client.addEdgesWithWeight('d', {{ 'e', 2 }});
-    client.addEdgesWithWeight('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
-    client.addEdgesWithWeight('f', {{ 'c', 6 }});
+    client.addEdgesWeighted('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
+    client.addEdgesWeighted('b', {{ 'a', 4 }, { 'c', 5 }});
+    client.addEdgesWeighted('d', {{ 'e', 2 }});
+    client.addEdgesWeighted('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
+    client.addEdgesWeighted('f', {{ 'c', 6 }});
 
     std::unique_ptr<std::vector<char>> path = client.findShortestPath('a', 'b');
 
@@ -44,13 +44,13 @@ TEST(TestClient, FindMinSpanningTree)
     GraphClient client;
     client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
-    client.addEdgesWithWeight('a', {{ 'b', 1 }, { 'c', 7 }});
-    client.addEdgesWithWeight('b', {{ 'a', 1 }, { 'c', 5 }, { 'd', 4 }});
-    client.addEdgesWithWeight('c', {{ 'a', 7 }, { 'e', 6 }});
-    client.addEdgesWithWeight('d', {{ 'e', 2 }, { 'b', 4 }});
-    client.addEdgesWithWeight('e', {{ 'b', 3 } });
+    client.addEdgesWeighted('a', {{ 'b', 1 }, { 'c', 7 }});
+    client.addEdgesWeighted('b', {{ 'a', 1 }, { 'c', 5 }, { 'd', 4 }});
+    client.addEdgesWeighted('c', {{ 'a', 7 }, { 'e', 6 }});
+    client.addEdgesWeighted('d', {{ 'e', 2 }, { 'b', 4 }});
+    client.addEdgesWeighted('e', {{ 'b', 3 } });
 
-    auto edges = client.findMinimumSpanningTree();
+    auto edges = client.findMinSpanningTree();
 
     ASSERT_EQ(edges->size(), 4);
 

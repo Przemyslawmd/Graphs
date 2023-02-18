@@ -27,7 +27,7 @@ public:
     const std::vector<std::unique_ptr<Node>>& getNodes();
     
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
-    void addEdgesWithWeight(char srcKey, const std::vector<std::tuple<char, int>>& edges);
+    void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges);
 
     bool isNodeVisited(char key);
     void setNodeVisit(char key, bool isVisited);
