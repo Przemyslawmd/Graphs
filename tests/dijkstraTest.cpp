@@ -40,7 +40,7 @@ TEST(TestDijkstra, FirstTest)
 
 TEST(TestDijkstra, SecondTest)
 {
-    Graph graph{ true, true } ;
+    Graph graph;
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     graph.addEdgesWithWeight('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
@@ -60,8 +60,6 @@ TEST(TestDijkstra, SecondTest)
     checkRoute(routesA, 'e', 'a', 2);
     checkRoute(routesA, 'f', 'e', 3);
     
-    
-    graph.resetNodes();
     dijkstra.traverseGraph('e');
     const auto& routesE = dijkstra.getRoutes();
     

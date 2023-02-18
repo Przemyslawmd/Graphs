@@ -74,6 +74,7 @@ void Graph::addEdge(char srcKey, char dstKey, int weight)
     if (isNodeExist(dstKey) == false) {
         return;
     }
+
     updateAdjacency(srcKey, dstKey, weight);
     if (isDirected == false) {
         updateAdjacency(dstKey, srcKey, weight);
@@ -110,7 +111,7 @@ void Graph::setNodeVisit(char key, bool isVisited)
 }
 
 
-void Graph::resetNodes()
+void Graph::resetVisitNodes()
 {
     for (auto& node : nodes) {
         node->setVisited(false);

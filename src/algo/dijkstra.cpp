@@ -26,6 +26,7 @@ void Dijkstra::traverseGraph(char srcKey)
         processRoutesTable(adjacency, key.value());
         key = findNodeToProcess();
     }
+    graph.resetVisitNodes();
 }
 
 
