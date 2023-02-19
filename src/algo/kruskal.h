@@ -20,7 +20,7 @@ class Kruskal
 {
 public:
 
-    Kruskal(Graph&);
+    explicit Kruskal(Graph&);
     Kruskal(const Kruskal&) = delete;
     Kruskal& operator=(Kruskal&) = delete;
 
