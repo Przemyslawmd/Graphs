@@ -12,7 +12,7 @@ class BFS
 {
 public:
 
-    BFS(Graph&);
+    explicit BFS(Graph&);
     BFS(const BFS&) = delete;
     BFS& operator=(BFS&) = delete;
 

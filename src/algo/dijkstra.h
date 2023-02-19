@@ -22,7 +22,7 @@ class Dijkstra
 {
 public:
 
-    Dijkstra(Graph&);
+    explicit Dijkstra(Graph&);
     Dijkstra(const Dijkstra&) = delete;
     Dijkstra& operator=(Dijkstra&) = delete;
 
