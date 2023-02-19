@@ -66,24 +66,24 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
 
 std::unique_ptr<std::list<Edge>> Kruskal::sortEdges()
 {
-    std::unique_ptr<std::list<Edge>> sortedEdges = std::make_unique<std::list<Edge>>();;
+    auto edgesToSort = std::make_unique<std::list<Edge>>();
     for (auto& [key, edges] : graph.getAdjacency()) {
         for (auto& edge : edges) {
-            auto iter = std::find_if(sortedEdges->begin(), sortedEdges->end(), 
-                                     [&edge](auto& sortedEdge) { return sortedEdge.isEqual(edge); });
-            if (iter == sortedEdges->end()) {
-                sortedEdges->push_back(Edge{ edge.src, edge.dst, edge.weight });
+            auto iter = std::find_if(edgesToSort->begin(), edgesToSort->end(), 
+                                     [&edge](auto& edgeToSort) { return edgeToSort.isEqual(edge); });
+            if (iter == edgesToSort->end()) {
+                edgesToSort->push_back(Edge{ edge.src, edge.dst, edge.weight });
             }
         }
     }
-    sortedEdges->sort([](const Edge& edge1, const Edge& edge2) { return edge1.weight > edge2.weight; });
-    return sortedEdges;
+    edgesToSort->sort([](const Edge& edge1, const Edge& edge2) { return edge1.weight > edge2.weight; });
+    return edgesToSort;
 }
 
 
 std::unique_ptr<std::vector<PartialTree>> Kruskal::initializePartialTrees()
 {
-    std::unique_ptr<std::vector<PartialTree>> trees = std::make_unique<std::vector<PartialTree>>();
+    auto trees = std::make_unique<std::vector<PartialTree>>();
     const auto& adjacency = graph.getAdjacency();
     trees->reserve(adjacency.size());
     for (const auto& [key, edges] : adjacency) {

@@ -35,7 +35,7 @@ void GraphClient::addEdgesWeighted(char srcKey, const std::vector<std::tuple<cha
 
 std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char dst)
 {
-    auto nodesList = std::make_unique<std::list<char>>();
+    const auto nodesList = std::make_unique<std::list<char>>();
     nodesList->push_front(dst);
     Dijkstra dijkstra{ *(graph.get()) };
     dijkstra.traverseGraph(src);
