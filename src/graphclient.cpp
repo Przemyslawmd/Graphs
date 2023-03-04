@@ -3,8 +3,6 @@
 #include "algo/dijkstra.h"
 #include "algo/kruskal.h"
 
-#include <bits/stdc++.h>
-
 
 GraphClient::GraphClient() : graph(std::make_unique<Graph>()) {}
 

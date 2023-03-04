@@ -1,7 +1,6 @@
 
 #include "kruskal.h"
 
-#include <bits/stdc++.h>
 #include <algorithm>
 
 constexpr int NOT_ATTACHED = 0;
