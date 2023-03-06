@@ -9,17 +9,11 @@ public:
 
     Edge(char src, char dst, int weight) : src(src), dst(dst), weight(weight) {}
 
-    bool isEqual(const Edge& edge) {
-        return this->weight == edge.weight && 
-               (
-               (this->src == edge.src && this->dst == edge.dst) || 
-               (this->src == edge.dst && this->dst == edge.src)
-               );
-    }
+    bool operator==(const Edge& edge);
 
-    char src;
-    char dst;
-    int weight;
+    const char src;
+    const char dst;
+    const int weight;
 };
 
 #endif

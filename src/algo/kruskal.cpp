@@ -65,7 +65,7 @@ std::unique_ptr<std::list<Edge>> Kruskal::sortEdges()
     auto edgesToSort = std::make_unique<std::list<Edge>>();
     for (auto& [key, edges] : graph.getAdjacency()) {
         for (auto& edge : edges) {
-            if (std::all_of(edgesToSort->begin(), edgesToSort->end(), [&edge](auto& edgeToSort) { return edgeToSort.isEqual(edge) == false; })) {
+            if (std::all_of(edgesToSort->begin(), edgesToSort->end(), [&edge](auto& edgeToSort) { return !(edgeToSort == edge); })) {
                 edgesToSort->push_back({ edge.src, edge.dst, edge.weight });
             }
         }
