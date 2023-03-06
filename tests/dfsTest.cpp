@@ -25,15 +25,15 @@ TEST(TestDFS, 1)
 
     const auto& nodes = graph.getNodes();
 
-    EXPECT_EQ(nodes[0]->getKey(), 'a');
+    EXPECT_EQ(nodes[0]->key, 'a');
     EXPECT_TRUE(nodes[0]->isVisited());
-    EXPECT_EQ(nodes[1]->getKey(), 'b');
+    EXPECT_EQ(nodes[1]->key, 'b');
     EXPECT_TRUE(nodes[1]->isVisited());
-    EXPECT_EQ(nodes[2]->getKey(), 'c');
+    EXPECT_EQ(nodes[2]->key, 'c');
     EXPECT_TRUE(nodes[2]->isVisited());
-    EXPECT_EQ(nodes[3]->getKey(), 'd');
+    EXPECT_EQ(nodes[3]->key, 'd');
     EXPECT_TRUE(nodes[3]->isVisited());
-    EXPECT_EQ(nodes[4]->getKey(), 'e');
+    EXPECT_EQ(nodes[4]->key, 'e');
     EXPECT_TRUE(nodes[4]->isVisited());
 }    
 
@@ -56,19 +56,19 @@ TEST(TestDFS, 2)
     
     const auto& nodes = graph.getNodes();
 
-    EXPECT_EQ(nodes[0]->getKey(), 'a');
+    EXPECT_EQ(nodes[0]->key, 'a');
     EXPECT_TRUE(nodes[0]->isVisited());
-    EXPECT_EQ(nodes[1]->getKey(), 'b');
+    EXPECT_EQ(nodes[1]->key, 'b');
     EXPECT_TRUE(nodes[1]->isVisited());
-    EXPECT_EQ(nodes[2]->getKey(), 'c');
+    EXPECT_EQ(nodes[2]->key, 'c');
     EXPECT_TRUE(nodes[2]->isVisited());
-    EXPECT_EQ(nodes[3]->getKey(), 'd');
+    EXPECT_EQ(nodes[3]->key, 'd');
     EXPECT_TRUE(nodes[3]->isVisited());
-    EXPECT_EQ(nodes[4]->getKey(), 'e');
+    EXPECT_EQ(nodes[4]->key, 'e');
     EXPECT_TRUE(nodes[4]->isVisited());
-    EXPECT_EQ(nodes[5]->getKey(), 'f');
+    EXPECT_EQ(nodes[5]->key, 'f');
     EXPECT_TRUE(nodes[5]->isVisited());
-    EXPECT_EQ(nodes[6]->getKey(), 'g');
+    EXPECT_EQ(nodes[6]->key, 'g');
     EXPECT_TRUE(nodes[6]->isVisited());
 }
 

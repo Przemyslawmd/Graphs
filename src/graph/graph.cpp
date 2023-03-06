@@ -26,7 +26,7 @@ void Graph::addNodes(const std::vector<char>& keys)
 
 bool Graph::isNodeExist(char key)
 {
-    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; }) != nodes.end();
+    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->key == key; }) != nodes.end();
 }
 
 
@@ -99,14 +99,14 @@ void Graph::updateAdjacency(char srcKey, char dstKey, int weight)
 
 bool Graph::isNodeVisited(char key)
 {
-    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; });
+    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->key == key; });
     return node->get()->isVisited();
 }
 
 
 void Graph::setNodeVisit(char key, bool isVisited)
 {
-    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->getKey() == key; });
+    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.get()->key == key; });
     node->get()->setVisited(isVisited);
 }
 

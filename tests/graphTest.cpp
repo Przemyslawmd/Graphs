@@ -54,11 +54,11 @@ TEST(TestCreateGraph, FirstTest)
 
     const auto& nodes = graph.getNodes();
 
-    ASSERT_EQ(nodes[0]->getKey(), 'a');
-    ASSERT_EQ(nodes[1]->getKey(), 'b');
-    ASSERT_EQ(nodes[2]->getKey(), 'c');
-    ASSERT_EQ(nodes[3]->getKey(), 'd');
-    ASSERT_EQ(nodes[4]->getKey(), 'e');
+    ASSERT_EQ(nodes[0]->key, 'a');
+    ASSERT_EQ(nodes[1]->key, 'b');
+    ASSERT_EQ(nodes[2]->key, 'c');
+    ASSERT_EQ(nodes[3]->key, 'd');
+    ASSERT_EQ(nodes[4]->key, 'e');
 
     const auto& adjacency = graph.getAdjacency();
 
@@ -92,11 +92,11 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
 
     const auto& nodes = graph.getNodes();
     
-    ASSERT_EQ(nodes[0]->getKey(), 'a');
-    ASSERT_EQ(nodes[1]->getKey(), 'b');
-    ASSERT_EQ(nodes[2]->getKey(), 'c');
-    ASSERT_EQ(nodes[3]->getKey(), 'd');
-    ASSERT_EQ(nodes[4]->getKey(), 'e');
+    ASSERT_EQ(nodes[0]->key, 'a');
+    ASSERT_EQ(nodes[1]->key, 'b');
+    ASSERT_EQ(nodes[2]->key, 'c');
+    ASSERT_EQ(nodes[3]->key, 'd');
+    ASSERT_EQ(nodes[4]->key, 'e');
 
     const auto& adjacency = graph.getAdjacency();
 
@@ -127,11 +127,11 @@ TEST(TestCreateGraph, ThirdTestGraphWithWeights)
 
     const auto& nodes = graph.getNodes();
     
-    ASSERT_EQ(nodes[0]->getKey(), 'a');
-    ASSERT_EQ(nodes[1]->getKey(), 'b');
-    ASSERT_EQ(nodes[2]->getKey(), 'c');
-    ASSERT_EQ(nodes[3]->getKey(), 'd');
-    ASSERT_EQ(nodes[4]->getKey(), 'e');
+    ASSERT_EQ(nodes[0]->key, 'a');
+    ASSERT_EQ(nodes[1]->key, 'b');
+    ASSERT_EQ(nodes[2]->key, 'c');
+    ASSERT_EQ(nodes[3]->key, 'd');
+    ASSERT_EQ(nodes[4]->key, 'e');
 
     const auto& adjacency = graph.getAdjacency();
 
