@@ -14,6 +14,7 @@ void BFS::traverseGraph()
     
     while (!nodesQueue.empty()) {
         processQueue(adjacency);
+        nodesQueue.pop();
     }
 }
 
@@ -29,7 +30,5 @@ void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
             graph.setNodeVisit(edge.dst, true);
         }
     }
-
-    nodesQueue.pop();  
 }
 
