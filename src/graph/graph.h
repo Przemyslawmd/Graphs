@@ -23,7 +23,6 @@ public:
         
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);
-    bool isNodeExist(char key);
     const std::vector<std::unique_ptr<Node>>& getNodes();
     
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
@@ -39,6 +38,8 @@ private:
 
     void addEdge(char srcKey, char dstKey, int weight);
     void updateAdjacency(char srcKey, char dstKey, int weight);
+
+    bool isNodeExist(char key);
 
     const bool isWeighted;
     const bool isDirected;

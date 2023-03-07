@@ -100,7 +100,7 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
 
     const auto& adjacency = graph.getAdjacency();
 
-    ASSERT_EQ(adjacency.size(), 5);
+    ASSERT_EQ(adjacency.size(), 7);
     for (char key : keys) {
         ASSERT_EQ(adjacency.count(key), 1);    
     }
@@ -108,8 +108,8 @@ TEST(TestCreateGraph, SecondTestImproperEdges)
     checkAdjacency(adjacency, 'a', { 'b' });
     checkAdjacency(adjacency, 'b', { 'a', 'c' });
     checkAdjacency(adjacency, 'c', { 'b', 'd', 'e' });
-    checkAdjacency(adjacency, 'd', { 'c', 'e' });
-    checkAdjacency(adjacency, 'e', { 'c', 'd' });
+    checkAdjacency(adjacency, 'd', { 'c', 'e', 'G' });
+    checkAdjacency(adjacency, 'e', { 'c', 'd', 'F' });
 }
 
 
