@@ -11,18 +11,22 @@
 #include <vector>
 
 
-void checkRoute(const std::map<char, route>& routes, char dstKey, std::optional<char> viaKey, int distance)
+class DijkstraTest : public ::testing::Test
 {
-    ASSERT_TRUE(routes.find(dstKey) != routes.end());
-    EXPECT_EQ(routes.at(dstKey).distance, distance);
-    EXPECT_EQ(routes.at(dstKey).predecessor, viaKey);
-}
+protected:
+
+    void checkRoute(const std::map<char, route>& routes, char dstKey, std::optional<char> predecessor, int distance)
+    {
+        ASSERT_TRUE(routes.find(dstKey) != routes.end());
+        EXPECT_EQ(routes.at(dstKey).distance, distance);
+        EXPECT_EQ(routes.at(dstKey).predecessor, predecessor);
+    }
+};
 
 
-TEST(TestDijkstra, FirstTest)
+TEST_F(DijkstraTest, FirstTest)
 {
     Graph graph{ false, true };
-    graph.addNodes({ 'a', 'b', 'c', 'd' });
 
     graph.addEdgesWeighted('a', {{ 'b', 1 }, { 'd', 3 }});
     graph.addEdgesWeighted('b', {{ 'c', 5 }, { 'd', 2 }});
@@ -38,10 +42,9 @@ TEST(TestDijkstra, FirstTest)
 }
 
 
-TEST(TestDijkstra, SecondTest)
+TEST_F(DijkstraTest, SecondTest)
 {
     Graph graph;
-    graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     graph.addEdgesWeighted('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
     graph.addEdgesWeighted('b', {{ 'a', 4 }, { 'c', 5 }});
@@ -50,6 +53,7 @@ TEST(TestDijkstra, SecondTest)
     graph.addEdgesWeighted('f', {{ 'c', 6 }});
 
     Dijkstra dijkstra{ graph };
+
     dijkstra.traverseGraph('a');
     const auto& routesA = dijkstra.getRoutes();
     
