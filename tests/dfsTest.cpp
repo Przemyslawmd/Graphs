@@ -9,10 +9,28 @@
 #include <vector>
 
 
-TEST(TestDFS, 1)
+class DFSTest : public ::testing::Test
+{
+protected:
+
+    void checkNodes(const std::vector<std::unique_ptr<Node>>& nodes,
+        const std::vector<char>& keys)
+    {
+        ASSERT_EQ(nodes.size(), keys.size());
+
+        auto it = nodes.cbegin();
+        for (const auto key : keys) {
+            EXPECT_EQ(key, (*it)->key);
+            EXPECT_TRUE((*it)->isVisited());
+            std::advance(it, 1);
+        }
+    }
+};
+
+
+TEST_F(DFSTest, 1)
 {
     Graph graph{ false, false };
-    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
 
     graph.addEdges('a', { 'b' });
     graph.addEdges('b', { 'a', 'c' });
@@ -24,24 +42,13 @@ TEST(TestDFS, 1)
     dfs.traverseGraph();
 
     const auto& nodes = graph.getNodes();
-
-    EXPECT_EQ(nodes[0]->key, 'a');
-    EXPECT_TRUE(nodes[0]->isVisited());
-    EXPECT_EQ(nodes[1]->key, 'b');
-    EXPECT_TRUE(nodes[1]->isVisited());
-    EXPECT_EQ(nodes[2]->key, 'c');
-    EXPECT_TRUE(nodes[2]->isVisited());
-    EXPECT_EQ(nodes[3]->key, 'd');
-    EXPECT_TRUE(nodes[3]->isVisited());
-    EXPECT_EQ(nodes[4]->key, 'e');
-    EXPECT_TRUE(nodes[4]->isVisited());
+    checkNodes(nodes, { 'a', 'b', 'c', 'd', 'e' });
 }    
 
 
-TEST(TestDFS, 2)
+TEST_F(DFSTest, SecondTest)
 {
     Graph graph{ false, false };
-    graph.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f', 'g' });
 
     graph.addEdges('a', { 'b', 'd' });
     graph.addEdges('b', { 'a', 'c', 'd', 'g' });
@@ -55,20 +62,6 @@ TEST(TestDFS, 2)
     dfs.traverseGraph();
     
     const auto& nodes = graph.getNodes();
-
-    EXPECT_EQ(nodes[0]->key, 'a');
-    EXPECT_TRUE(nodes[0]->isVisited());
-    EXPECT_EQ(nodes[1]->key, 'b');
-    EXPECT_TRUE(nodes[1]->isVisited());
-    EXPECT_EQ(nodes[2]->key, 'c');
-    EXPECT_TRUE(nodes[2]->isVisited());
-    EXPECT_EQ(nodes[3]->key, 'd');
-    EXPECT_TRUE(nodes[3]->isVisited());
-    EXPECT_EQ(nodes[4]->key, 'e');
-    EXPECT_TRUE(nodes[4]->isVisited());
-    EXPECT_EQ(nodes[5]->key, 'f');
-    EXPECT_TRUE(nodes[5]->isVisited());
-    EXPECT_EQ(nodes[6]->key, 'g');
-    EXPECT_TRUE(nodes[6]->isVisited());
+    checkNodes(nodes, { 'a', 'b', 'd', 'c', 'g', 'f', 'e' });
 }
 
