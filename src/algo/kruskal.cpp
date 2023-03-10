@@ -15,15 +15,11 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
     auto trees = initializePartialTrees();
 
     auto spanningTreeEdges = std::make_unique<std::vector<Edge>>();
-    int lastPartialTree = 0;
+    spanningTreeEdges->reserve(sortedEdges->size());
 
-    const auto& isAttached = [] (int tree) { return tree != NOT_ATTACHED; };
+    int highestPartialTree = 0;
 
     while (sortedEdges->empty() == false) {
-
-        if (std::all_of(trees->begin(), trees->end(), [](const auto& tree) { return tree.treeNumber == 1; })) {
-            break;
-        }
 
         Edge edge = sortedEdges->back();
         sortedEdges->pop_back();
@@ -31,24 +27,24 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
         auto src = std::find_if(trees->begin(), trees->end(), [&edge](const auto& tree) { return tree.key == edge.src; });
         auto dst = std::find_if(trees->begin(), trees->end(), [&edge](const auto& tree) { return tree.key == edge.dst; });
 
-        if (src->treeNumber == dst->treeNumber && isAttached(src->treeNumber)) {
+        if (src->treeNumber == dst->treeNumber && src->treeNumber != NOT_ATTACHED) {
             continue;
         }
-        else if (isAttached(src->treeNumber) == false && isAttached(dst->treeNumber) == false) {
-            lastPartialTree++;
-            src->treeNumber = lastPartialTree;
-            dst->treeNumber = lastPartialTree;
+        else if (src->treeNumber == NOT_ATTACHED && dst->treeNumber == NOT_ATTACHED) {
+            highestPartialTree++;
+            src->treeNumber = highestPartialTree;
+            dst->treeNumber = highestPartialTree;
         }
-        else if (src->treeNumber != dst->treeNumber && isAttached(src->treeNumber) && isAttached(dst->treeNumber)) {
-            int treeExtended = src->treeNumber < dst->treeNumber ? src->treeNumber : dst->treeNumber;
-            int treeDeleted = treeExtended == src->treeNumber ? dst->treeNumber : src->treeNumber;
+        else if (src->treeNumber != dst->treeNumber && src->treeNumber != NOT_ATTACHED && dst->treeNumber != NOT_ATTACHED) {
+            int toExtend = src->treeNumber < dst->treeNumber ? src->treeNumber : dst->treeNumber;
+            int toDelete = toExtend == src->treeNumber ? dst->treeNumber : src->treeNumber;
             for (auto& tree : *trees) {
-                if (tree.treeNumber == treeDeleted) {
-                    tree.treeNumber = treeExtended;
+                if (tree.treeNumber == toDelete) {
+                    tree.treeNumber = toExtend;
                 }
             }
         }
-        else if (isAttached(src->treeNumber) == false) {
+        else if (src->treeNumber == NOT_ATTACHED) {
             src->treeNumber = dst->treeNumber;
         }
         else {
