@@ -17,7 +17,6 @@ class Graph
 public:
     
     Graph(bool isDirected = true, bool isWeighted = true);
-    Graph(const std::vector<std::vector<char>>& adjacency);
     Graph(const Graph&) = delete;
     Graph& operator=(Graph&) = delete;
         
@@ -29,8 +28,8 @@ public:
     void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges);
 
     bool isNodeVisited(char key);
-    void setNodeVisit(char key, bool isVisited);
-    void resetVisitNodes();
+    void setNodeAsVisited(char key);
+    void setAllNodesAsNotVisited();
     
     const std::map<char, std::list<Edge>>& getAdjacency();
 

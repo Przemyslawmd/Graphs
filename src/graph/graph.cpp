@@ -99,19 +99,19 @@ void Graph::updateAdjacency(char srcKey, char dstKey, int weight)
 
 bool Graph::isNodeVisited(char key)
 {
-    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->key == key; });
-    return node->get()->isVisited();
+    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->key == key; });
+    return (*it)->isVisited();
 }
 
 
-void Graph::setNodeVisit(char key, bool isVisited)
+void Graph::setNodeAsVisited(char key)
 {
-    auto node = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->key == key; });
-    node->get()->setVisited(isVisited);
+    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->key == key; });
+    (*it)->setVisited(true);
 }
 
 
-void Graph::resetVisitNodes()
+void Graph::setAllNodesAsNotVisited()
 {
     for (auto& node : nodes) {
         node->setVisited(false);

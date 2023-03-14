@@ -9,7 +9,8 @@ void Dijkstra::traverseGraph(char srcKey)
 {
     const auto& nodes = graph.getNodes();
     const auto& adjacency = graph.getAdjacency();
-    
+    graph.setAllNodesAsNotVisited();
+
     if (routes.empty() == false) {
         routes.clear(); 
     }
@@ -20,11 +21,10 @@ void Dijkstra::traverseGraph(char srcKey)
 
     std::optional<char> key = findNodeToProcess();
     while (key != std::nullopt) {
-        graph.setNodeVisit(key.value(), true);
+        graph.setNodeAsVisited(key.value());
         processRoutesTable(adjacency, key.value());
         key = findNodeToProcess();
     }
-    graph.resetVisitNodes();
 }
 
 
