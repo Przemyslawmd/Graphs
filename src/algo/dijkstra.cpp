@@ -1,6 +1,8 @@
 
 #include "dijkstra.h"
 
+#include <climits>
+
 
 Dijkstra::Dijkstra(Graph& graph) : graph(graph) {}
 
