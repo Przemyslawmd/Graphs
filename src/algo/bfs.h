@@ -14,7 +14,10 @@ public:
 
     explicit BFS(Graph&);
     BFS(const BFS&) = delete;
-    BFS& operator=(BFS&) = delete;
+    BFS(BFS&&) = delete;
+    BFS& operator=(const BFS&) = delete;
+    BFS& operator=(BFS&&) = delete;
+
 
     void traverseGraph();
 

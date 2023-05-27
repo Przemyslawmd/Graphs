@@ -24,7 +24,9 @@ public:
 
     explicit Dijkstra(Graph&);
     Dijkstra(const Dijkstra&) = delete;
-    Dijkstra& operator=(Dijkstra&) = delete;
+    Dijkstra(Dijkstra&&) = delete;
+    Dijkstra& operator=(const Dijkstra&) = delete;
+    Dijkstra& operator=(Dijkstra&&) = delete;
 
     void traverseGraph(char srcKey);
     const std::map<char, route>& getRoutes();

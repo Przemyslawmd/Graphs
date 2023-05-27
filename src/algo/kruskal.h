@@ -22,7 +22,9 @@ public:
 
     explicit Kruskal(Graph&);
     Kruskal(const Kruskal&) = delete;
-    Kruskal& operator=(Kruskal&) = delete;
+    Kruskal(Kruskal&&) = delete;
+    Kruskal& operator=(const Kruskal&) = delete;
+    Kruskal& operator=(Kruskal&&) = delete;
 
     std::unique_ptr<std::vector<Edge>> makeMinSpanningTree();
 

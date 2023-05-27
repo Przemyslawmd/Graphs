@@ -11,7 +11,10 @@ public:
 
     explicit DFS(Graph&);
     DFS(const DFS&) = delete;
-    DFS& operator=(DFS&) = delete;
+    DFS(DFS&&) = delete;
+    DFS& operator=(const DFS&) = delete;
+    DFS& operator=(DFS&&) = delete;
+
 
     void traverseGraph();
 
