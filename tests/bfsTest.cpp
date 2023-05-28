@@ -5,8 +5,11 @@
 
 #include <gtest/gtest.h>
 
+#include <chrono>
 #include <memory>
 #include <vector>
+
+constexpr bool measurement = false;
 
 
 class BFSTest : public ::testing::Test
@@ -63,6 +66,7 @@ TEST_F(BFSTest, SecondTest)
 
 TEST_F(BFSTest, ThirdTest)
 {
+    auto begin = std::chrono::high_resolution_clock::now();
     Graph graph{ true, false };
 
     graph.addEdges('a', { 'd', 'h' });
@@ -83,7 +87,52 @@ TEST_F(BFSTest, ThirdTest)
     BFS bfs{ graph };
     bfs.traverseGraph();
 
+    if (measurement) {
+        auto end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        std::cout << "BFSTest : ThirdTest : time in microseconds : " << elapsed.count() << std::endl;
+    }
+
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 14) ;
 }
 
+
+TEST_F(BFSTest, FourthTest)
+{
+    auto begin = std::chrono::high_resolution_clock::now();
+    Graph graph{ true, false };
+
+    graph.addEdges('a', { 'd', 'h' });
+    graph.addEdges('b', { 'c' });
+    graph.addEdges('c', { 'a', 'i' });
+    graph.addEdges('d', { 'b', 'e', 'f' });
+    graph.addEdges('e', { 'c' });
+    graph.addEdges('f', { 'e', 'h', 'k' });
+    graph.addEdges('g', { 'e', 'i', 'o'});
+    graph.addEdges('h', { 'g', 'j' });
+    graph.addEdges('i', { 'f', 'n', 'p' });
+    graph.addEdges('j', { 'k' });
+    graph.addEdges('k', { 'l' });
+    graph.addEdges('l', { 'c', 'n' });
+    graph.addEdges('m', { 'h', 'k' });
+    graph.addEdges('n', { 'm' });
+    graph.addEdges('o', { 'c', 'u' });
+    graph.addEdges('p', { 'r', 's'});
+    graph.addEdges('r', { 'g', 'i', 't' });
+    graph.addEdges('s', { 'o', 'u'});
+    graph.addEdges('t', { 'l', 'n' });
+    graph.addEdges('u', { 'r' });
+
+    BFS bfs{ graph };
+    bfs.traverseGraph();
+
+    if (measurement) {
+        auto end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        std::cout << "BFSTest : FourthTest : time in microseconds : " << elapsed.count() << std::endl;
+    }
+
+    const auto& nodes = graph.getNodes();
+    checkNodes(nodes, 20);
+}
