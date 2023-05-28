@@ -5,6 +5,8 @@
 #include "../graph/edge.h"
 #include "../graph/graph.h"
 
+#include <list>
+#include <map>
 #include <queue>
 
 

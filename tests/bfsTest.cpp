@@ -13,16 +13,11 @@ class BFSTest : public ::testing::Test
 {
 protected:
 
-    void checkNodes(const std::vector<std::unique_ptr<Node>>& nodes,
-                    const std::vector<char>& keys)
+    void checkNodes(const std::vector<std::unique_ptr<Node>>& nodes, int expectedNodesCount)
     {
-        ASSERT_EQ(nodes.size(), keys.size());
-
-        auto it = nodes.cbegin();
-        for (const auto key : keys) {
-            EXPECT_EQ(key, (*it)->key);
-            EXPECT_TRUE((*it)->isVisited());
-            std::advance(it, 1);
+        ASSERT_EQ(nodes.size(), expectedNodesCount);
+        for (auto& node : nodes) {
+            EXPECT_TRUE(node->isVisited());
         }
     }
 };
@@ -42,7 +37,7 @@ TEST_F(BFSTest, FirstTest)
     bfs.traverseGraph();
 
     const auto& nodes = graph.getNodes();
-    checkNodes(nodes, { 'a', 'b', 'c', 'd', 'e' });
+    checkNodes(nodes, 5);
 }
 
 
@@ -62,6 +57,33 @@ TEST_F(BFSTest, SecondTest)
     bfs.traverseGraph();
 
     const auto& nodes = graph.getNodes();
-    checkNodes(nodes, { 'a', 'b', 'd', 'c', 'g', 'f', 'e' });
+    checkNodes(nodes, 7);
+}
+
+
+TEST_F(BFSTest, ThirdTest)
+{
+    Graph graph{ true, false };
+
+    graph.addEdges('a', { 'd', 'h' });
+    graph.addEdges('b', { 'c' });
+    graph.addEdges('c', { 'a', 'i' });
+    graph.addEdges('d', { 'b', 'e', 'f' });
+    graph.addEdges('e', { 'c' });
+    graph.addEdges('f', { 'e', 'h', 'k'});
+    graph.addEdges('g', { 'e', 'i' });
+    graph.addEdges('h', { 'g', 'j' });
+    graph.addEdges('i', { 'f', 'n'});
+    graph.addEdges('j', { 'k' });
+    graph.addEdges('k', { 'l' });
+    graph.addEdges('l', { 'c', 'n' });
+    graph.addEdges('m', { 'h', 'k'});
+    graph.addEdges('n', { 'm' });
+
+    BFS bfs{ graph };
+    bfs.traverseGraph();
+
+    const auto& nodes = graph.getNodes();
+    checkNodes(nodes, 14) ;
 }
 

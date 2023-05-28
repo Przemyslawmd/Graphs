@@ -13,7 +13,7 @@ void BFS::traverseGraph()
     const auto& adjacency = graph.getAdjacency();
     nodesQueue.push(adjacency.begin()->first);
     
-    while (!nodesQueue.empty()) {
+    while (nodesQueue.empty() == false) {
         processQueue(adjacency);
         nodesQueue.pop();
     }
