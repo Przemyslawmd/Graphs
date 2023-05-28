@@ -14,13 +14,13 @@ enable_testing()
 
 add_executable(
   GraphTests
-  clientTest.cpp
-  bfsTest.cpp
-  dfsTest.cpp
-  dijkstraTest.cpp
-  graphTest.cpp
-  kruskalTest.cpp
-  graphFactory.h)
+  "testGraphClient.cpp"
+  "testBfs.cpp"
+  "testDfs.cpp"
+  "testDijkstra.cpp"
+  "testCreatingGraph.cpp"
+  "testKruskal.cpp"
+  "graphFactory.h")
 
 target_include_directories(
   GraphTests 
