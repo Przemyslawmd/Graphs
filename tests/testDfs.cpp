@@ -11,7 +11,7 @@
 #include <memory>
 #include <vector>
 
-constexpr bool measurement = true;
+constexpr bool measurement = false;
 
 
 class DFSTest : public ::testing::Test
@@ -31,7 +31,7 @@ protected:
 TEST_F(DFSTest, 1)
 {
     Graph graph{ false, false };
-    GraphFactory::createGraph(graph, 1);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_FiveNodes);
 
     DFS dfs{ graph };
     dfs.traverseGraph();
@@ -44,7 +44,7 @@ TEST_F(DFSTest, 1)
 TEST_F(DFSTest, SecondTest)
 {
     Graph graph{ false, false };
-    GraphFactory::createGraph(graph, 2);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_SevenNodes);
 
     DFS dfs{ graph };
     dfs.traverseGraph();
@@ -57,7 +57,7 @@ TEST_F(DFSTest, SecondTest)
 TEST_F(DFSTest, ThirdTest)
 {
     Graph graph{ true, false };
-    GraphFactory::createGraph(graph, 3);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_FourteenNodes);
 
     auto begin = std::chrono::high_resolution_clock::now();
     std::clock_t c_start = std::clock();
@@ -79,7 +79,7 @@ TEST_F(DFSTest, ThirdTest)
 TEST_F(DFSTest, FourthTest)
 {
     Graph graph{ false, false };
-    GraphFactory::createGraph(graph, 4);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_TwentyNodes);
 
     auto begin = std::chrono::high_resolution_clock::now();
     DFS dfs{ graph };

@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-constexpr bool measurement = true;
+constexpr bool measurement = false;
 
 
 class BFSTest : public ::testing::Test
@@ -30,7 +30,7 @@ protected:
 TEST_F(BFSTest, FirstTest)
 {
     Graph graph{ false, false };
-    GraphFactory::createGraph(graph, 1);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_FiveNodes);
     BFS bfs{ graph };
     bfs.traverseGraph();
 
@@ -42,7 +42,7 @@ TEST_F(BFSTest, FirstTest)
 TEST_F(BFSTest, SecondTest)
 {
     Graph graph{ false, false };
-    GraphFactory::createGraph(graph, 2);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_SevenNodes);
     BFS bfs{ graph };
     bfs.traverseGraph();
 
@@ -54,7 +54,7 @@ TEST_F(BFSTest, SecondTest)
 TEST_F(BFSTest, ThirdTest)
 {
     Graph graph{ true, false };
-    GraphFactory::createGraph(graph, 3);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_FourteenNodes);
 
     auto begin = std::chrono::high_resolution_clock::now();
     BFS bfs{ graph };
@@ -74,7 +74,7 @@ TEST_F(BFSTest, ThirdTest)
 TEST_F(BFSTest, FourthTest)
 {
     Graph graph{ false, false };
-    GraphFactory::createGraph(graph, 4);
+    GraphFactory::createGraph(graph, GraphType::Unweighted_TwentyNodes);
 
     auto begin = std::chrono::high_resolution_clock::now();
     BFS bfs{ graph };

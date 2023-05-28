@@ -2,20 +2,28 @@
 #include "../src/graph/graph.h"
 
 
+enum class GraphType {
+    Unweighted_FiveNodes,
+    Unweighted_SevenNodes,
+    Unweighted_FourteenNodes,
+    Unweighted_TwentyNodes,
+};
+
+
 class GraphFactory
 {
 public:
 
-    static void createGraph(Graph& graph, int number)
+    static void createGraph(Graph& graph, GraphType type)
     {   
-        if (number == 1) {
+        if (type == GraphType::Unweighted_FiveNodes) {
             graph.addEdges('a', { 'b' });
             graph.addEdges('b', { 'a', 'c' });
             graph.addEdges('c', { 'b', 'd', 'e' });
             graph.addEdges('d', { 'c', 'e' });
             graph.addEdges('e', { 'c', 'd' });
         }
-        else if (number == 2) {
+        else if (type == GraphType::Unweighted_SevenNodes) {
             graph.addEdges('a', { 'b', 'd' });
             graph.addEdges('b', { 'a', 'c', 'd', 'g' });
             graph.addEdges('c', { 'b', 'g' });
@@ -24,7 +32,7 @@ public:
             graph.addEdges('f', { 'd', 'e' });
             graph.addEdges('g', { 'b', 'c' });
         }
-        else if (number == 3) {
+        else if (type == GraphType::Unweighted_FourteenNodes) {
             graph.addEdges('a', { 'd', 'h' });
             graph.addEdges('b', { 'c' });
             graph.addEdges('c', { 'a', 'i' });
@@ -40,7 +48,7 @@ public:
             graph.addEdges('m', { 'h', 'k' });
             graph.addEdges('n', { 'm' });
         }
-        else if (number == 4) {
+        else if (type == GraphType::Unweighted_TwentyNodes) {
             graph.addEdges('a', { 'd', 'h' });
             graph.addEdges('b', { 'c' });
             graph.addEdges('c', { 'a', 'i' });

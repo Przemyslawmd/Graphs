@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-constexpr bool measurement = true;
+constexpr bool measurement = false;
 
 
 void checkEdge(const Edge& edge, char src, char dst, int weight)

@@ -11,7 +11,7 @@
 #include <optional>
 #include <vector>
 
-constexpr bool measurement = true;
+constexpr bool measurement = false;
 
 
 class DijkstraTest : public ::testing::Test
