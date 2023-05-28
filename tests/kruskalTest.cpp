@@ -6,8 +6,11 @@
 
 #include <gtest/gtest.h>
 
+#include <chrono>
 #include <memory>
 #include <vector>
+
+constexpr bool measurement = true;
 
 
 void checkEdge(const Edge& edge, char src, char dst, int weight)
@@ -29,8 +32,15 @@ TEST(TestKruskal, FirstTest)
     graph.addEdgesWeighted('d', {{ 'e', 2 }, { 'b', 4 }});
     graph.addEdgesWeighted('e', {{ 'b', 3 } });
 
+    auto begin = std::chrono::high_resolution_clock::now();
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
+    if (measurement) {
+        std::clock_t c_end = std::clock();
+        auto end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        std::cout << "TestKruskal : FirstTest : time in microseconds : " << elapsed.count() << std::endl;
+    }
 
     EXPECT_EQ(edges.get()->size(), 4);
     checkEdge(edges.get()->at(0), 'a', 'b', 1);

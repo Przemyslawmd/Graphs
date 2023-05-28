@@ -6,9 +6,12 @@
 
 #include <gtest/gtest.h>
 
+#include <chrono>
 #include <memory>
 #include <optional>
 #include <vector>
+
+constexpr bool measurement = true;
 
 
 class DijkstraTest : public ::testing::Test
@@ -33,8 +36,8 @@ TEST_F(DijkstraTest, FirstTest)
 
     Dijkstra dijkstra{ graph };
     dijkstra.traverseGraph('a');
-    const auto& routes = dijkstra.getRoutes();
     
+    const auto& routes = dijkstra.getRoutes();
     checkRoute(routes, 'a', std::nullopt, 0);
     checkRoute(routes, 'b', 'a', 1);
     checkRoute(routes, 'c', 'b', 6);
@@ -54,9 +57,15 @@ TEST_F(DijkstraTest, SecondTest)
 
     Dijkstra dijkstra{ graph };
 
+    auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
+    if (measurement) {
+        auto end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        std::cout << "DijkstraTest : SecondTest for A node: time in microseconds : " << elapsed.count() << std::endl;
+    }
+
     const auto& routesA = dijkstra.getRoutes();
-    
     checkRoute(routesA, 'a', std::nullopt, 0);
     checkRoute(routesA, 'b', 'e', 6);
     checkRoute(routesA, 'c', 'e', 4);
@@ -64,9 +73,15 @@ TEST_F(DijkstraTest, SecondTest)
     checkRoute(routesA, 'e', 'a', 2);
     checkRoute(routesA, 'f', 'e', 3);
     
+    begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('e');
+    if (measurement) {
+        auto end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        std::cout << "DijkstraTest : SecondTest for E node: time in microseconds : " << elapsed.count() << std::endl;
+    }
+
     const auto& routesE = dijkstra.getRoutes();
-    
     checkRoute(routesE, 'a',  'b', 8);
     checkRoute(routesE, 'b',  'e', 4);
     checkRoute(routesE, 'c',  'e', 2);

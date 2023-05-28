@@ -7,10 +7,11 @@
 #include <gtest/gtest.h>
 
 #include <chrono>
+#include <ctime>
 #include <memory>
 #include <vector>
 
-constexpr bool measurement = false;
+constexpr bool measurement = true;
 
 
 class DFSTest : public ::testing::Test
@@ -59,10 +60,12 @@ TEST_F(DFSTest, ThirdTest)
     GraphFactory::createGraph(graph, 3);
 
     auto begin = std::chrono::high_resolution_clock::now();
+    std::clock_t c_start = std::clock();
     DFS dfs{ graph };
     dfs.traverseGraph();
 
     if (measurement) {
+        std::clock_t c_end = std::clock();
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
         std::cout << "DFSTest : ThirdTest : time in microseconds : " << elapsed.count() << std::endl;

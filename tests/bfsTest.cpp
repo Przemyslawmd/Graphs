@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-constexpr bool measurement = false;
+constexpr bool measurement = true;
 
 
 class BFSTest : public ::testing::Test
