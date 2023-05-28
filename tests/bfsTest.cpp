@@ -2,6 +2,7 @@
 #include "../src/algo/bfs.h"
 #include "../src/graph/node.h"
 #include "../src/graph/graph.h"
+#include "graphFactory.h"
 
 #include <gtest/gtest.h>
 
@@ -29,13 +30,7 @@ protected:
 TEST_F(BFSTest, FirstTest)
 {
     Graph graph{ false, false };
-
-    graph.addEdges('a', { 'b' });
-    graph.addEdges('b', { 'a', 'c' });
-    graph.addEdges('c', { 'b', 'd', 'e' });
-    graph.addEdges('d', { 'c', 'e' });
-    graph.addEdges('e', { 'c', 'd' });
-
+    GraphFactory::createGraph(graph, 1);
     BFS bfs{ graph };
     bfs.traverseGraph();
 
@@ -47,15 +42,7 @@ TEST_F(BFSTest, FirstTest)
 TEST_F(BFSTest, SecondTest)
 {
     Graph graph{ false, false };
-
-    graph.addEdges('a', { 'b', 'd' });
-    graph.addEdges('b', { 'a', 'c', 'd', 'g' });
-    graph.addEdges('c', { 'b', 'g' });
-    graph.addEdges('d', { 'a', 'b', 'f' });
-    graph.addEdges('e', { 'f' });
-    graph.addEdges('f', { 'd', 'e' });
-    graph.addEdges('g', { 'b', 'c' });
-
+    GraphFactory::createGraph(graph, 2);
     BFS bfs{ graph };
     bfs.traverseGraph();
 
@@ -66,24 +53,10 @@ TEST_F(BFSTest, SecondTest)
 
 TEST_F(BFSTest, ThirdTest)
 {
-    auto begin = std::chrono::high_resolution_clock::now();
     Graph graph{ true, false };
+    GraphFactory::createGraph(graph, 3);
 
-    graph.addEdges('a', { 'd', 'h' });
-    graph.addEdges('b', { 'c' });
-    graph.addEdges('c', { 'a', 'i' });
-    graph.addEdges('d', { 'b', 'e', 'f' });
-    graph.addEdges('e', { 'c' });
-    graph.addEdges('f', { 'e', 'h', 'k'});
-    graph.addEdges('g', { 'e', 'i' });
-    graph.addEdges('h', { 'g', 'j' });
-    graph.addEdges('i', { 'f', 'n'});
-    graph.addEdges('j', { 'k' });
-    graph.addEdges('k', { 'l' });
-    graph.addEdges('l', { 'c', 'n' });
-    graph.addEdges('m', { 'h', 'k'});
-    graph.addEdges('n', { 'm' });
-
+    auto begin = std::chrono::high_resolution_clock::now();
     BFS bfs{ graph };
     bfs.traverseGraph();
 
@@ -100,30 +73,10 @@ TEST_F(BFSTest, ThirdTest)
 
 TEST_F(BFSTest, FourthTest)
 {
+    Graph graph{ false, false };
+    GraphFactory::createGraph(graph, 4);
+
     auto begin = std::chrono::high_resolution_clock::now();
-    Graph graph{ true, false };
-
-    graph.addEdges('a', { 'd', 'h' });
-    graph.addEdges('b', { 'c' });
-    graph.addEdges('c', { 'a', 'i' });
-    graph.addEdges('d', { 'b', 'e', 'f' });
-    graph.addEdges('e', { 'c' });
-    graph.addEdges('f', { 'e', 'h', 'k' });
-    graph.addEdges('g', { 'e', 'i', 'o'});
-    graph.addEdges('h', { 'g', 'j' });
-    graph.addEdges('i', { 'f', 'n', 'p' });
-    graph.addEdges('j', { 'k' });
-    graph.addEdges('k', { 'l' });
-    graph.addEdges('l', { 'c', 'n' });
-    graph.addEdges('m', { 'h', 'k' });
-    graph.addEdges('n', { 'm' });
-    graph.addEdges('o', { 'c', 'u' });
-    graph.addEdges('p', { 'r', 's'});
-    graph.addEdges('r', { 'g', 'i', 't' });
-    graph.addEdges('s', { 'o', 'u'});
-    graph.addEdges('t', { 'l', 'n' });
-    graph.addEdges('u', { 'r' });
-
     BFS bfs{ graph };
     bfs.traverseGraph();
 
@@ -136,3 +89,4 @@ TEST_F(BFSTest, FourthTest)
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 20);
 }
+

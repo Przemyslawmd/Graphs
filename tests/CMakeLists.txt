@@ -20,7 +20,7 @@ add_executable(
   dijkstraTest.cpp
   graphTest.cpp
   kruskalTest.cpp
-)
+  graphFactory.h)
 
 target_include_directories(
   GraphTests 
