@@ -7,6 +7,7 @@ enum class GraphType {
     Unweighted_SevenNodes,
     Unweighted_FourteenNodes,
     Unweighted_TwentyNodes,
+    Weighted_EightNodes,
 };
 
 
@@ -69,6 +70,16 @@ public:
             graph.addEdges('s', { 'o', 'u' });
             graph.addEdges('t', { 'l', 'n' });
             graph.addEdges('u', { 'r' });
+        }
+        else if (type == GraphType::Weighted_EightNodes) {
+            graph.addEdgesWeighted('a', { { 'd', 3 }, { 'h', 5 }});
+            graph.addEdgesWeighted('b', { { 'c', 4 } });
+            graph.addEdgesWeighted('c', { { 'a', 4 } });
+            graph.addEdgesWeighted('d', { { 'b', 2 }, { 'e', 1 }, { 'f', 8 } });
+            graph.addEdgesWeighted('e', { { 'c', 5 } });
+            graph.addEdgesWeighted('f', { { 'e', 2 }, { 'h', 2 } });
+            graph.addEdgesWeighted('g', { { 'e', 3 } });
+            graph.addEdgesWeighted('h', { { 'g', 6 } });
         }
     }
 };

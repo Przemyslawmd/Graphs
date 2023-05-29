@@ -3,6 +3,7 @@
 #include "../src/graph/edge.h"
 #include "../src/graph/node.h"
 #include "../src/graph/graph.h"
+#include "graphFactory.h"
 
 #include <gtest/gtest.h>
 
@@ -11,7 +12,7 @@
 #include <optional>
 #include <vector>
 
-constexpr bool measurement = false;
+constexpr bool measurement = true;
 
 
 class DijkstraTest : public ::testing::Test
@@ -88,5 +89,31 @@ TEST_F(DijkstraTest, SecondTest)
     checkRoute(routesE, 'd',  'a', 13);
     checkRoute(routesE, 'e',  std::nullopt, 0);
     checkRoute(routesE, 'f',  'e', 1);
+}
+
+
+TEST_F(DijkstraTest, ThirdTest)
+{
+    Graph graph{ true, true };
+    GraphFactory::createGraph(graph, GraphType::Weighted_EightNodes);
+
+    Dijkstra dijkstra{ graph };
+    auto begin = std::chrono::high_resolution_clock::now();
+    dijkstra.traverseGraph('a');
+    if (measurement) {
+        auto end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        std::cout << "DijkstraTest : ThirdTest for A node: time in microseconds : " << elapsed.count() << std::endl;
+    }
+
+    const auto& routes = dijkstra.getRoutes();
+    checkRoute(routes, 'a', std::nullopt, 0);
+    checkRoute(routes, 'b', 'd', 5);
+    checkRoute(routes, 'c', 'e', 9);
+    checkRoute(routes, 'd', 'a', 3);
+    checkRoute(routes, 'e', 'd', 4);
+    checkRoute(routes, 'f', 'd', 11);
+    checkRoute(routes, 'g', 'h', 11);
+    checkRoute(routes, 'h', 'a', 5);
 }
 
