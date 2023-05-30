@@ -103,7 +103,7 @@ TEST_F(DijkstraTest, ThirdTest)
     if (measurement) {
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "DijkstraTest : ThirdTest for A node: time in microseconds : " << elapsed.count() << std::endl;
+        std::cout << "Dijkstra Test : ThirdTest for A node: time in microseconds : " << elapsed.count() << std::endl;
     }
 
     const auto& routes = dijkstra.getRoutes();
@@ -115,5 +115,35 @@ TEST_F(DijkstraTest, ThirdTest)
     checkRoute(routes, 'f', 'd', 11);
     checkRoute(routes, 'g', 'h', 11);
     checkRoute(routes, 'h', 'a', 5);
+}
+
+
+TEST_F(DijkstraTest, FourthTest)
+{
+    Graph graph{ true, true };
+    GraphFactory::createGraph(graph, GraphType::Weighted_TwelveNodes);
+
+    Dijkstra dijkstra{ graph };
+    auto begin = std::chrono::high_resolution_clock::now();
+    dijkstra.traverseGraph('a');
+    if (measurement) {
+        auto end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        std::cout << "Dijkstra Test : FourthTest for A node: time in microseconds : " << elapsed.count() << std::endl;
+    }
+
+    const auto& routes = dijkstra.getRoutes();
+    checkRoute(routes, 'a', std::nullopt, 0);
+    checkRoute(routes, 'b', 'd', 5);
+    checkRoute(routes, 'c', 'e', 9);
+    checkRoute(routes, 'd', 'a', 3);
+    checkRoute(routes, 'e', 'd', 4);
+    checkRoute(routes, 'f', 'd', 11);
+    checkRoute(routes, 'g', 'h', 11);
+    checkRoute(routes, 'h', 'a', 5);
+    checkRoute(routes, 'i', 'b', 6);
+    checkRoute(routes, 'j', 'e', 11);
+    checkRoute(routes, 'k', 'i', 12);
+    checkRoute(routes, 'l', 'h', 9);
 }
 

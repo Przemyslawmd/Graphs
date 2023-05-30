@@ -8,6 +8,7 @@ enum class GraphType {
     Unweighted_FourteenNodes,
     Unweighted_TwentyNodes,
     Weighted_EightNodes,
+    Weighted_TwelveNodes,
 };
 
 
@@ -80,6 +81,20 @@ public:
             graph.addEdgesWeighted('f', { { 'e', 2 }, { 'h', 2 } });
             graph.addEdgesWeighted('g', { { 'e', 3 } });
             graph.addEdgesWeighted('h', { { 'g', 6 } });
+        }
+        else if (type == GraphType::Weighted_TwelveNodes) {
+            graph.addEdgesWeighted('a', { { 'd', 3 }, { 'h', 5 } });
+            graph.addEdgesWeighted('b', { { 'c', 4 }, { 'i', 1 } });
+            graph.addEdgesWeighted('c', { { 'a', 4 }, { 'l', 5 } });
+            graph.addEdgesWeighted('d', { { 'b', 2 }, { 'e', 1 }, { 'f', 8 } });
+            graph.addEdgesWeighted('e', { { 'c', 5 }, { 'j', 7 } });
+            graph.addEdgesWeighted('f', { { 'e', 2 }, { 'h', 2 }, { 'i', 7 }, { 'k', 10 } });
+            graph.addEdgesWeighted('g', { { 'e', 3 } });
+            graph.addEdgesWeighted('h', { { 'g', 6 }, { 'l', 4 }});
+            graph.addEdgesWeighted('i', { { 'k', 6 } });
+            graph.addEdgesWeighted('j', { { 'c', 8 } });
+            graph.addEdgesWeighted('k', { { 'g', 3 }, { 'j', 5 } });
+            graph.addEdgesWeighted('l', { { 'g', 2 }, { 'e', 5 }, {'f', 12 } });
         }
     }
 };
