@@ -37,7 +37,6 @@ TEST(TestKruskal, FirstTest)
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
     if (measurement) {
-        std::clock_t c_end = std::clock();
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
         std::cout << "TestKruskal : FirstTest : time in microseconds : " << elapsed.count() << std::endl;
@@ -60,7 +59,6 @@ TEST(TestKruskal, SecondTest)
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
     if (measurement) {
-        std::clock_t c_end = std::clock();
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
         std::cout << "TestKruskal : SecondTest : time in microseconds : " << elapsed.count() << std::endl;
