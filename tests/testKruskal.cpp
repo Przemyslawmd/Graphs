@@ -17,8 +17,8 @@ constexpr bool measurement = false;
 
 bool checkEdge(std::vector<Edge>* edges, char src, char dst, int weight)
 {
-    const Edge edge2{ src, dst, weight };
-    return std::any_of(edges->begin(), edges->end(), [&edge2](auto& edge) { return edge == edge2; });
+    const Edge edgeToCheck{ src, dst, weight };
+    return std::any_of(edges->begin(), edges->end(), [&edgeToCheck](auto& edge) { return edge == edgeToCheck; });
 }
 
 
@@ -51,7 +51,7 @@ TEST(TestKruskal, FirstTest)
 }
 
 
-TEST(TestKruskal, ThirdTest)
+TEST(TestKruskal, SecondTest)
 {
     Graph graph{ false, true };
     GraphFactory::createGraph(graph, GraphType::Weighted_NineNodes_Nondirectorial);
@@ -63,7 +63,7 @@ TEST(TestKruskal, ThirdTest)
         std::clock_t c_end = std::clock();
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "TestKruskal : ThirdTest : time in microseconds : " << elapsed.count() << std::endl;
+        std::cout << "TestKruskal : SecondTest : time in microseconds : " << elapsed.count() << std::endl;
     }
 
     EXPECT_EQ(edges.get()->size(), 8);
