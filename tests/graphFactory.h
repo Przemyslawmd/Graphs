@@ -8,6 +8,7 @@ enum class GraphType {
     Unweighted_FourteenNodes,
     Unweighted_TwentyNodes,
     Weighted_EightNodes,
+    Weighted_NineNodes_Nondirectorial,
     Weighted_TwelveNodes,
 };
 
@@ -81,6 +82,16 @@ public:
             graph.addEdgesWeighted('f', { { 'e', 2 }, { 'h', 2 } });
             graph.addEdgesWeighted('g', { { 'e', 3 } });
             graph.addEdgesWeighted('h', { { 'g', 6 } });
+        }
+        else if (type == GraphType::Weighted_NineNodes_Nondirectorial) {
+            graph.addEdgesWeighted('a', { { 'b', 4 }, { 'h', 8 } });
+            graph.addEdgesWeighted('b', { { 'c', 9 }, { 'h', 11 } });
+            graph.addEdgesWeighted('c', { { 'd', 7 }, { 'f', 4 },  { 'i', 2 } });
+            graph.addEdgesWeighted('d', { { 'e', 9 }, { 'f', 14 } });
+            graph.addEdgesWeighted('e', { { 'f', 10 } });
+            graph.addEdgesWeighted('f', { { 'g', 2 } });
+            graph.addEdgesWeighted('g', { { 'h', 1 }, {'i', 6 } });
+            graph.addEdgesWeighted('h', { { 'i', 7 } });
         }
         else if (type == GraphType::Weighted_TwelveNodes) {
             graph.addEdgesWeighted('a', { { 'd', 3 }, { 'h', 5 } });
