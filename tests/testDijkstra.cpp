@@ -25,6 +25,14 @@ protected:
         EXPECT_EQ(routes.at(dstKey).distance, distance);
         EXPECT_EQ(routes.at(dstKey).predecessor, predecessor);
     }
+
+    void showTime(std::chrono::steady_clock::time_point start, std::chrono::steady_clock::time_point end)
+    {
+        const char* testCase = ::testing::UnitTest::GetInstance()->current_test_info()->test_case_name();
+        const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+        std::cout << std::setw(12) << testCase << std::setw(12) << testName << " : time in microseconds : " << elapsed.count() << std::endl;
+    }
 };
 
 
@@ -60,10 +68,9 @@ TEST_F(DijkstraTest, SecondTest)
 
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
+    auto end = std::chrono::high_resolution_clock::now();
     if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "DijkstraTest : SecondTest for A node: time in microseconds : " << elapsed.count() << std::endl;
+        showTime(begin, end);
     }
 
     const auto& routesA = dijkstra.getRoutes();
@@ -76,10 +83,9 @@ TEST_F(DijkstraTest, SecondTest)
     
     begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('e');
+    end = std::chrono::high_resolution_clock::now();
     if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "DijkstraTest : SecondTest for E node: time in microseconds : " << elapsed.count() << std::endl;
+        showTime(begin, end);
     }
 
     const auto& routesE = dijkstra.getRoutes();
@@ -100,10 +106,9 @@ TEST_F(DijkstraTest, ThirdTest)
     Dijkstra dijkstra{ graph };
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
+    auto end = std::chrono::high_resolution_clock::now();
     if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "Dijkstra Test : ThirdTest for A node: time in microseconds : " << elapsed.count() << std::endl;
+        showTime(begin, end);
     }
 
     const auto& routes = dijkstra.getRoutes();
@@ -126,10 +131,9 @@ TEST_F(DijkstraTest, FourthTest)
     Dijkstra dijkstra{ graph };
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
+    auto end = std::chrono::high_resolution_clock::now();
     if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "Dijkstra Test : FourthTest for A node: time in microseconds : " << elapsed.count() << std::endl;
+        showTime(begin, end);
     }
 
     const auto& routes = dijkstra.getRoutes();

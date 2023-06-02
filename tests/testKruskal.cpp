@@ -22,6 +22,15 @@ bool checkEdge(std::vector<Edge>* edges, char src, char dst, int weight)
 }
 
 
+void showTime(std::chrono::steady_clock::time_point start, std::chrono::steady_clock::time_point end)
+{
+    const char* testCase = ::testing::UnitTest::GetInstance()->current_test_info()->test_case_name();
+    const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << std::setw(12) << testCase << std::setw(12) << testName <<" : time in microseconds : " << elapsed.count() << std::endl;
+}
+
+
 TEST(TestKruskal, FirstTest)
 {
     Graph graph{ true, true } ;
@@ -36,10 +45,9 @@ TEST(TestKruskal, FirstTest)
     auto begin = std::chrono::high_resolution_clock::now();
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
+    auto end = std::chrono::high_resolution_clock::now();
     if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "TestKruskal : FirstTest : time in microseconds : " << elapsed.count() << std::endl;
+        showTime(begin, end);
     }
 
     EXPECT_EQ(edges.get()->size(), 4);
@@ -58,10 +66,9 @@ TEST(TestKruskal, SecondTest)
     auto begin = std::chrono::high_resolution_clock::now();
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
+    auto end = std::chrono::high_resolution_clock::now();
     if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "TestKruskal : SecondTest : time in microseconds : " << elapsed.count() << std::endl;
+        showTime(begin, end);
     }
 
     EXPECT_EQ(edges.get()->size(), 8);
