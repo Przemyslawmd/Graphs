@@ -31,7 +31,7 @@ void showTime(std::chrono::steady_clock::time_point start, std::chrono::steady_c
 }
 
 
-TEST(TestKruskal, FirstTest)
+TEST(TestKruskal, FiveNodes_Directional)
 {
     Graph graph{ true, true } ;
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', });
@@ -58,7 +58,7 @@ TEST(TestKruskal, FirstTest)
 }
 
 
-TEST(TestKruskal, SecondTest)
+TEST(TestKruskal, NineNodes_Nodirectional)
 {
     Graph graph{ false, true };
     GraphFactory::createGraph(graph, GraphType::Weighted_NineNodes_Nondirectorial);
@@ -80,5 +80,31 @@ TEST(TestKruskal, SecondTest)
     EXPECT_TRUE(checkEdge(edges.get(), 'c', 'i', 2));
     EXPECT_TRUE(checkEdge(edges.get(), 'c', 'd', 7));
     EXPECT_TRUE(checkEdge(edges.get(), 'd', 'e', 9));
+}
+
+
+TEST(TestKruskal, TenNodes_Nodirectional)
+{
+    Graph graph{ false, true };
+    GraphFactory::createGraph(graph, GraphType::Weighted_TenNodes_Nondirectorial);
+
+    auto begin = std::chrono::high_resolution_clock::now();
+    Kruskal kruskal{ graph };
+    std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
+    auto end = std::chrono::high_resolution_clock::now();
+    if (measurement) {
+        showTime(begin, end);
+    }
+
+    EXPECT_EQ(edges.get()->size(), 9);
+    EXPECT_TRUE(checkEdge(edges.get(), 'a', 'b', 3));
+    EXPECT_TRUE(checkEdge(edges.get(), 'a', 'f', 2));
+    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'f', 1));
+    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'g', 6));
+    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'h', 5));
+    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'i', 10));
+    EXPECT_TRUE(checkEdge(edges.get(), 'c', 'd', 8));
+    EXPECT_TRUE(checkEdge(edges.get(), 'd', 'i', 4));
+    EXPECT_TRUE(checkEdge(edges.get(), 'i', 'j', 9));
 }
 

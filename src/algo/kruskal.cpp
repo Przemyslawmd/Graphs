@@ -58,16 +58,16 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
 
 std::unique_ptr<std::list<Edge>> Kruskal::sortEdges()
 {
-    auto edgesToSort = std::make_unique<std::list<Edge>>();
+    auto sortedEdges = std::make_unique<std::list<Edge>>();
     for (auto& [key, edges] : graph.getAdjacency()) {
         for (auto& edge : edges) {
-            if (std::all_of(edgesToSort->begin(), edgesToSort->end(), [&edge](auto& edgeToSort) { return !(edgeToSort == edge); })) {
-                edgesToSort->push_back({ edge.src, edge.dst, edge.weight });
+            if (std::all_of(sortedEdges->begin(), sortedEdges->end(), [&edge](auto& edgeToSort) { return !(edgeToSort == edge); })) {
+                sortedEdges->push_back({ edge.src, edge.dst, edge.weight });
             }
         }
     }
-    edgesToSort->sort([](const Edge& edge1, const Edge& edge2) { return edge1.weight > edge2.weight; });
-    return edgesToSort;
+    sortedEdges->sort([](const Edge& edge1, const Edge& edge2) { return edge1.weight > edge2.weight; });
+    return sortedEdges;
 }
 
 
