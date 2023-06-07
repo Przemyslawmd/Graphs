@@ -14,10 +14,10 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
     auto sortedEdges = sortEdges();
     auto trees = initializePartialTrees();
 
-    auto spanningTreeEdges = std::make_unique<std::vector<Edge>>();
-    spanningTreeEdges->reserve(sortedEdges.size());
+    auto spanningTree = std::make_unique<std::vector<Edge>>();
+    spanningTree->reserve(sortedEdges.size());
 
-    int highestPartialTree = 0;
+    int lastPartialTree = 0;
 
     while (sortedEdges.empty() == false) {
 
@@ -31,9 +31,9 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
             continue;
         }
         else if (src->treeNumber == NOT_ATTACHED && dst->treeNumber == NOT_ATTACHED) {
-            highestPartialTree++;
-            src->treeNumber = highestPartialTree;
-            dst->treeNumber = highestPartialTree;
+            lastPartialTree++;
+            src->treeNumber = lastPartialTree;
+            dst->treeNumber = lastPartialTree;
         }
         else if (src->treeNumber != dst->treeNumber && src->treeNumber != NOT_ATTACHED && dst->treeNumber != NOT_ATTACHED) {
             int toExtend = src->treeNumber < dst->treeNumber ? src->treeNumber : dst->treeNumber;
@@ -50,17 +50,17 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
         else {
             dst->treeNumber = src->treeNumber;
         }
-        spanningTreeEdges->push_back(edge);
+        spanningTree->push_back(std::move(edge));
     }
-    return spanningTreeEdges;
+    return spanningTree;
 }
 
 
 std::list<Edge> Kruskal::sortEdges()
 {
-    std::list<Edge>  sortedEdges;
-    for (auto& [key, edges] : graph.getAdjacency()) {
-        for (auto& edge : edges) {
+    std::list<Edge> sortedEdges;
+    for (const auto& [key, edges] : graph.getAdjacency()) {
+        for (const auto& edge : edges) {
             if (std::all_of(sortedEdges.begin(), sortedEdges.end(), [&edge](auto& edgeToSort) { return !(edgeToSort == edge); })) {
                 sortedEdges.push_back({ edge.src, edge.dst, edge.weight });
             }
