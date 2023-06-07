@@ -30,8 +30,8 @@ public:
 
 private:
 
-    std::unique_ptr<std::list<Edge>> sortEdges();
-    std::unique_ptr<std::vector<PartialTree>> initializePartialTrees();
+    std::list<Edge> sortEdges();
+    std::vector<PartialTree> initializePartialTrees();
 
     Graph& graph;
 };
