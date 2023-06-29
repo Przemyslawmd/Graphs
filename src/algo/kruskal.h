@@ -10,10 +10,12 @@
 #include <vector>
 
 
-typedef struct {
+struct PartialTree {
+
+    PartialTree(char key, int treeNumber) : key(key), treeNumber(treeNumber) {}
     char key;
     int treeNumber;
-} PartialTree;
+};
 
 
 class Kruskal

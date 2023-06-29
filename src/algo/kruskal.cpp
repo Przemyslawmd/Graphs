@@ -76,8 +76,8 @@ std::vector<PartialTree> Kruskal::initializePartialTrees()
     std::vector<PartialTree> trees;
     const auto& adjacency = graph.getAdjacency();
     trees.reserve(adjacency.size());
-    for (const auto& [key, edges] : adjacency) {
-        trees.push_back({ key, NOT_ATTACHED });
+    for (const auto& [key, _] : adjacency) {
+        trees.emplace_back(key, NOT_ATTACHED);
     }
     return trees;
 }
