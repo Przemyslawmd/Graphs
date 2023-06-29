@@ -18,7 +18,7 @@ void Dijkstra::traverseGraph(char srcKey)
     }
     for (const auto& node : nodes) {
         int distance = node->key == srcKey ? 0 : INT_MAX;
-        routes[node->key] = route{ distance };
+        routes.emplace(node->key, route{ distance });
     }
 
     std::optional<char> key = findNodeToProcess();
@@ -35,12 +35,12 @@ void Dijkstra::processRoutesTable(const std::map<char, std::list<Edge>>& adjacen
     if (adjacency.count(key) != 1) {
         return;
     }
-    auto& adjacentNodes = adjacency.at(key);
 
-    for (auto node = adjacentNodes.begin(); node != adjacentNodes.end(); node++) {
-        if (graph.isNodeVisited(node->dst) == false) {
-            if (routes[node->dst].distance > routes[key].distance + node->weight)
-            routes[node->dst] = route{ node->weight + routes[key].distance, std::optional<char>{ key }};
+    const auto& adjacentNodes = adjacency.at(key);
+    for (const auto& edge : adjacentNodes) {
+        int currentWeight = routes[key].distance + edge.weight;
+        if (graph.isNodeVisited(edge.dst) == false && routes[edge.dst].distance > currentWeight) {
+            routes[edge.dst] = route{ currentWeight, std::optional<char>{ key }};
         }
     }   
 }
@@ -49,14 +49,14 @@ void Dijkstra::processRoutesTable(const std::map<char, std::list<Edge>>& adjacen
 std::optional<char> Dijkstra::findNodeToProcess()
 {
     int initial = INT_MAX;
-    std::optional<char> key;
-    for (auto route = routes.begin(); route != routes.end(); route++) {
-        if (graph.isNodeVisited(route->first) == false && route->second.distance < initial) {
-            initial = route->second.distance;
-            key = route->first;
+    std::optional<char> nodeToProcess;
+    for (const auto& [nodeKey, route] : routes) {
+        if (graph.isNodeVisited(nodeKey) == false && route.distance < initial) {
+            initial = route.distance;
+            nodeToProcess = nodeKey;
         }
     } 
-    return key;
+    return nodeToProcess;
 }
 
 
