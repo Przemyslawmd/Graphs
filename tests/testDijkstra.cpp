@@ -26,7 +26,7 @@ protected:
         EXPECT_EQ(routes.at(dstKey).predecessor, predecessor);
     }
 
-    void showTime(std::chrono::steady_clock::time_point start, std::chrono::steady_clock::time_point end)
+    void showTime(std::chrono::system_clock::time_point start, std::chrono::system_clock::time_point end)
     {
         const char* testCase = ::testing::UnitTest::GetInstance()->current_test_info()->test_case_name();
         const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
