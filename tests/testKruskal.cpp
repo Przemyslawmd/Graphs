@@ -1,5 +1,6 @@
 
 #include "graphFactory.h"
+#include "timeType.h"
 #include "../src/algo/kruskal.h"
 #include "../src/graph/edge.h"
 #include "../src/graph/node.h"
@@ -22,7 +23,7 @@ bool checkEdge(std::vector<Edge>* edges, char src, char dst, int weight)
 }
 
 
-void showTime(std::chrono::system_clock::time_point start, std::chrono::system_clock::time_point end)
+void showTime(TIME_TYPE start, TIME_TYPE end)
 {
     const char* testCase = ::testing::UnitTest::GetInstance()->current_test_info()->test_case_name();
     const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();

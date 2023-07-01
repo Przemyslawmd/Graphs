@@ -10,6 +10,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+if(LINUX)
+    set(TIME_MEASUREMENT_TYPE std::chrono::system_clock::time_point)
+elseif(WIN32)
+    set(TIME_MEASUREMENT_TYPE std::chrono::steady_clock::time_point)
+endif()
+configure_file (timeType.h.in ${CMAKE_CURRENT_SOURCE_DIR}/timeType.h @ONLY)
+
 enable_testing()
 
 add_executable(

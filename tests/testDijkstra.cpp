@@ -4,6 +4,7 @@
 #include "../src/graph/node.h"
 #include "../src/graph/graph.h"
 #include "graphFactory.h"
+#include "timeType.h"
 
 #include <gtest/gtest.h>
 
@@ -26,7 +27,7 @@ protected:
         EXPECT_EQ(routes.at(dstKey).predecessor, predecessor);
     }
 
-    void showTime(std::chrono::system_clock::time_point start, std::chrono::system_clock::time_point end)
+    void showTime(TIME_TYPE start, TIME_TYPE end)
     {
         const char* testCase = ::testing::UnitTest::GetInstance()->current_test_info()->test_case_name();
         const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
