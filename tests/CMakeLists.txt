@@ -10,7 +10,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-if(LINUX)
+if(UNIX)
     set(TIME_MEASUREMENT_TYPE std::chrono::system_clock::time_point)
 elseif(WIN32)
     set(TIME_MEASUREMENT_TYPE std::chrono::steady_clock::time_point)
