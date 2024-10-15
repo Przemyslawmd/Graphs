@@ -10,18 +10,16 @@
 #include <memory>
 #include <vector>
 
-constexpr bool measurement = false;
-
 
 class BFSTest : public ::testing::Test
 {
 protected:
 
-    void checkNodes(const std::vector<std::unique_ptr<Node>>& nodes, int expectedNodesCount)
+    void checkNodes(const std::vector<Node>& nodes, int expectedNodesCount)
     {
         ASSERT_EQ(nodes.size(), expectedNodesCount);
         for (auto& node : nodes) {
-            EXPECT_TRUE(node->isVisited());
+            EXPECT_TRUE(node.isVisited());
         }
     }
 };
@@ -60,11 +58,9 @@ TEST_F(BFSTest, ThirdTest)
     BFS bfs{ graph };
     bfs.traverseGraph();
 
-    if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "BFSTest : ThirdTest : time in microseconds : " << elapsed.count() << std::endl;
-    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+    std::cout << "BFSTest : ThirdTest : time in microseconds : " << elapsed.count() << std::endl;
 
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 14) ;
@@ -80,11 +76,9 @@ TEST_F(BFSTest, FourthTest)
     BFS bfs{ graph };
     bfs.traverseGraph();
 
-    if (measurement) {
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::cout << "BFSTest : FourthTest : time in microseconds : " << elapsed.count() << std::endl;
-    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+    std::cout << "BFSTest : FourthTest : time in microseconds : " << elapsed.count() << std::endl;
 
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 20);

@@ -1,19 +1,17 @@
 
+#include <chrono>
+#include <memory>
+#include <optional>
+#include <vector>
+
+#include <gtest/gtest.h>
+
 #include "../src/algo/dijkstra.h"
 #include "../src/graph/edge.h"
 #include "../src/graph/node.h"
 #include "../src/graph/graph.h"
 #include "graphFactory.h"
 #include "timeType.h"
-
-#include <gtest/gtest.h>
-
-#include <chrono>
-#include <memory>
-#include <optional>
-#include <vector>
-
-constexpr bool measurement = true;
 
 
 class DijkstraTest : public ::testing::Test
@@ -70,9 +68,7 @@ TEST_F(DijkstraTest, SecondTest)
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
     auto end = std::chrono::high_resolution_clock::now();
-    if (measurement) {
-        showTime(begin, end);
-    }
+    showTime(begin, end);
 
     const auto& routesA = dijkstra.getRoutes();
     checkRoute(routesA, 'a', std::nullopt, 0);
@@ -85,9 +81,7 @@ TEST_F(DijkstraTest, SecondTest)
     begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('e');
     end = std::chrono::high_resolution_clock::now();
-    if (measurement) {
-        showTime(begin, end);
-    }
+    showTime(begin, end);
 
     const auto& routesE = dijkstra.getRoutes();
     checkRoute(routesE, 'a',  'b', 8);
@@ -108,9 +102,7 @@ TEST_F(DijkstraTest, ThirdTest)
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
     auto end = std::chrono::high_resolution_clock::now();
-    if (measurement) {
-        showTime(begin, end);
-    }
+    showTime(begin, end);
 
     const auto& routes = dijkstra.getRoutes();
     checkRoute(routes, 'a', std::nullopt, 0);
@@ -133,9 +125,7 @@ TEST_F(DijkstraTest, FourthTest)
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
     auto end = std::chrono::high_resolution_clock::now();
-    if (measurement) {
-        showTime(begin, end);
-    }
+    showTime(begin, end);
 
     const auto& routes = dijkstra.getRoutes();
     checkRoute(routes, 'a', std::nullopt, 0);

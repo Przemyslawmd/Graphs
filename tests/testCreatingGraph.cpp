@@ -1,13 +1,13 @@
 
+#include <memory>
+#include <vector>
+
+#include <gtest/gtest.h>
+
 #include "../src/graph/edge.h"
 #include "../src/graph/graph.h"
 #include "../src/graph/node.h"
 
-#include <gtest/gtest.h>
-
-#include <memory>
-#include <vector>
- 
 
 void checkAdjacency(const std::map<char, std::list<Edge>>& adjacency,
                     char key,
@@ -38,14 +38,14 @@ void checkAdjacencyWithWeight(const std::map<char, std::list<Edge>>& adjacency,
 }
 
 
-void checkNodes(const std::vector<std::unique_ptr<Node>>& nodes,
+void checkNodes(const std::vector<Node>& nodes,
                 const std::vector<char>& keys)
 {
     ASSERT_EQ(nodes.size(), keys.size());
 
     auto it = nodes.cbegin();
     for (const auto key : keys) {
-        EXPECT_EQ(key, (*it)->key);
+        EXPECT_EQ(key, (*it).key);
         std::advance(it, 1);
     }
 }

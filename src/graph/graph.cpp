@@ -11,7 +11,7 @@ Graph::Graph(bool isDirected, bool isWeighted): isDirected(isDirected), isWeight
 void Graph::addNode(char key)
 {
     if (isNodeExist(key) == false) {
-        nodes.push_back(std::make_unique<Node>(key));
+        nodes.emplace_back(key);
     }
 }
 
@@ -26,11 +26,11 @@ void Graph::addNodes(const std::vector<char>& keys)
 
 bool Graph::isNodeExist(char key)
 {
-    return std::all_of(nodes.begin(), nodes.end(), [key](const auto& node) { return node->key != key; }) == false;
+    return std::all_of(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key != key; }) == false;
 }
 
 
-const std::vector<std::unique_ptr<Node>>& Graph::getNodes()
+const std::vector<Node>& Graph::getNodes()
 {
     return nodes;
 }
@@ -69,10 +69,10 @@ void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int
 void Graph::addEdge(char srcKey, char dstKey, int weight)
 {
     if (isNodeExist(srcKey) == false) {
-        nodes.push_back(std::make_unique<Node>(srcKey));
+        nodes.emplace_back(srcKey);
     }
     if (isNodeExist(dstKey) == false) {
-        nodes.push_back(std::make_unique<Node>(dstKey));
+        nodes.emplace_back(dstKey);
     }
 
     updateAdjacency(srcKey, dstKey, weight);
@@ -99,22 +99,22 @@ void Graph::updateAdjacency(char srcKey, char dstKey, int weight)
 
 bool Graph::isNodeVisited(char key)
 {
-    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->key == key; });
-    return (*it)->isVisited();
+    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    return (*it).isVisited();
 }
 
 
 void Graph::setNodeAsVisited(char key)
 {
-    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node->key == key; });
-    (*it)->setVisited(true);
+    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    (*it).setVisited(true);
 }
 
 
 void Graph::setAllNodesAsNotVisited()
 {
     for (auto& node : nodes) {
-        node->setVisited(false);
+        node.setVisited(false);
     }
 }
 

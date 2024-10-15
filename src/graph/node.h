@@ -8,8 +8,6 @@ class Node
 public:
 
     explicit Node(char key);
-    Node(const Node&) = delete;
-    Node& operator=(Node&) = delete;
 
     bool isVisited() const;
     void setVisited(bool isVisited);

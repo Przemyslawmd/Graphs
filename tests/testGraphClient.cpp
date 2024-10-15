@@ -1,14 +1,14 @@
 
+#include <memory>
+#include <tuple>
+#include <vector>
+
+#include <gtest/gtest.h>
+
 #include "../src/graphclient.h"
 #include "../src/graph/graph.h"
 #include "../src/graph/node.h"
 #include "../src/graphclient.h"
-
-#include <gtest/gtest.h>
-
-#include <memory>
-#include <tuple>
-#include <vector>
 
 
 TEST(TestClient, FindShortestPath)

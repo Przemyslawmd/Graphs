@@ -1,19 +1,17 @@
 
+#include <algorithm>
+#include <chrono>
+#include <memory>
+#include <vector>
+
+#include <gtest/gtest.h>
+
 #include "graphFactory.h"
 #include "timeType.h"
 #include "../src/algo/kruskal.h"
 #include "../src/graph/edge.h"
 #include "../src/graph/node.h"
 #include "../src/graph/graph.h"
-
-#include <gtest/gtest.h>
-
-#include <algorithm>
-#include <chrono>
-#include <memory>
-#include <vector>
-
-constexpr bool measurement = false;
 
 
 bool checkEdge(std::vector<Edge>* edges, char src, char dst, int weight)
@@ -47,9 +45,7 @@ TEST(TestKruskal, FiveNodes_Directional)
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
     auto end = std::chrono::high_resolution_clock::now();
-    if (measurement) {
-        showTime(begin, end);
-    }
+    showTime(begin, end);
 
     EXPECT_EQ(edges.get()->size(), 4);
     EXPECT_TRUE(checkEdge(edges.get(), 'a', 'b', 1));
@@ -68,9 +64,7 @@ TEST(TestKruskal, NineNodes_Nodirectional)
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
     auto end = std::chrono::high_resolution_clock::now();
-    if (measurement) {
-        showTime(begin, end);
-    }
+    showTime(begin, end);
 
     EXPECT_EQ(edges.get()->size(), 8);
     EXPECT_TRUE(checkEdge(edges.get(), 'a', 'b', 4));
@@ -93,9 +87,7 @@ TEST(TestKruskal, TenNodes_Nodirectional)
     Kruskal kruskal{ graph };
     std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
     auto end = std::chrono::high_resolution_clock::now();
-    if (measurement) {
-        showTime(begin, end);
-    }
+    showTime(begin, end);
 
     EXPECT_EQ(edges.get()->size(), 9);
     EXPECT_TRUE(checkEdge(edges.get(), 'a', 'b', 3));
