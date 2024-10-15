@@ -37,7 +37,7 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
     nodesList->push_front(dst);
     Dijkstra dijkstra{ *(graph.get()) };
     dijkstra.traverseGraph(src);
-    const std::map<char, route>& routes = dijkstra.getRoutes();
+    const std::map<char, Route>& routes = dijkstra.getRoutes();
 
     std::optional<char> predecessor;
     predecessor = routes.at(dst).predecessor;

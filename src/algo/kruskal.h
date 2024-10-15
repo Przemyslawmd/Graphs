@@ -10,11 +10,11 @@
 #include <vector>
 
 
-struct PartialTree {
-
-    PartialTree(char key, int treeNumber) : key(key), treeNumber(treeNumber) {}
-    char key;
-    int treeNumber;
+struct PartialTree
+{
+    PartialTree(char key, size_t number) : key(key), number(number) {}
+    const char key;
+    size_t number;
 };
 
 
@@ -32,8 +32,8 @@ public:
 
 private:
 
-    std::list<Edge> sortEdges();
-    std::vector<PartialTree> initializePartialTrees();
+    std::list<Edge> createSortedEdges();
+    std::vector<PartialTree> createPartialTrees();
 
     Graph& graph;
 };
