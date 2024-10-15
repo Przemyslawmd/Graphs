@@ -92,7 +92,7 @@ void Graph::updateAdjacency(char srcKey, char dstKey, int weight)
     auto& adjacentNodes = adjacency.at(srcKey);
     auto it = std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dstKey](const auto& edge) { return edge.dst == dstKey; });
     if (it == adjacentNodes.end()) {
-        adjacentNodes.push_back(Edge{ srcKey, dstKey, weight });
+        adjacentNodes.emplace_back( srcKey, dstKey, weight );
     }
 }
 

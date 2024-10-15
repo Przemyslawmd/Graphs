@@ -23,7 +23,7 @@ public:
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);
     const std::vector<Node>& getNodes();
-    
+
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
     void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges);
 

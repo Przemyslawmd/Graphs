@@ -12,7 +12,7 @@ void BFS::traverseGraph()
     graph.setAllNodesAsNotVisited();
     const auto& adjacency = graph.getAdjacency();
     nodesQueue.push(adjacency.begin()->first);
-    
+
     while (nodesQueue.empty() == false) {
         processQueue(adjacency);
         nodesQueue.pop();
@@ -27,7 +27,7 @@ void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
 
     for (const auto& edge : adjacency.at(key)) {
         if (graph.isNodeVisited(edge.dst) == false) {
-            nodesQueue.push(edge.dst);
+            nodesQueue.emplace(edge.dst);
             graph.setNodeAsVisited(edge.dst);
         }
     }

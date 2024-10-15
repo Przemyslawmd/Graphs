@@ -11,8 +11,8 @@ void DFS::traverseGraph()
 {
     graph.setAllNodesAsNotVisited();
     const auto& adjacency = graph.getAdjacency();
-    char initialKey = adjacency.begin()->first;        
-    processNode(initialKey);   
+    char initialKey = adjacency.begin()->first;
+    processNode(initialKey);
 }
 
 
