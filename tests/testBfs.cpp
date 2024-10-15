@@ -1,28 +1,18 @@
 
-#include "../src/algo/bfs.h"
-#include "../src/graph/node.h"
-#include "../src/graph/graph.h"
-#include "graphFactory.h"
-
-#include <gtest/gtest.h>
-
 #include <chrono>
 #include <memory>
 #include <vector>
 
+#include <gtest/gtest.h>
 
-class BFSTest : public ::testing::Test
-{
-protected:
+#include "../src/algo/bfs.h"
+#include "../src/graph/node.h"
+#include "../src/graph/graph.h"
+#include "baseTest.h"
+#include "graphFactory.h"
 
-    void checkNodes(const std::vector<Node>& nodes, int expectedNodesCount)
-    {
-        ASSERT_EQ(nodes.size(), expectedNodesCount);
-        for (auto& node : nodes) {
-            EXPECT_TRUE(node.isVisited());
-        }
-    }
-};
+
+class BFSTest : public GraphTest {};
 
 
 TEST_F(BFSTest, FirstTest)
@@ -54,13 +44,12 @@ TEST_F(BFSTest, ThirdTest)
     Graph graph{ true, false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_FourteenNodes);
 
-    auto begin = std::chrono::high_resolution_clock::now();
+    const auto begin = std::chrono::high_resolution_clock::now();
     BFS bfs{ graph };
     bfs.traverseGraph();
 
-    auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-    std::cout << "BFSTest : ThirdTest : time in microseconds : " << elapsed.count() << std::endl;
+    const auto end = std::chrono::high_resolution_clock::now();
+    showDuration(begin, end);
 
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 14) ;
@@ -72,13 +61,12 @@ TEST_F(BFSTest, FourthTest)
     Graph graph{ false, false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_TwentyNodes);
 
-    auto begin = std::chrono::high_resolution_clock::now();
+    const auto begin = std::chrono::high_resolution_clock::now();
     BFS bfs{ graph };
     bfs.traverseGraph();
 
-    auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-    std::cout << "BFSTest : FourthTest : time in microseconds : " << elapsed.count() << std::endl;
+    const auto end = std::chrono::high_resolution_clock::now();
+    showDuration(begin, end);
 
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 20);

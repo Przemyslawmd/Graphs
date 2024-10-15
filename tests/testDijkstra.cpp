@@ -6,15 +6,16 @@
 
 #include <gtest/gtest.h>
 
+#include "baseTest.h"
+#include "graphFactory.h"
+#include "timeType.h"
 #include "../src/algo/dijkstra.h"
 #include "../src/graph/edge.h"
 #include "../src/graph/node.h"
 #include "../src/graph/graph.h"
-#include "graphFactory.h"
-#include "timeType.h"
 
 
-class DijkstraTest : public ::testing::Test
+class DijkstraTest : public GraphTest
 {
 protected:
 
@@ -23,14 +24,6 @@ protected:
         ASSERT_TRUE(routes.find(dstKey) != routes.end());
         EXPECT_EQ(routes.at(dstKey).distance, distance);
         EXPECT_EQ(routes.at(dstKey).predecessor, predecessor);
-    }
-
-    void showTime(TIME_TYPE start, TIME_TYPE end)
-    {
-        const char* testCase = ::testing::UnitTest::GetInstance()->current_test_info()->test_case_name();
-        const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-        std::cout << std::setw(12) << testCase << std::setw(12) << testName << " : time in microseconds : " << elapsed.count() << std::endl;
     }
 };
 
@@ -44,7 +37,7 @@ TEST_F(DijkstraTest, FirstTest)
 
     Dijkstra dijkstra{ graph };
     dijkstra.traverseGraph('a');
-    
+
     const auto& routes = dijkstra.getRoutes();
     checkRoute(routes, 'a', std::nullopt, 0);
     checkRoute(routes, 'b', 'a', 1);
@@ -68,7 +61,7 @@ TEST_F(DijkstraTest, SecondTest)
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
     auto end = std::chrono::high_resolution_clock::now();
-    showTime(begin, end);
+    showDuration(begin, end);
 
     const auto& routesA = dijkstra.getRoutes();
     checkRoute(routesA, 'a', std::nullopt, 0);
@@ -81,7 +74,7 @@ TEST_F(DijkstraTest, SecondTest)
     begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('e');
     end = std::chrono::high_resolution_clock::now();
-    showTime(begin, end);
+    showDuration(begin, end);
 
     const auto& routesE = dijkstra.getRoutes();
     checkRoute(routesE, 'a',  'b', 8);
@@ -102,7 +95,7 @@ TEST_F(DijkstraTest, ThirdTest)
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
     auto end = std::chrono::high_resolution_clock::now();
-    showTime(begin, end);
+    showDuration(begin, end);
 
     const auto& routes = dijkstra.getRoutes();
     checkRoute(routes, 'a', std::nullopt, 0);
@@ -125,7 +118,7 @@ TEST_F(DijkstraTest, FourthTest)
     auto begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('a');
     auto end = std::chrono::high_resolution_clock::now();
-    showTime(begin, end);
+    showDuration(begin, end);
 
     const auto& routes = dijkstra.getRoutes();
     checkRoute(routes, 'a', std::nullopt, 0);

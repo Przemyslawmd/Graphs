@@ -6,24 +6,14 @@
 
 #include <gtest/gtest.h>
 
+#include "baseTest.h"
+#include "graphFactory.h"
 #include "../src/algo/dfs.h"
 #include "../src/graph/node.h"
 #include "../src/graph/graph.h"
-#include "graphFactory.h"
 
 
-class DFSTest : public ::testing::Test
-{
-protected:
-
-    void checkNodes(const std::vector<Node>& nodes, int expectedNodesCount)
-    {
-        ASSERT_EQ(nodes.size(), expectedNodesCount);
-        for (auto& node : nodes) {
-            EXPECT_TRUE(node.isVisited());
-        }
-    }
-};
+class DFSTest : public GraphTest {};
 
 
 TEST_F(DFSTest, 1)
@@ -46,7 +36,7 @@ TEST_F(DFSTest, SecondTest)
 
     DFS dfs{ graph };
     dfs.traverseGraph();
-    
+
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 7);
 }
@@ -63,8 +53,7 @@ TEST_F(DFSTest, ThirdTest)
     dfs.traverseGraph();
 
     const auto end = std::chrono::high_resolution_clock::now();
-    const auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-    std::cout << "DFSTest : ThirdTest : time in microseconds : " << elapsed.count() << std::endl;
+    showDuration(begin, end);
 
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 14);
@@ -81,8 +70,7 @@ TEST_F(DFSTest, FourthTest)
     dfs.traverseGraph();
 
     auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-    std::cout << "DFSTest : FourthTest : time in microseconds : " << elapsed.count() << std::endl;
+    showDuration(begin, end);
 
     const auto& nodes = graph.getNodes();
     checkNodes(nodes, 20);
