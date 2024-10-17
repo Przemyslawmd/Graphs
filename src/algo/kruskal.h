@@ -32,8 +32,8 @@ public:
 
 private:
 
-    std::list<Edge> createSortedEdges();
-    std::vector<PartialTree> createPartialTrees();
+    std::unique_ptr<std::list<Edge>> createSortedEdges();
+    std::unique_ptr<std::vector<PartialTree>> createPartialTrees();
 
     Graph& graph;
 };

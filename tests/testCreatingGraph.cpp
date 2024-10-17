@@ -53,7 +53,7 @@ void checkNodes(const std::vector<Node>& nodes,
 
 TEST(TestCreateGraph, FirstTest)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
+    std::vector keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph{ false, false };
     graph.addNodes(keys);
 
@@ -104,7 +104,7 @@ TEST(TestCreateGraph, SecondTestNoNodesCreatedBefore)
 
 TEST(TestCreateGraph, ThirdTestGraphWithWeights)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
+    std::vector keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph{ true, true };
     graph.addNodes(keys);
 

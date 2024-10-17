@@ -70,7 +70,7 @@ TEST_F(DijkstraTest, SecondTest)
     checkRoute(routesA, 'd', 'a', 5);
     checkRoute(routesA, 'e', 'a', 2);
     checkRoute(routesA, 'f', 'e', 3);
-    
+
     begin = std::chrono::high_resolution_clock::now();
     dijkstra.traverseGraph('e');
     end = std::chrono::high_resolution_clock::now();

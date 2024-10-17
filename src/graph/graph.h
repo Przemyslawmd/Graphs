@@ -19,7 +19,7 @@ public:
     Graph(bool isDirected = true, bool isWeighted = true);
     Graph(const Graph&) = delete;
     Graph& operator=(Graph&) = delete;
-        
+
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);
     const std::vector<Node>& getNodes();

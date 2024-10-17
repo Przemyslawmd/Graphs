@@ -40,7 +40,7 @@ TEST_F(KruskalTest, FiveNodes_Directional)
 
     const auto begin = std::chrono::high_resolution_clock::now();
     Kruskal kruskal{ graph };
-    std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
+    const auto edges = kruskal.makeMinSpanningTree();
     const auto end = std::chrono::high_resolution_clock::now();
     showDuration(begin, end);
 
@@ -59,7 +59,7 @@ TEST_F(KruskalTest, NineNodes_Nodirectional)
 
     const auto begin = std::chrono::high_resolution_clock::now();
     Kruskal kruskal{ graph };
-    std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
+    const auto edges = kruskal.makeMinSpanningTree();
     const auto end = std::chrono::high_resolution_clock::now();
     showDuration(begin, end);
 
@@ -82,7 +82,7 @@ TEST_F(KruskalTest, TenNodes_Nodirectional)
 
     const auto begin = std::chrono::high_resolution_clock::now();
     Kruskal kruskal{ graph };
-    std::unique_ptr<std::vector<Edge>> edges = kruskal.makeMinSpanningTree();
+    const auto edges = kruskal.makeMinSpanningTree();
     const auto end = std::chrono::high_resolution_clock::now();
     showDuration(begin, end);
 

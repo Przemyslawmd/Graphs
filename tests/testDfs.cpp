@@ -16,7 +16,7 @@
 class DFSTest : public GraphTest {};
 
 
-TEST_F(DFSTest, 1)
+TEST_F(DFSTest, FirstTest)
 {
     Graph graph{ false, false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_FiveNodes);
@@ -48,7 +48,6 @@ TEST_F(DFSTest, ThirdTest)
     GraphFactory::createGraph(graph, GraphType::Unweighted_FourteenNodes);
 
     const auto begin = std::chrono::high_resolution_clock::now();
-    std::clock_t c_start = std::clock();
     DFS dfs{ graph };
     dfs.traverseGraph();
 

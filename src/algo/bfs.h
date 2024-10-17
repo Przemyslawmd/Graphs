@@ -20,7 +20,6 @@ public:
     BFS& operator=(const BFS&) = delete;
     BFS& operator=(BFS&&) = delete;
 
-
     void traverseGraph();
 
 private:

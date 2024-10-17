@@ -15,7 +15,6 @@ public:
     DFS& operator=(const DFS&) = delete;
     DFS& operator=(DFS&&) = delete;
 
-
     void traverseGraph();
 
 private:

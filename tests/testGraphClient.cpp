@@ -22,7 +22,7 @@ TEST(TestClient, FindShortestPath)
     client.addEdgesWeighted('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
     client.addEdgesWeighted('f', {{ 'c', 6 }});
 
-    std::unique_ptr<std::vector<char>> path = client.findShortestPath('a', 'b');
+    auto path = client.findShortestPath('a', 'b');
 
     ASSERT_EQ(path->size(), 3);
     ASSERT_EQ(path->at(0), 'a');
