@@ -15,7 +15,7 @@
 class Graph
 {
 public:
-    
+
     Graph(bool isDirected = true, bool isWeighted = true);
     Graph(const Graph&) = delete;
     Graph& operator=(Graph&) = delete;

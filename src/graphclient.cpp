@@ -33,8 +33,9 @@ void GraphClient::addEdgesWeighted(char srcKey, const std::vector<std::tuple<cha
 
 std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char dst)
 {
-    const auto nodesList = std::make_unique<std::list<char>>();
-    nodesList->push_front(dst);
+    std::list<char> nodesList;
+    nodesList.push_front(dst);
+
     Dijkstra dijkstra{ *(graph.get()) };
     dijkstra.traverseGraph(src);
     const std::map<char, Route>& routes = dijkstra.getRoutes();
@@ -42,10 +43,10 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
     std::optional<char> predecessor;
     predecessor = routes.at(dst).predecessor;
     while (predecessor != std::nullopt) {
-        nodesList->push_front(predecessor.value());
+        nodesList.push_front(predecessor.value());
         predecessor = routes.at(predecessor.value()).predecessor;
     }
-    return std::make_unique<std::vector<char>>(nodesList->begin(), nodesList->end());
+    return std::make_unique<std::vector<char>>(nodesList.begin(), nodesList.end());
 }
 
 
@@ -56,9 +57,8 @@ std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpannin
     auto edgesTuple  = std::make_unique<std::vector<std::tuple<char, char>>>();
 
     for (const Edge& edge : *edges) {
-        edgesTuple->push_back(std::tuple<char, char>{ edge.src, edge.dst });
+        edgesTuple->emplace_back(edge.src, edge.dst);
     }
-
     return edgesTuple;
 }
 
