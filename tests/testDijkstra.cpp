@@ -30,7 +30,7 @@ protected:
 
 TEST_F(DijkstraTest, FirstTest)
 {
-    Graph graph{ false, true };
+    Graph graph{ false };
 
     graph.addEdgesWeighted('a', {{ 'b', 1 }, { 'd', 3 }});
     graph.addEdgesWeighted('b', {{ 'c', 5 }, { 'd', 2 }});
@@ -88,7 +88,7 @@ TEST_F(DijkstraTest, SecondTest)
 
 TEST_F(DijkstraTest, ThirdTest)
 {
-    Graph graph{ true, true };
+    Graph graph{ true };
     GraphFactory::createGraph(graph, GraphType::Weighted_EightNodes);
 
     Dijkstra dijkstra{ graph };
@@ -111,7 +111,7 @@ TEST_F(DijkstraTest, ThirdTest)
 
 TEST_F(DijkstraTest, FourthTest)
 {
-    Graph graph{ true, true };
+    Graph graph{ true };
     GraphFactory::createGraph(graph, GraphType::Weighted_TwelveNodes);
 
     Dijkstra dijkstra{ graph };

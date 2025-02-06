@@ -9,7 +9,7 @@ DFS::DFS(Graph& graph) : graph(graph) {}
 
 void DFS::traverseGraph()
 {
-    graph.setAllNodesAsNotVisited();
+    graph.setAllVisitedFlags(false);
     const auto& adjacency = graph.getAdjacency();
     char initialKey = adjacency.begin()->first;
     processNode(initialKey);

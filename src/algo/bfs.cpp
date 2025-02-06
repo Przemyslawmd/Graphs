@@ -9,7 +9,7 @@ BFS::BFS(Graph& graph) : graph(graph) {}
 
 void BFS::traverseGraph()
 {
-    graph.setAllNodesAsNotVisited();
+    graph.setAllVisitedFlags(false);
     const auto& adjacency = graph.getAdjacency();
     nodesQueue.push(adjacency.begin()->first);
 

@@ -29,14 +29,14 @@ protected:
 
 TEST_F(KruskalTest, FiveNodes_Directional)
 {
-    Graph graph{ true, true } ;
+    Graph graph{ true } ;
     graph.addNodes({ 'a', 'b', 'c', 'd', 'e', });
 
     graph.addEdgesWeighted('a', {{ 'b', 1 }, { 'c', 7 }});
     graph.addEdgesWeighted('b', {{ 'a', 1 }, { 'c', 5 }, { 'd', 4 }});
     graph.addEdgesWeighted('c', {{ 'a', 7 }, { 'e', 6 }});
     graph.addEdgesWeighted('d', {{ 'e', 2 }, { 'b', 4 }});
-    graph.addEdgesWeighted('e', {{ 'b', 3 } });
+    graph.addEdgesWeighted('e', {{ 'b', 3 }});
 
     const auto begin = std::chrono::high_resolution_clock::now();
     Kruskal kruskal{ graph };
@@ -54,7 +54,7 @@ TEST_F(KruskalTest, FiveNodes_Directional)
 
 TEST_F(KruskalTest, NineNodes_Nodirectional)
 {
-    Graph graph{ false, true };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Weighted_NineNodes_Nondirectorial);
 
     const auto begin = std::chrono::high_resolution_clock::now();
@@ -77,7 +77,7 @@ TEST_F(KruskalTest, NineNodes_Nodirectional)
 
 TEST_F(KruskalTest, TenNodes_Nodirectional)
 {
-    Graph graph{ false, true };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Weighted_TenNodes_Nondirectorial);
 
     const auto begin = std::chrono::high_resolution_clock::now();

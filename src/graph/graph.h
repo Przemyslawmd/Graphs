@@ -15,11 +15,11 @@
 class Graph
 {
 public:
-    
-    Graph(bool isDirected = true, bool isWeighted = true);
+
+    Graph(bool isDirected = true);
     Graph(const Graph&) = delete;
     Graph& operator=(Graph&) = delete;
-        
+
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);
     const std::vector<Node>& getNodes();
@@ -29,18 +29,17 @@ public:
 
     bool isNodeVisited(char key);
     void setNodeAsVisited(char key);
-    void setAllNodesAsNotVisited();
+    void setAllVisitedFlags(bool isVisited);
 
     const std::map<char, std::list<Edge>>& getAdjacency();
 
 private:
 
-    void addEdge(char srcKey, char dstKey, int weight);
+    void addEdge(char srcKey, char dstKey, size_t weight);
     void updateAdjacency(char srcKey, char dstKey, int weight);
 
     bool isNodeExist(char key);
 
-    const bool isWeighted;
     const bool isDirected;
 
     std::vector<Node> nodes;

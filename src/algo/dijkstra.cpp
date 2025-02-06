@@ -11,7 +11,7 @@ void Dijkstra::traverseGraph(char srcKey)
 {
     const auto& nodes = graph.getNodes();
     const auto& adjacency = graph.getAdjacency();
-    graph.setAllNodesAsNotVisited();
+    graph.setAllVisitedFlags(false);
 
     if (routes.empty() == false) {
         routes.clear(); 

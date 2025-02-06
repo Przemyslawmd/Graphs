@@ -17,7 +17,7 @@ class BFSTest : public GraphTest {};
 
 TEST_F(BFSTest, FirstTest)
 {
-    Graph graph{ false, false };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_FiveNodes);
     BFS bfs{ graph };
     bfs.traverseGraph();
@@ -29,7 +29,7 @@ TEST_F(BFSTest, FirstTest)
 
 TEST_F(BFSTest, SecondTest)
 {
-    Graph graph{ false, false };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_SevenNodes);
     BFS bfs{ graph };
     bfs.traverseGraph();
@@ -41,7 +41,7 @@ TEST_F(BFSTest, SecondTest)
 
 TEST_F(BFSTest, ThirdTest)
 {
-    Graph graph{ true, false };
+    Graph graph{ true };
     GraphFactory::createGraph(graph, GraphType::Unweighted_FourteenNodes);
 
     const auto begin = std::chrono::high_resolution_clock::now();
@@ -58,7 +58,7 @@ TEST_F(BFSTest, ThirdTest)
 
 TEST_F(BFSTest, FourthTest)
 {
-    Graph graph{ false, false };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_TwentyNodes);
 
     const auto begin = std::chrono::high_resolution_clock::now();

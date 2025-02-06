@@ -18,7 +18,7 @@ class DFSTest : public GraphTest {};
 
 TEST_F(DFSTest, 1)
 {
-    Graph graph{ false, false };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_FiveNodes);
 
     DFS dfs{ graph };
@@ -31,7 +31,7 @@ TEST_F(DFSTest, 1)
 
 TEST_F(DFSTest, SecondTest)
 {
-    Graph graph{ false, false };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_SevenNodes);
 
     DFS dfs{ graph };
@@ -44,7 +44,7 @@ TEST_F(DFSTest, SecondTest)
 
 TEST_F(DFSTest, ThirdTest)
 {
-    Graph graph{ true, false };
+    Graph graph{ true };
     GraphFactory::createGraph(graph, GraphType::Unweighted_FourteenNodes);
 
     const auto begin = std::chrono::high_resolution_clock::now();
@@ -62,7 +62,7 @@ TEST_F(DFSTest, ThirdTest)
 
 TEST_F(DFSTest, FourthTest)
 {
-    Graph graph{ false, false };
+    Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_TwentyNodes);
 
     auto begin = std::chrono::high_resolution_clock::now();

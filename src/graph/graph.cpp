@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-Graph::Graph(bool isDirected, bool isWeighted): isDirected(isDirected), isWeighted(isWeighted) {}
+Graph::Graph(bool isDirected): isDirected(isDirected) {}
 
 
 void Graph::addNode(char key)
@@ -18,7 +18,7 @@ void Graph::addNode(char key)
 
 void Graph::addNodes(const std::vector<char>& keys)
 {
-    for (auto key : keys) {
+    for (const auto key : keys) {
         addNode(key);
     }
 }
@@ -26,7 +26,7 @@ void Graph::addNodes(const std::vector<char>& keys)
 
 bool Graph::isNodeExist(char key)
 {
-    return std::all_of(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key != key; }) == false;
+    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; }) != nodes.end();
 }
 
 
@@ -44,10 +44,6 @@ const std::map<char, std::list<Edge>>& Graph::getAdjacency()
 
 void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 {
-    if (isWeighted) {
-        std::cout << "Graph is weighted, use addEdgesWeighted function" << std::endl;
-        return;
-    }
     for (char dstKey : dstKeysVec) {
         addEdge(srcKey, dstKey, 1);
     }
@@ -56,17 +52,13 @@ void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 
 void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges)
 {
-    if (isWeighted == false) {
-        std::cout << "Graph is not weighted, use addEdges function" << std::endl;
-        return;
-    }
     for (const auto& edge : edges) {
         addEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
     }
 }
 
 
-void Graph::addEdge(char srcKey, char dstKey, int weight)
+void Graph::addEdge(char srcKey, char dstKey, size_t weight)
 {
     if (isNodeExist(srcKey) == false) {
         nodes.emplace_back(srcKey);
@@ -111,10 +103,10 @@ void Graph::setNodeAsVisited(char key)
 }
 
 
-void Graph::setAllNodesAsNotVisited()
+void Graph::setAllVisitedFlags(bool isVisited)
 {
     for (auto& node : nodes) {
-        node.setVisited(false);
+        node.setVisited(isVisited);
     }
 }
 
