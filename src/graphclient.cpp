@@ -25,7 +25,7 @@ void GraphClient::addEdges(char srcKey, const std::vector<char>& dstKeys)
 }
 
 
-void GraphClient::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges)
+void GraphClient::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges)
 {
     graph->addEdgesWeighted(srcKey, edges);
 }

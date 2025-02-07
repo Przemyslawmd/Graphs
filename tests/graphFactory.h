@@ -75,49 +75,49 @@ public:
             graph.addEdges('u', { 'r' });
         }
         else if (type == GraphType::Weighted_EightNodes) {
-            graph.addEdgesWeighted('a', { { 'd', 3 }, { 'h', 5 }});
-            graph.addEdgesWeighted('b', { { 'c', 4 } });
-            graph.addEdgesWeighted('c', { { 'a', 4 } });
-            graph.addEdgesWeighted('d', { { 'b', 2 }, { 'e', 1 }, { 'f', 8 } });
-            graph.addEdgesWeighted('e', { { 'c', 5 } });
-            graph.addEdgesWeighted('f', { { 'e', 2 }, { 'h', 2 } });
-            graph.addEdgesWeighted('g', { { 'e', 3 } });
-            graph.addEdgesWeighted('h', { { 'g', 6 } });
+            graph.addEdgesWeighted('a', {{ 'd', 3 }, { 'h', 5 }});
+            graph.addEdgesWeighted('b', {{ 'c', 4 } });
+            graph.addEdgesWeighted('c', {{ 'a', 4 } });
+            graph.addEdgesWeighted('d', {{ 'b', 2 }, { 'e', 1 }, { 'f', 8 }});
+            graph.addEdgesWeighted('e', {{ 'c', 5 } });
+            graph.addEdgesWeighted('f', {{ 'e', 2 }, { 'h', 2 } });
+            graph.addEdgesWeighted('g', {{ 'e', 3 } });
+            graph.addEdgesWeighted('h', {{ 'g', 6 } });
         }
         else if (type == GraphType::Weighted_NineNodes_Nondirectorial) {
-            graph.addEdgesWeighted('a', { { 'b', 4 }, { 'h', 8 } });
-            graph.addEdgesWeighted('b', { { 'c', 9 }, { 'h', 11 } });
-            graph.addEdgesWeighted('c', { { 'd', 7 }, { 'f', 4 },  { 'i', 2 } });
-            graph.addEdgesWeighted('d', { { 'e', 9 }, { 'f', 14 } });
-            graph.addEdgesWeighted('e', { { 'f', 10 } });
-            graph.addEdgesWeighted('f', { { 'g', 2 } });
-            graph.addEdgesWeighted('g', { { 'h', 1 }, {'i', 6 } });
-            graph.addEdgesWeighted('h', { { 'i', 7 } });
+            graph.addEdgesWeighted('a', {{ 'b', 4 }, { 'h', 8 }});
+            graph.addEdgesWeighted('b', {{ 'c', 9 }, { 'h', 11 }});
+            graph.addEdgesWeighted('c', {{ 'd', 7 }, { 'f', 4 },  { 'i', 2 }});
+            graph.addEdgesWeighted('d', {{ 'e', 9 }, { 'f', 14 }});
+            graph.addEdgesWeighted('e', {{ 'f', 10 } });
+            graph.addEdgesWeighted('f', {{ 'g', 2 } });
+            graph.addEdgesWeighted('g', {{ 'h', 1 }, {'i', 6 }});
+            graph.addEdgesWeighted('h', {{ 'i', 7 } });
         }
         else if (type == GraphType::Weighted_TenNodes_Nondirectorial) {
-            graph.addEdgesWeighted('a', { { 'b', 3 }, { 'f', 2 } });
-            graph.addEdgesWeighted('b', { { 'c', 17 }, { 'd', 16 } });
-            graph.addEdgesWeighted('c', { { 'd', 8 }, { 'i', 18 } });
-            graph.addEdgesWeighted('d', { { 'e', 11 }, { 'i', 4 } });
-            graph.addEdgesWeighted('e', { { 'f', 1 }, { 'g', 6 }, { 'h', 5 }, { 'i', 10 } });
-            graph.addEdgesWeighted('f', { { 'g', 7 } });
-            graph.addEdgesWeighted('g', { { 'h', 15 } });
-            graph.addEdgesWeighted('h', { { 'i', 12 }, { 'j', 13 } });
-            graph.addEdgesWeighted('i', { { 'j', 9 } });
+            graph.addEdgesWeighted('a', {{ 'b', 3 }, { 'f', 2 }});
+            graph.addEdgesWeighted('b', {{ 'c', 17 }, { 'd', 16 }});
+            graph.addEdgesWeighted('c', {{ 'd', 8 }, { 'i', 18 }});
+            graph.addEdgesWeighted('d', {{ 'e', 11 }, { 'i', 4 }});
+            graph.addEdgesWeighted('e', {{ 'f', 1 }, { 'g', 6 }, { 'h', 5 }, { 'i', 10 }});
+            graph.addEdgesWeighted('f', {{ 'g', 7 }});
+            graph.addEdgesWeighted('g', {{ 'h', 15 }});
+            graph.addEdgesWeighted('h', {{ 'i', 12 }, { 'j', 13 }});
+            graph.addEdgesWeighted('i', {{ 'j', 9 }});
         }
         else if (type == GraphType::Weighted_TwelveNodes) {
-            graph.addEdgesWeighted('a', { { 'd', 3 }, { 'h', 5 } });
-            graph.addEdgesWeighted('b', { { 'c', 4 }, { 'i', 1 } });
-            graph.addEdgesWeighted('c', { { 'a', 4 }, { 'l', 5 } });
-            graph.addEdgesWeighted('d', { { 'b', 2 }, { 'e', 1 }, { 'f', 8 } });
-            graph.addEdgesWeighted('e', { { 'c', 5 }, { 'j', 7 } });
-            graph.addEdgesWeighted('f', { { 'e', 2 }, { 'h', 2 }, { 'i', 7 }, { 'k', 10 } });
-            graph.addEdgesWeighted('g', { { 'e', 3 } });
-            graph.addEdgesWeighted('h', { { 'g', 6 }, { 'l', 4 }});
-            graph.addEdgesWeighted('i', { { 'k', 6 } });
-            graph.addEdgesWeighted('j', { { 'c', 8 } });
-            graph.addEdgesWeighted('k', { { 'g', 3 }, { 'j', 5 } });
-            graph.addEdgesWeighted('l', { { 'g', 2 }, { 'e', 5 }, {'f', 12 } });
+            graph.addEdgesWeighted('a', {{ 'd', 3 }, { 'h', 5 }});
+            graph.addEdgesWeighted('b', {{ 'c', 4 }, { 'i', 1 }});
+            graph.addEdgesWeighted('c', {{ 'a', 4 }, { 'l', 5 }});
+            graph.addEdgesWeighted('d', {{ 'b', 2 }, { 'e', 1 }, { 'f', 8 }});
+            graph.addEdgesWeighted('e', {{ 'c', 5 }, { 'j', 7 }});
+            graph.addEdgesWeighted('f', {{ 'e', 2 }, { 'h', 2 }, { 'i', 7 }, { 'k', 10 }});
+            graph.addEdgesWeighted('g', {{ 'e', 3 }});
+            graph.addEdgesWeighted('h', {{ 'g', 6 }, { 'l', 4 }});
+            graph.addEdgesWeighted('i', {{ 'k', 6 }});
+            graph.addEdgesWeighted('j', {{ 'c', 8 }});
+            graph.addEdgesWeighted('k', {{ 'g', 3 }, { 'j', 5 }});
+            graph.addEdgesWeighted('l', {{ 'g', 2 }, { 'e', 5 }, {'f', 12 }});
         }
     }
 };

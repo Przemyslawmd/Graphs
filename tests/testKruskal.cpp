@@ -19,7 +19,7 @@ class KruskalTest : public GraphTest
 {
 protected:
 
-    bool checkEdge(std::vector<Edge>* edges, char src, char dst, int weight)
+    bool checkEdge(std::vector<Edge>* edges, char src, char dst, size_t weight)
     {
         const Edge edgeToCheck{ src, dst, weight };
         return std::any_of(edges->begin(), edges->end(), [&edgeToCheck](auto& edge) { return edge == edgeToCheck; });

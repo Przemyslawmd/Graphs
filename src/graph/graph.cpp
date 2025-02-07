@@ -50,7 +50,7 @@ void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
 }
 
 
-void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges)
+void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges)
 {
     for (const auto& edge : edges) {
         addEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
@@ -74,10 +74,10 @@ void Graph::addEdge(char srcKey, char dstKey, size_t weight)
 }
 
 
-void Graph::updateAdjacency(char srcKey, char dstKey, int weight)
+void Graph::updateAdjacency(char srcKey, char dstKey, size_t weight)
 {
     if (adjacency.count(srcKey) != 1) {
-        adjacency.insert({ srcKey, { Edge{ srcKey, dstKey, weight }}});
+        adjacency.insert({ srcKey, {{ srcKey, dstKey, weight }}});
         return;
     }
 

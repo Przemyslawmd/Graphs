@@ -25,7 +25,7 @@ public:
     const std::vector<Node>& getNodes();
 
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
-    void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges);
+    void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges);
 
     bool isNodeVisited(char key);
     void setNodeAsVisited(char key);
@@ -35,8 +35,8 @@ public:
 
 private:
 
-    void addEdge(char srcKey, char dstKey, size_t weight);
-    void updateAdjacency(char srcKey, char dstKey, int weight);
+    void addEdge(char srcKey, char dstKey, size_t  weight);
+    void updateAdjacency(char srcKey, char dstKey, size_t weight);
 
     bool isNodeExist(char key);
 

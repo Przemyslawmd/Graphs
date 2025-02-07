@@ -18,7 +18,7 @@ public:
     void addNodes(const std::vector<char>& keys);
 
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
-    void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, int>>& edges);
+    void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges);
 
     std::unique_ptr<std::vector<char>> findShortestPath(char src, char dst);
     std::unique_ptr<std::vector<std::tuple<char, char>>> findMinSpanningTree();
