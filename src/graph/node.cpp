@@ -2,16 +2,16 @@
 #include "node.h"
 
 
-Node::Node(char key) : key(key), visited(false) {}
+Graphs::Node::Node(char key) : key(key), visited(false) {}
 
 
-bool Node::isVisited() const
+bool Graphs::Node::isVisited() const
 {
     return visited;
 }
 
 
-void Node::setVisited(bool isVisited)
+void Graphs::Node::setVisited(bool isVisited)
 {
     visited = isVisited;
 }
