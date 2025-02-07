@@ -17,3 +17,5 @@ add_library(
     graphclient.cpp
 )
 
+target_include_directories(GraphsLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
