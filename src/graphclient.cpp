@@ -18,6 +18,16 @@ void GraphClient::addNodes(const std::vector<char>& keys)
     graph->addNodes(keys);
 }
 
+void addEdge(char srcKey, char dstKeys)
+{
+
+}
+
+void addEdgeWeighted(char srcKey, char dstKeys, size_t weight)
+{
+
+}
+
 
 void GraphClient::addEdges(char srcKey, const std::vector<char>& dstKeys)
 {

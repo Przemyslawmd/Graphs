@@ -42,23 +42,35 @@ const std::map<char, std::list<Edge>>& Graph::getAdjacency()
 }
 
 
-void Graph::addEdges(char srcKey, const std::vector<char>& dstKeysVec)
+void Graph::addEdge(char srcKey, char dstKey)
 {
-    for (char dstKey : dstKeysVec) {
-        addEdge(srcKey, dstKey, 1);
+    createEdge(srcKey, dstKey, 1);
+}
+
+
+void Graph::addEdges(char srcKey, const std::vector<char>& dstKeys)
+{
+    for (char dstKey : dstKeys) {
+        createEdge(srcKey, dstKey, 1);
     }
+}
+
+
+void Graph::addEdgeWeighted(char srcKey, char dstKey, size_t weight)
+{
+    createEdge(srcKey, dstKey, weight);
 }
 
 
 void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges)
 {
     for (const auto& edge : edges) {
-        addEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
+        createEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
     }
 }
 
 
-void Graph::addEdge(char srcKey, char dstKey, size_t weight)
+void Graph::createEdge(char srcKey, char dstKey, size_t weight)
 {
     if (isNodeExist(srcKey) == false) {
         nodes.emplace_back(srcKey);
