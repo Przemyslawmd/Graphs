@@ -19,7 +19,7 @@ class GraphFactory
 public:
 
     static void createGraph(Graph& graph, GraphType type)
-    {   
+    {
         if (type == GraphType::Unweighted_FiveNodes) {
             graph.addEdges('a', { 'b' });
             graph.addEdges('b', { 'a', 'c' });

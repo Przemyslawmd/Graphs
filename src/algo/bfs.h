@@ -7,6 +7,7 @@
 
 #include <list>
 #include <map>
+#include <memory>
 #include <queue>
 
 
@@ -20,8 +21,7 @@ public:
     BFS& operator=(const BFS&) = delete;
     BFS& operator=(BFS&&) = delete;
 
-
-    void traverseGraph();
+    std::unique_ptr<std::vector<char>> traverseGraph(char key);
 
 private:
 
@@ -29,6 +29,7 @@ private:
 
     Graph& graph;
     std::queue<char> nodesQueue;
+    std::unique_ptr<std::vector<char>> sequence;
 };
 
 #endif
