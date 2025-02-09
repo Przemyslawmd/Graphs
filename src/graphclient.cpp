@@ -1,5 +1,7 @@
 
 #include "graphclient.h"
+#include "algo/bfs.h"
+#include "algo/dfs.h"
 #include "algo/dijkstra.h"
 #include "algo/kruskal.h"
 
@@ -40,6 +42,20 @@ void GraphClient::addEdges(char src, const std::vector<char>& dst)
 void GraphClient::addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges)
 {
     graph->addEdgesWeighted(src, edges);
+}
+
+
+std::unique_ptr<std::vector<char>> GraphClient::traverseBFS(char src)
+{
+    BFS bfs{ *graph };
+    return bfs.traverseGraph(src);
+}
+
+
+std::unique_ptr<std::vector<char>> GraphClient::traverseDFS(char src)
+{
+    DFS dfs{ *graph };
+    return dfs.traverseGraph(src);
 }
 
 

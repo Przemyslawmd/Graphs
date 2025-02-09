@@ -7,20 +7,11 @@
 #include <gtest/gtest.h>
 
 #include "timeType.h"
-#include "../src/graph/node.h"
 
 
 class GraphTest : public testing::Test
 {
 protected:
-
-    void checkNodes(const std::vector<Node>& nodes, int expectedNodesCount)
-    {
-        ASSERT_EQ(nodes.size(), expectedNodesCount);
-        for (auto& node : nodes) {
-            EXPECT_TRUE(node.isVisited());
-        }
-    }
 
     void showDuration(const TIME_TYPE start, const TIME_TYPE end)
     {

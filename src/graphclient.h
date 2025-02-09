@@ -23,6 +23,9 @@ public:
     void addEdges(char src, const std::vector<char>& dst);
     void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
 
+    std::unique_ptr<std::vector<char>> traverseBFS(char src);
+    std::unique_ptr<std::vector<char>> traverseDFS(char src);
+
     std::unique_ptr<std::vector<char>> findShortestPath(char src, char dst);
     std::unique_ptr<std::vector<std::tuple<char, char>>> findMinSpanningTree();
 
