@@ -2,7 +2,6 @@
 #include "graph.h"
 
 #include <algorithm>
-#include <iostream>
 
 
 Graph::Graph(bool isDirected): isDirected(isDirected) {}
@@ -104,14 +103,14 @@ void Graph::updateAdjacency(char srcKey, char dstKey, size_t weight)
 bool Graph::isNodeVisited(char key)
 {
     const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
-    return (*it).isVisited();
+    return it->isVisited();
 }
 
 
 void Graph::setNodeAsVisited(char key)
 {
     const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
-    (*it).setVisited(true);
+    it->setVisited(true);
 }
 
 

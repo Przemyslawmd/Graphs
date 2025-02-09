@@ -96,3 +96,23 @@ TEST_F(DFSTest, FourthTest)
     ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
 }
 
+
+// Graph with a node not being a source node
+TEST_F(DFSTest, FifthTest)
+{
+    Graph graph{ true };
+    graph.addEdge('a', 'b');
+    graph.addEdge('b', 'c');
+    graph.addEdge('c', 'd');
+    DFS bfs{ graph };
+
+    auto sequence = bfs.traverseGraph('a');
+    size_t index = 0;
+    for (const char key : { 'a', 'b', 'c', 'd' }) {
+        ASSERT_EQ(sequence->at(index++), key);
+    }
+
+    const auto& nodes = graph.getNodes();
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+}
+

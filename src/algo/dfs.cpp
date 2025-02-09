@@ -21,6 +21,10 @@ void DFS::processNode(char key)
     graph.setNodeAsVisited(key);
     sequence->push_back(key);
 
+    if (graph.getAdjacency().contains(key) == false) {
+        return;
+    }
+
     const auto& adjacentNodes = graph.getAdjacency().at(key);
     for (const auto& edge : adjacentNodes) {
         if (graph.isNodeVisited(edge.dst) == false) {

@@ -28,6 +28,10 @@ void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
     graph.setNodeAsVisited(key);
     sequence->push_back(key);
 
+    if (adjacency.contains(key) == false) {
+        return;
+    }
+
     for (const auto& edge : adjacency.at(key)) {
         if (graph.isNodeVisited(edge.dst) == false) {
             nodesQueue.emplace(edge.dst);

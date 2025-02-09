@@ -83,7 +83,25 @@ TEST_F(BFSTest, FourthTest)
 
     size_t index = 0;
     for (const char key : { 'a', 'd', 'h','b', 'e', 'f', 'g', 'j', 'c', 'k', 'i', 'o', 'l', 'n', 'p', 'u', 'm', 'r', 's', 't' }) {
-        std::cout << sequence->at(index) << std::endl;
+        ASSERT_EQ(sequence->at(index++), key);
+    }
+
+    const auto& nodes = graph.getNodes();
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+}
+
+
+// Graph with a node not being a source node
+TEST_F(BFSTest, FifthTest)
+{
+    Graph graph{ true };
+    graph.addEdge('a', 'b');
+    graph.addEdge('b', 'c');
+    BFS bfs{ graph };
+
+    auto sequence = bfs.traverseGraph('a');
+    size_t index = 0;
+    for (const char key : { 'a', 'b', 'c' }) {
         ASSERT_EQ(sequence->at(index++), key);
     }
 
