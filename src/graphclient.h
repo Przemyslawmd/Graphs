@@ -12,16 +12,16 @@ class GraphClient
 {
 public:
 
-    GraphClient();
+    GraphClient(bool isDirected = true);
 
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);
 
-    void addEdge(char srcKey, char dstKeys);
-    void addEdgeWeighted(char srcKey, char dstKeys, size_t weight);
+    void addEdge(char src, char dst);
+    void addEdgeWeighted(char src, char dst, size_t weight);
 
-    void addEdges(char srcKey, const std::vector<char>& dstKeys);
-    void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges);
+    void addEdges(char src, const std::vector<char>& dst);
+    void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
 
     std::unique_ptr<std::vector<char>> findShortestPath(char src, char dst);
     std::unique_ptr<std::vector<std::tuple<char, char>>> findMinSpanningTree();

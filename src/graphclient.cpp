@@ -4,7 +4,7 @@
 #include "algo/kruskal.h"
 
 
-GraphClient::GraphClient() : graph(std::make_unique<Graph>()) {}
+GraphClient::GraphClient(bool isDirected) : graph(std::make_unique<Graph>(isDirected)) {}
 
 
 void GraphClient::addNode(char key)
@@ -18,26 +18,28 @@ void GraphClient::addNodes(const std::vector<char>& keys)
     graph->addNodes(keys);
 }
 
-void addEdge(char srcKey, char dstKeys)
+
+void GraphClient::addEdge(char src, char dst)
 {
-
-}
-
-void addEdgeWeighted(char srcKey, char dstKeys, size_t weight)
-{
-
+    graph->addEdge(src, dst);
 }
 
 
-void GraphClient::addEdges(char srcKey, const std::vector<char>& dstKeys)
+void GraphClient::addEdgeWeighted(char src, char dst, size_t weight)
 {
-    graph->addEdges(srcKey, dstKeys);
+    graph->addEdgeWeighted(src, dst, weight);
 }
 
 
-void GraphClient::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges)
+void GraphClient::addEdges(char src, const std::vector<char>& dst)
 {
-    graph->addEdgesWeighted(srcKey, edges);
+    graph->addEdges(src, dst);
+}
+
+
+void GraphClient::addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges)
+{
+    graph->addEdgesWeighted(src, edges);
 }
 
 
