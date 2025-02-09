@@ -1,24 +1,25 @@
 
 #include "dfs.h"
 
-#include <iterator>
+
+DFS::DFS(Graph& graph) : graph(graph) 
+{
+    sequence = std::make_unique<std::vector<char>>();
+}
 
 
-DFS::DFS(Graph& graph) : graph(graph) {}
-
-
-void DFS::traverseGraph()
+std::unique_ptr<std::vector<char>> DFS::traverseGraph(char key)
 {
     graph.setAllVisitedFlags(false);
-    const auto& adjacency = graph.getAdjacency();
-    char initialKey = adjacency.begin()->first;
-    processNode(initialKey);
+    processNode(key);
+    return std::move(sequence);
 }
 
 
 void DFS::processNode(char key)
 {
     graph.setNodeAsVisited(key);
+    sequence->push_back(key);
 
     const auto& adjacentNodes = graph.getAdjacency().at(key);
     for (const auto& edge : adjacentNodes) {
