@@ -9,10 +9,11 @@
 #include "baseTest.h"
 #include "graphFactory.h"
 #include "timeType.h"
-#include "../src/algo/kruskal.h"
-#include "../src/graph/edge.h"
-#include "../src/graph/node.h"
-#include "../src/graph/graph.h"
+
+#include "algo/kruskal.h"
+#include "graph/edge.h"
+#include "graph/node.h"
+#include "graph/graph.h"
 
 
 class KruskalTest : public GraphTest

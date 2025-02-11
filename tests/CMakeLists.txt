@@ -1,6 +1,6 @@
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-set(LIB_BUILD "../build/src")
+set(LIB_BUILD "../build/src/")
 
 include(FetchContent)
 FetchContent_Declare(

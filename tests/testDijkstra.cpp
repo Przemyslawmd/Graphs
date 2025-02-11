@@ -9,10 +9,11 @@
 #include "baseTest.h"
 #include "graphFactory.h"
 #include "timeType.h"
-#include "../src/algo/dijkstra.h"
-#include "../src/graph/edge.h"
-#include "../src/graph/node.h"
-#include "../src/graph/graph.h"
+
+#include "algo/dijkstra.h"
+#include "graph/edge.h"
+#include "graph/node.h"
+#include "graph/graph.h"
 
 
 class DijkstraTest : public GraphTest

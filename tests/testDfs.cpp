@@ -5,14 +5,14 @@
 #include <memory>
 #include <vector>
 
-
 #include <gtest/gtest.h>
 
 #include "baseTest.h"
 #include "graphFactory.h"
-#include "../src/algo/dfs.h"
-#include "../src/graph/node.h"
-#include "../src/graph/graph.h"
+
+#include "algo/dfs.h"
+#include "graph/node.h"
+#include "graph/graph.h"
 
 
 class DFSTest : public GraphTest {};
@@ -97,8 +97,7 @@ TEST_F(DFSTest, FourthTest)
 }
 
 
-// Graph with a node not being a source node
-TEST_F(DFSTest, FifthTest)
+TEST_F(DFSTest, NodeNotSource)
 {
     Graph graph{ true };
     graph.addEdge('a', 'b');

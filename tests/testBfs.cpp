@@ -5,11 +5,12 @@
 
 #include <gtest/gtest.h>
 
-#include "../src/algo/bfs.h"
-#include "../src/graph/node.h"
-#include "../src/graph/graph.h"
 #include "baseTest.h"
 #include "graphFactory.h"
+
+#include "graph/node.h"
+#include "graph/graph.h"
+#include "algo/bfs.h"
 
 
 class BFSTest : public GraphTest {};
@@ -91,8 +92,7 @@ TEST_F(BFSTest, FourthTest)
 }
 
 
-// Graph with a node not being a source node
-TEST_F(BFSTest, FifthTest)
+TEST_F(BFSTest, NodeNotSource)
 {
     Graph graph{ true };
     graph.addEdge('a', 'b');
