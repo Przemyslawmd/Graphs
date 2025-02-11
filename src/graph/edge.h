@@ -12,7 +12,7 @@ public:
     bool operator==(const Edge& edge);
 
     const char src;
-    const char dst;
+    char dst;
     const size_t weight;
 };
 

@@ -23,6 +23,20 @@ void Graph::addNodes(const std::vector<char>& keys)
 }
 
 
+void Graph::removeNode(char keyToRemove)
+{
+    std::erase_if(nodes, [keyToRemove](const auto& node) { return node.key == keyToRemove;});
+
+    if (adjacency.contains(keyToRemove)) {
+        adjacency.erase(keyToRemove);
+    }
+
+    for (auto& [key, value] : adjacency) {
+        value.remove_if([keyToRemove](const auto& edge) { return edge.dst == keyToRemove || edge.src == keyToRemove; });
+    }
+}
+
+
 bool Graph::isNodeExist(char key)
 {
     return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; }) != nodes.end();

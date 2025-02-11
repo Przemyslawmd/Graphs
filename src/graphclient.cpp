@@ -21,6 +21,12 @@ void GraphClient::addNodes(const std::vector<char>& keys)
 }
 
 
+void GraphClient::removeNode(char key)
+{
+    graph->removeNode(key);
+}
+
+
 void GraphClient::addEdge(char src, char dst)
 {
     graph->addEdge(src, dst);

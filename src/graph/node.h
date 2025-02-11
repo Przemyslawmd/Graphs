@@ -12,7 +12,7 @@ public:
     bool isVisited() const;
     void setVisited(bool isVisited);
 
-    const char key;
+    char key;
 
 private:
 

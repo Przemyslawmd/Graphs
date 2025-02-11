@@ -24,6 +24,8 @@ public:
     void addNodes(const std::vector<char>& keys);
     const std::vector<Node>& getNodes();
 
+    void removeNode(char);
+
     void addEdge(char srcKey, char dst);
     void addEdges(char srcKey, const std::vector<char>& dstKeys);
     void addEdgeWeighted(char srcKey, char dstKeys, size_t weight);
