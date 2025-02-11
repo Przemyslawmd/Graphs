@@ -6,7 +6,16 @@
 #include "algo/kruskal.h"
 
 
-GraphClient::GraphClient(bool isDirected) : graph(std::make_unique<Graph>(isDirected)) {}
+void GraphClient::initGraph(bool isDirected)
+{
+    graph = std::make_unique<Graph>(isDirected);;
+}
+
+
+void GraphClient::removeGraph()
+{
+    graph.reset();
+}
 
 
 void GraphClient::addNode(char key)

@@ -5,15 +5,15 @@
 
 #include <gtest/gtest.h>
 
-#include "../src/graphclient.h"
-#include "../src/graph/graph.h"
-#include "../src/graph/node.h"
-#include "../src/graphclient.h"
+#include "graphclient.h"
+#include "graph/graph.h"
+#include "graph/node.h"
 
 
 TEST(TestClient, FindShortestPath)
 {
     GraphClient client;
+    client.initGraph(true);
     client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     client.addEdgesWeighted('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
@@ -22,7 +22,7 @@ TEST(TestClient, FindShortestPath)
     client.addEdgesWeighted('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
     client.addEdgesWeighted('f', {{ 'c', 6 }});
 
-    std::unique_ptr<std::vector<char>> path = client.findShortestPath('a', 'b');
+    auto path = client.findShortestPath('a', 'b');
 
     ASSERT_EQ(path->size(), 3);
     ASSERT_EQ(path->at(0), 'a');
@@ -42,6 +42,7 @@ TEST(TestClient, FindShortestPath)
 TEST(TestClient, FindMinSpanningTree)
 {
     GraphClient client;
+    client.initGraph(true);
     client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     client.addEdgesWeighted('a', {{ 'b', 1 }, { 'c', 7 }});

@@ -4,15 +4,19 @@
 
 #include "graph/graph.h"
 
-#include <map>
+#include <memory>
 #include <tuple>
+#include <vector>
 
 
 class GraphClient
 {
 public:
 
-    GraphClient(bool isDirected = true);
+    GraphClient() = default;
+
+    void initGraph(bool isDirected);
+    void removeGraph();
 
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);
