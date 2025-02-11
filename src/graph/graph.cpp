@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-#include "../logs/logCollector.h"
+#include "logs/logCollector.h"
 
 
 Graph::Graph(bool isDirected): isDirected(isDirected) {}
@@ -31,7 +31,7 @@ void Graph::removeNode(char key)
         LogCollector::putError(Error::NODE_NOT_EXISTS);
         return;
     }
-    std::erase_if(nodes, [key](const auto& node) { return node.key == key;});
+    std::erase_if(nodes, [key](const auto& node) { return node.key == key; });
 
     if (adjacency.contains(key)) {
         adjacency.erase(key);
@@ -55,30 +55,30 @@ const std::map<char, std::list<Edge>>& Graph::getAdjacency()
 }
 
 
-void Graph::addEdge(char srcKey, char dstKey)
+void Graph::addEdge(char src, char dst)
 {
-    createEdge(srcKey, dstKey, 1);
+    createEdge(src, dst, 1);
 }
 
 
-void Graph::addEdges(char srcKey, const std::vector<char>& dstKeys)
+void Graph::addEdges(char src, const std::vector<char>& dstKeys)
 {
-    for (char dstKey : dstKeys) {
-        createEdge(srcKey, dstKey, 1);
+    for (char dst : dstKeys) {
+        createEdge(src, dst, 1);
     }
 }
 
 
-void Graph::addEdgeWeighted(char srcKey, char dstKey, size_t weight)
+void Graph::addEdgeWeighted(char src, char dst, size_t weight)
 {
-    createEdge(srcKey, dstKey, weight);
+    createEdge(src, dst, weight);
 }
 
 
-void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges)
+void Graph::addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges)
 {
     for (const auto& edge : edges) {
-        createEdge(srcKey, std::get<0>(edge), std::get<1>(edge));
+        createEdge(src, std::get<0>(edge), std::get<1>(edge));
     }
 }
 
@@ -116,33 +116,33 @@ void Graph::setAllVisitedFlags(bool isVisited)
 /**********************************************************************************************/
 
 
-void Graph::createEdge(char srcKey, char dstKey, size_t weight)
+void Graph::createEdge(char src, char dst, size_t weight)
 {
-    if (isNodeExist(srcKey) == false) {
-        nodes.emplace_back(srcKey);
+    if (isNodeExist(src) == false) {
+        nodes.emplace_back(src);
     }
-    if (isNodeExist(dstKey) == false) {
-        nodes.emplace_back(dstKey);
+    if (isNodeExist(dst) == false) {
+        nodes.emplace_back(dst);
     }
 
-    updateAdjacency(srcKey, dstKey, weight);
+    updateAdjacency(src, dst, weight);
     if (isDirected == false) {
-        updateAdjacency(dstKey, srcKey, weight);
+        updateAdjacency(dst, src, weight);
     } 
 }
 
 
-void Graph::updateAdjacency(char srcKey, char dstKey, size_t weight)
+void Graph::updateAdjacency(char src, char dst, size_t weight)
 {
-    if (adjacency.count(srcKey) != 1) {
-        adjacency.insert({ srcKey, {{ srcKey, dstKey, weight }}});
+    if (adjacency.count(src) != 1) {
+        adjacency.insert({ src, {{ src, dst, weight }}});
         return;
     }
 
-    auto& adjacentNodes = adjacency.at(srcKey);
-    auto it = std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dstKey](const auto& edge) { return edge.dst == dstKey; });
+    auto& adjacentNodes = adjacency.at(src);
+    auto it = std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dst](const auto& edge) { return edge.dst == dst; });
     if (it == adjacentNodes.end()) {
-        adjacentNodes.emplace_back( srcKey, dstKey, weight );
+        adjacentNodes.emplace_back( src, dst, weight );
     }
 }
 
