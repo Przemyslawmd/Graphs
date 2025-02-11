@@ -12,8 +12,7 @@ add_library(
     ${ALGO_DIR}dfs.cpp 
     ${ALGO_DIR}dijkstra.cpp 
     ${ALGO_DIR}kruskal.cpp
-    graphclient.cpp
-)
+    "graphclient.cpp")
 
 target_include_directories(GraphsLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+#include "../logs/logCollector.h"
+
 
 Graph::Graph(bool isDirected): isDirected(isDirected) {}
 
@@ -23,23 +25,21 @@ void Graph::addNodes(const std::vector<char>& keys)
 }
 
 
-void Graph::removeNode(char keyToRemove)
+void Graph::removeNode(char key)
 {
-    std::erase_if(nodes, [keyToRemove](const auto& node) { return node.key == keyToRemove;});
+    if (isNodeExist(key) == false) {
+        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        return;
+    }
+    std::erase_if(nodes, [key](const auto& node) { return node.key == key;});
 
-    if (adjacency.contains(keyToRemove)) {
-        adjacency.erase(keyToRemove);
+    if (adjacency.contains(key)) {
+        adjacency.erase(key);
     }
 
-    for (auto& [key, value] : adjacency) {
-        value.remove_if([keyToRemove](const auto& edge) { return edge.dst == keyToRemove || edge.src == keyToRemove; });
+    for (auto& [_, value] : adjacency) {
+        value.remove_if([key](const auto& edge) { return edge.dst == key; });
     }
-}
-
-
-bool Graph::isNodeExist(char key)
-{
-    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; }) != nodes.end();
 }
 
 
@@ -83,6 +83,39 @@ void Graph::addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, siz
 }
 
 
+bool Graph::isNodeVisited(char key)
+{
+    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    if (it == nodes.end()) {
+        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        return false;
+    }
+    return it->isVisited();
+}
+
+
+void Graph::setNodeAsVisited(char key)
+{
+    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    if (it == nodes.end()) {
+        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        return;
+    }
+    it->setVisited(true);
+}
+
+
+void Graph::setAllVisitedFlags(bool isVisited)
+{
+    for (auto& node : nodes) {
+        node.setVisited(isVisited);
+    }
+}
+
+/************************************** PRIVATE ***********************************************/
+/**********************************************************************************************/
+
+
 void Graph::createEdge(char srcKey, char dstKey, size_t weight)
 {
     if (isNodeExist(srcKey) == false) {
@@ -114,24 +147,8 @@ void Graph::updateAdjacency(char srcKey, char dstKey, size_t weight)
 }
 
 
-bool Graph::isNodeVisited(char key)
+bool Graph::isNodeExist(char key)
 {
-    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
-    return it->isVisited();
-}
-
-
-void Graph::setNodeAsVisited(char key)
-{
-    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
-    it->setVisited(true);
-}
-
-
-void Graph::setAllVisitedFlags(bool isVisited)
-{
-    for (auto& node : nodes) {
-        node.setVisited(isVisited);
-    }
+    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; }) != nodes.end();
 }
 
