@@ -12,8 +12,7 @@
 
 TEST(TestClient, FindShortestPath)
 {
-    GraphClient client;
-    client.initGraph(true);
+    GraphClient client{ true };
     client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     client.addEdgesWeighted('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
@@ -41,8 +40,7 @@ TEST(TestClient, FindShortestPath)
 
 TEST(TestClient, FindMinSpanningTree)
 {
-    GraphClient client;
-    client.initGraph(true);
+    GraphClient client{ true };
     client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
 
     client.addEdgesWeighted('a', {{ 'b', 1 }, { 'c', 7 }});

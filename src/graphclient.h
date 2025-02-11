@@ -13,10 +13,9 @@ class GraphClient
 {
 public:
 
-    GraphClient() = default;
+    GraphClient(bool isDirected);
 
-    void initGraph(bool isDirected);
-    void removeGraph();
+    void resetGraph(bool isDirected);
 
     void addNode(char key);
     void addNodes(const std::vector<char>& keys);

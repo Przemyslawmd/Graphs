@@ -6,15 +6,12 @@
 #include "algo/kruskal.h"
 
 
-void GraphClient::initGraph(bool isDirected)
-{
-    graph = std::make_unique<Graph>(isDirected);;
-}
+GraphClient::GraphClient(bool isDirected) : graph(std::make_unique<Graph>(isDirected)) {}
 
 
-void GraphClient::removeGraph()
+void GraphClient::resetGraph(bool isDirected)
 {
-    graph.reset();
+    graph.reset(std::make_unique<Graph>(isDirected).get());
 }
 
 
