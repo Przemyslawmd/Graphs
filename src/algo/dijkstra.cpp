@@ -40,7 +40,7 @@ void Dijkstra::processRoutesTable(const std::map<char, std::list<Edge>>& adjacen
     for (const auto& edge : adjacentNodes) {
         int currentWeight = routes[key].distance + edge.weight;
         if (graph.isNodeVisited(edge.dst) == false && routes[edge.dst].distance > currentWeight) {
-            routes[edge.dst] = route{ currentWeight, std::optional<char>{ key }};
+            routes[edge.dst] = { currentWeight, std::optional<char>{ key }};
         }
     }   
 }

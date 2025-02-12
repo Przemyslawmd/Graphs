@@ -2,8 +2,8 @@
 #ifndef GRAPHS_KRUSKAL_H
 #define GRAPHS_KRUSKAL_H
 
-#include "../graph/graph.h"
-#include "../graph/edge.h"
+#include "graph/graph.h"
+#include "graph/edge.h"
 
 #include <list>
 #include <memory>
@@ -12,9 +12,9 @@
 
 struct PartialTree {
 
-    PartialTree(char key, int treeNumber) : key(key), treeNumber(treeNumber) {}
+    PartialTree(char key, size_t tree) : key(key), tree(tree) {}
     char key;
-    int treeNumber;
+    size_t tree;
 };
 
 
@@ -32,8 +32,8 @@ public:
 
 private:
 
-    std::list<Edge> sortEdges();
-    std::vector<PartialTree> initializePartialTrees();
+    std::unique_ptr<std::list<Edge>> sortEdges();
+    std::unique_ptr<std::vector<PartialTree>> initPartialTrees();
 
     Graph& graph;
 };
