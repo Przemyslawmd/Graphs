@@ -73,32 +73,32 @@ std::unique_ptr<std::vector<char>> GraphClient::traverseDFS(char src)
 
 std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char dst)
 {
-    const auto nodesList = std::make_unique<std::list<char>>();
-    nodesList->push_front(dst);
-    Dijkstra dijkstra{ *(graph.get()) };
+    const auto nodes = std::make_unique<std::list<char>>();
+    nodes->push_front(dst);
+    Dijkstra dijkstra{ *graph };
     dijkstra.traverseGraph(src);
-    const std::map<char, route>& routes = dijkstra.getRoutes();
+    const auto& routes = dijkstra.getRoutes();
 
     std::optional<char> predecessor;
     predecessor = routes.at(dst).predecessor;
     while (predecessor != std::nullopt) {
-        nodesList->push_front(predecessor.value());
+        nodes->push_front(predecessor.value());
         predecessor = routes.at(predecessor.value()).predecessor;
     }
-    return std::make_unique<std::vector<char>>(nodesList->begin(), nodesList->end());
+    return std::make_unique<std::vector<char>>(nodes->begin(), nodes->end());
 }
 
 
 std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpanningTree()
 {
-    Kruskal kruskal{ *(graph.get()) };
-    auto edges = kruskal.makeMinSpanningTree();
-    auto edgesTuple  = std::make_unique<std::vector<std::tuple<char, char>>>();
+    Kruskal kruskal{ *graph };
+    const auto edges = kruskal.makeMinSpanningTree();
+    auto edgesAsChars = std::make_unique<std::vector<std::tuple<char, char>>>();
 
     for (const Edge& edge : *edges) {
-        edgesTuple->push_back(std::tuple<char, char>{ edge.src, edge.dst });
+        edgesAsChars->emplace_back(edge.src, edge.dst);
     }
 
-    return edgesTuple;
+    return edgesAsChars;
 }
 

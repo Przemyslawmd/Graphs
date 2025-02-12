@@ -10,7 +10,7 @@
 #include "graph/node.h"
 
 
-TEST(TestClient, FindShortestPath)
+TEST(TestClient, FindShortestPath_Directed)
 {
     GraphClient client{ true };
     client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
@@ -28,13 +28,39 @@ TEST(TestClient, FindShortestPath)
     ASSERT_EQ(path->at(1), 'e');
     ASSERT_EQ(path->at(2), 'b');
 
-    path = client.findShortestPath('e', 'd');
+    path = std::move(client.findShortestPath('e', 'd'));
 
     ASSERT_EQ(path->size(), 4);
     ASSERT_EQ(path->at(0), 'e');
     ASSERT_EQ(path->at(1), 'b');
     ASSERT_EQ(path->at(2), 'a');
     ASSERT_EQ(path->at(3), 'd');
+}
+
+
+TEST(TestClient, FindShortestPath_Undirected)
+{
+    GraphClient client{ false };
+    client.addNodes({ 'a', 'b', 'c', 'd', 'e', 'f' });
+
+    client.addEdgesWeighted('a', {{ 'd', 5 }, { 'e', 2 }, { 'f', 8 }});
+    client.addEdgesWeighted('b', {{ 'a', 4 }, { 'c', 5 }});
+    client.addEdgesWeighted('d', {{ 'e', 2 }});
+    client.addEdgesWeighted('e', {{ 'b', 4 }, { 'c', 2 }, { 'f', 1 }});
+    client.addEdgesWeighted('f', {{ 'c', 6 }});
+
+    auto path = client.findShortestPath('a', 'b');
+
+    ASSERT_EQ(path->size(), 2);
+    ASSERT_EQ(path->at(0), 'a');
+    ASSERT_EQ(path->at(1), 'b');
+
+    path = std::move(client.findShortestPath('a', 'c'));
+
+    ASSERT_EQ(path->size(), 3);
+    ASSERT_EQ(path->at(0), 'a');
+    ASSERT_EQ(path->at(1), 'e');
+    ASSERT_EQ(path->at(2), 'c');
 }
 
 
