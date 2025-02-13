@@ -1,5 +1,5 @@
 
-#include "../src/graph/graph.h"
+#include "graph/graph.h"
 
 
 enum class GraphType {
