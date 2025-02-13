@@ -11,7 +11,8 @@ GraphClient::GraphClient(bool isDirected) : graph(std::make_unique<Graph>(isDire
 
 void GraphClient::resetGraph(bool isDirected)
 {
-    graph.reset(std::make_unique<Graph>(isDirected).get());
+    graph.reset();
+    graph = std::make_unique<Graph>(isDirected);
 }
 
 
