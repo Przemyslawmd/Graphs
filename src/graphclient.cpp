@@ -82,7 +82,7 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
     dijkstra.traverseGraph(src);
     const auto& routes = dijkstra.getRoutes();
 
-    if (routes.contains(dst) == false) {
+    if (routes.at(dst).distance == INT_MAX) {
         LogCollector::putError(Error::ROUTE_NOT_EXISTS);
         return nullptr;
     }
