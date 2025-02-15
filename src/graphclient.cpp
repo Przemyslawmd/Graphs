@@ -1,9 +1,11 @@
 
 #include "graphclient.h"
+
 #include "algo/bfs.h"
 #include "algo/dfs.h"
 #include "algo/dijkstra.h"
 #include "algo/kruskal.h"
+#include "logs/logCollector.h"
 
 
 GraphClient::GraphClient(bool isDirected) : graph(std::make_unique<Graph>(isDirected)) {}
@@ -79,6 +81,11 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
     Dijkstra dijkstra{ *graph };
     dijkstra.traverseGraph(src);
     const auto& routes = dijkstra.getRoutes();
+
+    if (routes.contains(dst) == false) {
+        LogCollector::putError(Error::ROUTE_NOT_EXISTS);
+        return nullptr;
+    }
 
     std::optional<char> predecessor;
     predecessor = routes.at(dst).predecessor;

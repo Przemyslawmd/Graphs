@@ -6,6 +6,7 @@
 enum class Error
 {
     NODE_NOT_EXISTS,
+    ROUTE_NOT_EXISTS,
 };
 
 #endif
