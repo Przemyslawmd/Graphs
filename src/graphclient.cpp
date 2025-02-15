@@ -110,3 +110,9 @@ std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpannin
     return edgesAsChars;
 }
 
+
+std::optional<std::string> GraphClient::getLastErrorMessage()
+{
+    return LogCollector::getLastMessage();
+}
+

@@ -5,7 +5,9 @@
 #include "graph/graph.h"
 
 #include <memory>
+#include <optional>
 #include <tuple>
+#include <string>
 #include <vector>
 
 
@@ -33,6 +35,8 @@ public:
 
     std::unique_ptr<std::vector<char>> findShortestPath(char src, char dst);
     std::unique_ptr<std::vector<std::tuple<char, char>>> findMinSpanningTree();
+
+    std::optional<std::string> getLastErrorMessage();
 
 private:
 
