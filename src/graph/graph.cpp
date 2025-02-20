@@ -78,7 +78,28 @@ void Graph::addEdgeWeighted(char src, char dst, size_t weight)
 void Graph::addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges)
 {
     for (const auto& edge : edges) {
-        createEdge(src, std::get<0>(edge), std::get<1>(edge));
+        createEdge(src, std::get<char>(edge), std::get<size_t>(edge));
+    }
+}
+
+
+void Graph::removeEdge(char src, char dst)
+{
+    if (adjacency.contains(src) == false) {
+        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
+        return;
+    }
+
+    auto& edges = adjacency.at(src);
+    auto it = std::find_if(edges.begin(), edges.end(), [dst](const auto& edge) { return edge.dst == dst; });
+    if (it == edges.end()) {
+        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
+        return;
+    }
+    edges.erase(it);
+
+    if (adjacency.at(src).empty()) {
+        adjacency.erase(src);
     }
 }
 
@@ -134,14 +155,13 @@ void Graph::createEdge(char src, char dst, size_t weight)
 
 void Graph::updateAdjacency(char src, char dst, size_t weight)
 {
-    if (adjacency.count(src) != 1) {
+    if (adjacency.contains(src) == false) {
         adjacency.insert({ src, {{ src, dst, weight }}});
         return;
     }
 
     auto& adjacentNodes = adjacency.at(src);
-    auto it = std::find_if(adjacentNodes.begin(), adjacentNodes.end(), [dst](const auto& edge) { return edge.dst == dst; });
-    if (it == adjacentNodes.end()) {
+    if (std::none_of(adjacentNodes.begin(), adjacentNodes.end(), [dst](const auto& edge) { return edge.dst == dst; })) {
         adjacentNodes.emplace_back( src, dst, weight );
     }
 }
@@ -149,6 +169,6 @@ void Graph::updateAdjacency(char src, char dst, size_t weight)
 
 bool Graph::isNodeExist(char key)
 {
-    return std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; }) != nodes.end();
+    return std::any_of(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
 }
 

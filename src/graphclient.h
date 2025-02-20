@@ -27,6 +27,8 @@ public:
     void addEdge(char src, char dst);
     void addEdgeWeighted(char src, char dst, size_t weight);
 
+    void removeEdge(char src, char dst);
+
     void addEdges(char src, const std::vector<char>& dst);
     void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
 

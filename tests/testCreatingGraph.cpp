@@ -15,8 +15,8 @@ void checkAdjacency(const std::list<Edge>& edges, const std::vector<char>& expec
 
     auto it = edges.cbegin();
     for (char neighbour : expected) {
-        EXPECT_EQ(it->dst, neighbour);
-        EXPECT_EQ(it->weight, 1);
+        ASSERT_EQ(it->dst, neighbour);
+        ASSERT_EQ(it->weight, 1);
         std::advance(it, 1);
     }
 }
@@ -28,8 +28,8 @@ void checkAdjacencyWeighted(const std::list<Edge>& adjacency, const std::vector<
 
     auto it = adjacency.cbegin();
     for (const auto& edge : expected) {
-        EXPECT_EQ(it->dst, std::get<0>(edge));
-        EXPECT_EQ(it->weight, std::get<1>(edge));
+        ASSERT_EQ(it->dst, std::get<char>(edge));
+        ASSERT_EQ(it->weight, std::get<size_t>(edge));
         std::advance(it, 1);
     }
 }
@@ -47,11 +47,10 @@ void checkNodes(const std::vector<Node>& nodes, const std::vector<char>& expecte
 }
 
 
-TEST(TestCreateGraph, FirstTest)
+TEST(TestCreateGraph, CommonTest)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph{ false };
-    graph.addNodes(keys);
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
 
     graph.addEdges('a', { 'b' });
     graph.addEdges('b', { 'a', 'c' });
@@ -72,7 +71,7 @@ TEST(TestCreateGraph, FirstTest)
 }
 
 
-TEST(TestCreateGraph, SecondTestNoNodesCreatedBefore)
+TEST(TestCreateGraph, NodesNotCreatedBefore)
 {
     Graph graph{ false };
 
@@ -98,11 +97,10 @@ TEST(TestCreateGraph, SecondTestNoNodesCreatedBefore)
 }
 
 
-TEST(TestCreateGraph, ThirdTestGraphWithWeights)
+TEST(TestCreateGraph, WeightedGraph)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph{ true };
-    graph.addNodes(keys);
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
 
     graph.addEdgesWeighted('a', {{ 'b', 1  }});
     graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   }});
@@ -123,11 +121,10 @@ TEST(TestCreateGraph, ThirdTestGraphWithWeights)
 }
 
 
-TEST(TestCreateGraph, RemovingNodesFirst)
+TEST(TestCreateGraph, RemoveNodes_1)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph{ true };
-    graph.addNodes(keys);
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
 
     graph.addEdgesWeighted('a', {{ 'b', 1  }});
     graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   }});
@@ -146,11 +143,10 @@ TEST(TestCreateGraph, RemovingNodesFirst)
 }
 
 
-TEST(TestCreateGraph, RemovingNodesSecond)
+TEST(TestCreateGraph, RemoveNodes_2)
 {
-    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
     Graph graph{ true };
-    graph.addNodes(keys);
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
 
     graph.addEdgesWeighted('a', {{ 'b', 1  }});
     graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   }});
@@ -167,4 +163,104 @@ TEST(TestCreateGraph, RemovingNodesSecond)
     checkAdjacencyWeighted(adjacency.at('c'), {{ 'b', 10 }, { 'e', 1 }});
     checkAdjacencyWeighted(adjacency.at('e'), {{ 'c', 3  }});
 }
+
+
+TEST(TestCreateGraph, RemoveEdge)
+{
+    Graph graph{ true };
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
+
+    graph.addEdgesWeighted('a', {{ 'b', 1  }});
+    graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   }});
+    graph.addEdgesWeighted('c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 } });
+    graph.addEdgesWeighted('d', {{ 'c', 5  }, { 'e', 12  }});
+    graph.addEdgesWeighted('e', {{ 'c', 3  }, { 'd', 101 }});
+
+    graph.removeEdge('c', 'e');
+
+    const auto& adjacency = graph.getAdjacency();
+    ASSERT_EQ(adjacency.size(), 5);
+    checkAdjacencyWeighted(adjacency.at('a'), {{ 'b', 1 }});
+    checkAdjacencyWeighted(adjacency.at('b'), {{ 'a', 2  }, { 'c', 4   }});
+    checkAdjacencyWeighted(adjacency.at('c'), {{ 'b', 10 }, { 'd', 4   }});
+    checkAdjacencyWeighted(adjacency.at('d'), {{ 'c', 5  }, { 'e', 12  }});
+    checkAdjacencyWeighted(adjacency.at('e'), {{ 'c', 3  }, { 'd', 101 }});
+}
+
+
+TEST(TestCreateGraph, RemoveAllEdgesFromNode)
+{
+    Graph graph{ true };
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
+
+    graph.addEdgesWeighted('a', {{ 'b', 1  }});
+    graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   } });
+    graph.addEdgesWeighted('c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 } });
+    graph.addEdgesWeighted('d', {{ 'c', 5  }, { 'e', 12  } });
+    graph.addEdgesWeighted('e', {{ 'c', 3  }, { 'd', 101 } });
+
+    graph.removeEdge('b', 'a');
+    graph.removeEdge('b', 'c');
+
+    const auto& adjacency = graph.getAdjacency();
+    ASSERT_EQ(adjacency.size(), 4);
+    checkAdjacencyWeighted(adjacency.at('a'), {{ 'b', 1   }});
+    checkAdjacencyWeighted(adjacency.at('c'), {{ 'b', 10 }, { 'd', 4 }, { 'e', 1 }});
+    checkAdjacencyWeighted(adjacency.at('d'), {{ 'c', 5  }, { 'e', 12 }});
+    checkAdjacencyWeighted(adjacency.at('e'), {{ 'c', 3  }, { 'd', 101 }});
+}
+
+
+TEST(TestCreateGraph, RemoveAndAddEdge)
+{
+    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
+    Graph graph{ true };
+    graph.addNodes(keys);
+
+    graph.addEdgesWeighted('a', {{ 'b', 1  }});
+    graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   }});
+    graph.addEdgesWeighted('c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 } });
+    graph.addEdgesWeighted('d', {{ 'c', 5  }, { 'e', 12  }});
+    graph.addEdgesWeighted('e', {{ 'c', 3  }, { 'd', 101 }});
+
+    graph.removeEdge('c', 'e');
+    graph.addEdgeWeighted('c', 'e', 12);
+
+    const auto& adjacency = graph.getAdjacency();
+    ASSERT_EQ(adjacency.size(), 5);
+    checkAdjacencyWeighted(adjacency.at('a'), {{ 'b', 1   }});
+    checkAdjacencyWeighted(adjacency.at('b'), {{ 'a', 2  }, { 'c', 4   }});
+    checkAdjacencyWeighted(adjacency.at('c'), {{ 'b', 10 }, { 'd', 4   }, { 'e', 12 }});
+    checkAdjacencyWeighted(adjacency.at('d'), {{ 'c', 5  }, { 'e', 12  }});
+    checkAdjacencyWeighted(adjacency.at('e'), {{ 'c', 3  }, { 'd', 101 }});
+}
+
+
+TEST(TestCreateGraph, RemoveAllEdgesFromNodeAndAdd)
+{
+    std::vector<char> keys = { 'a', 'b', 'c', 'd', 'e' };
+    Graph graph{ true };
+    graph.addNodes(keys);
+
+    graph.addEdgesWeighted('a', {{ 'b', 1  }});
+    graph.addEdgesWeighted('b', {{ 'a', 2  }, { 'c', 4   }});
+    graph.addEdgesWeighted('c', {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 } });
+    graph.addEdgesWeighted('d', {{ 'c', 5  }, { 'e', 12  }});
+    graph.addEdgesWeighted('e', {{ 'c', 3  }, { 'd', 101 }});
+
+    graph.removeEdge('b', 'a');
+    graph.removeEdge('b', 'c');
+
+    graph.addEdgeWeighted('b', 'c', 10);
+    graph.addEdgeWeighted('b', 'e', 2);
+
+    const auto& adjacency = graph.getAdjacency();
+    ASSERT_EQ(adjacency.size(), 5);
+    checkAdjacencyWeighted(adjacency.at('a'), {{ 'b', 1 } });
+    checkAdjacencyWeighted(adjacency.at('b'), {{ 'c', 10 }, { 'e', 2   }});
+    checkAdjacencyWeighted(adjacency.at('c'), {{ 'b', 10 }, { 'd', 4   }, { 'e', 1 }});
+    checkAdjacencyWeighted(adjacency.at('d'), {{ 'c', 5  }, { 'e', 12  }});
+    checkAdjacencyWeighted(adjacency.at('e'), {{ 'c', 3  }, { 'd', 101 }});
+}
+
 

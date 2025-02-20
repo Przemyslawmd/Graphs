@@ -26,10 +26,12 @@ public:
 
     void removeNode(char);
 
-    void addEdge(char srcKey, char dst);
-    void addEdges(char srcKey, const std::vector<char>& dstKeys);
-    void addEdgeWeighted(char srcKey, char dstKeys, size_t weight);
-    void addEdgesWeighted(char srcKey, const std::vector<std::tuple<char, size_t>>& edges);
+    void addEdge(char src, char dst);
+    void addEdges(char src, const std::vector<char>& dstKeys);
+    void addEdgeWeighted(char src, char dstKeys, size_t weight);
+    void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
+
+    void removeEdge(char srcKey, char dst);
 
     bool isNodeVisited(char key);
     void setNodeAsVisited(char key);

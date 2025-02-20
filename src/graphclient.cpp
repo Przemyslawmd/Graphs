@@ -60,6 +60,12 @@ void GraphClient::addEdgesWeighted(char src, const std::vector<std::tuple<char, 
 }
 
 
+void GraphClient::removeEdge(char src, char dst)
+{
+    graph->removeEdge(src, dst);
+}
+
+
 std::unique_ptr<std::vector<char>> GraphClient::traverseBFS(char src)
 {
     BFS bfs{ *graph };

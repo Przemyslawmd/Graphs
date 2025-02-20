@@ -5,6 +5,7 @@
 
 enum class Error
 {
+    CONNECTION_NOT_EXISTS,
     NODE_NOT_EXISTS,
     ROUTE_NOT_EXISTS,
 };
