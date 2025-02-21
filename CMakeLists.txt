@@ -1,12 +1,15 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.25)
 project(Graphs)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED true)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-option(BUILD_TESTS "Build tests" ON)
+set(MAIN_PROJECT OFF)
+if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+    set(MAIN_PROJECT ON)
+endif()
 
 add_subdirectory(src)
-if (BUILD_TESTS MATCHES ON)
+if (MAIN_PROJECT)
     add_subdirectory(tests)
 endif()
