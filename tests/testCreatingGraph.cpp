@@ -264,3 +264,24 @@ TEST(TestCreateGraph, RemoveAllEdgesFromNodeAndAdd)
 }
 
 
+TEST(TestCreateGraph, RemoveEdgeUndirected)
+{
+    Graph graph{ false };
+    graph.addNodes({ 'a', 'b', 'c', 'd', 'e' });
+
+    graph.addEdgesWeighted('a', {{ 'b', 1 }, { 'c', 3 }});
+    graph.addEdgesWeighted('b', {{ 'c', 4 }});
+    graph.addEdgesWeighted('c', {{ 'd', 4 }, { 'e', 1 }});
+    graph.addEdgesWeighted('d', {{ 'e', 12 }});
+
+    graph.removeEdge('c', 'e');
+
+    const auto& adjacency = graph.getAdjacency();
+    ASSERT_EQ(adjacency.size(), 5);
+    checkAdjacencyWeighted(adjacency.at('a'), {{ 'b', 1 }, { 'c', 3 }});
+    checkAdjacencyWeighted(adjacency.at('b'), {{ 'a', 1 }, { 'c', 4 }});
+    checkAdjacencyWeighted(adjacency.at('c'), {{ 'a', 3 }, { 'b', 4 }, { 'd', 4 }});
+    checkAdjacencyWeighted(adjacency.at('d'), {{ 'c', 4 }, { 'e', 12 }});
+    checkAdjacencyWeighted(adjacency.at('e'), {{ 'd', 12 }});
+}
+

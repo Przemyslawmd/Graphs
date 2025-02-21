@@ -85,21 +85,9 @@ void Graph::addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t
 
 void Graph::removeEdge(char src, char dst)
 {
-    if (adjacency.contains(src) == false) {
-        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
-        return;
-    }
-
-    auto& edges = adjacency.at(src);
-    auto it = std::find_if(edges.begin(), edges.end(), [dst](const auto& edge) { return edge.dst == dst; });
-    if (it == edges.end()) {
-        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
-        return;
-    }
-    edges.erase(it);
-
-    if (adjacency.at(src).empty()) {
-        adjacency.erase(src);
+    deleteEdge(src, dst);
+    if (!isDirected) {
+        deleteEdge(dst, src);
     }
 }
 
@@ -147,9 +135,30 @@ void Graph::createEdge(char src, char dst, size_t weight)
     }
 
     updateAdjacency(src, dst, weight);
-    if (isDirected == false) {
+    if (!isDirected) {
         updateAdjacency(dst, src, weight);
     } 
+}
+
+
+void Graph::deleteEdge(char src, char dst)
+{
+    if (adjacency.contains(src) == false) {
+        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
+        return;
+    }
+
+    auto& edges = adjacency.at(src);
+    auto it = std::find_if(edges.begin(), edges.end(), [dst](const auto& edge) { return edge.dst == dst; });
+    if (it == edges.end()) {
+        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
+        return;
+    }
+    edges.erase(it);
+
+    if (adjacency.at(src).empty()) {
+        adjacency.erase(src);
+    }
 }
 
 
