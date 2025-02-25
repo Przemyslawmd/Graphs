@@ -36,9 +36,9 @@ void GraphClient::removeNode(char key)
 }
 
 
-void GraphClient::removeNodes(const std::vector<char>& keys)
+void GraphClient::removeNodes(std::unique_ptr<std::vector<char>>& keys)
 {
-    for (char key : keys) {
+    for (char key : *keys) {
         graph->removeNode(key);
     }
 }
