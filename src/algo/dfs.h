@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-#include "../graph/graph.h"
+#include "graph/graph.h"
 
 
 class DFS

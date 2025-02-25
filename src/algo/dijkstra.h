@@ -2,14 +2,14 @@
 #ifndef GRAPHS_DIJKSTRA_H
 #define GRAPHS_DIJKSTRA_H
 
-#include "../graph/edge.h"
-#include "../graph/node.h"
-#include "../graph/graph.h"
-
 #include <list>
 #include <map>
 #include <optional>
- 
+
+#include "graph/edge.h"
+#include "graph/node.h"
+#include "graph/graph.h"
+
 
 typedef struct 
 {

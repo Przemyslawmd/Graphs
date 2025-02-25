@@ -2,12 +2,12 @@
 #ifndef GRAPHS_KRUSKAL_H
 #define GRAPHS_KRUSKAL_H
 
-#include "graph/graph.h"
-#include "graph/edge.h"
-
 #include <list>
 #include <memory>
 #include <vector>
+
+#include "graph/graph.h"
+#include "graph/edge.h"
 
 
 struct PartialTree {

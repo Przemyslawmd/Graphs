@@ -2,13 +2,13 @@
 #ifndef GRAPHS_BFS_H
 #define GRAPHS_BFS_H
 
-#include "../graph/edge.h"
-#include "../graph/graph.h"
-
 #include <list>
 #include <map>
 #include <memory>
 #include <queue>
+
+#include "graph/edge.h"
+#include "graph/graph.h"
 
 
 class BFS

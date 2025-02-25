@@ -2,6 +2,7 @@
 #include "kruskal.h"
 
 #include <algorithm>
+#include <ranges>
 
 constexpr int NOT_ATTACHED = 0;
 
@@ -60,7 +61,7 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
 std::unique_ptr<std::list<Edge>> Kruskal::sortEdges()
 {
     auto sorted = std::make_unique<std::list<Edge>>();
-    for (const auto& [key, edges] : graph.getAdjacency()) {
+    for (const auto& edges : graph.getAdjacency() | std::views::values) {
         for (const auto& edge : edges) {
             if (std::all_of(sorted->begin(), sorted->end(), [&edge](auto& edgeToSort) { return !(edgeToSort == edge); })) {
                 sorted->emplace_back(edge.src, edge.dst, edge.weight);
@@ -77,7 +78,7 @@ std::unique_ptr<std::vector<PartialTree>> Kruskal::initPartialTrees()
     auto trees = std::make_unique<std::vector<PartialTree>>();
     const auto& adjacency = graph.getAdjacency();
     trees->reserve(adjacency.size());
-    for (const auto& [key, _] : adjacency) {
+    for (const auto& key : adjacency | std::views::keys) {
         trees->emplace_back(key, NOT_ATTACHED);
     }
     return trees;
