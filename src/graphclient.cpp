@@ -36,6 +36,14 @@ void GraphClient::removeNode(char key)
 }
 
 
+void GraphClient::removeNodes(const std::vector<char>& keys)
+{
+    for (char key : keys) {
+        graph->removeNode(key);
+    }
+}
+
+
 void GraphClient::addEdge(char src, char dst)
 {
     graph->addEdge(src, dst);
@@ -63,6 +71,14 @@ void GraphClient::addEdgesWeighted(char src, const std::vector<std::tuple<char, 
 void GraphClient::removeEdge(char src, char dst)
 {
     graph->removeEdge(src, dst);
+}
+
+
+void GraphClient::removeEdges(const std::vector<std::tuple<char, char>>& edges)
+{
+    for (const auto& edge : edges) {
+        graph->removeEdge(std::get<0>(edge), std::get<1>(edge));
+    }
 }
 
 

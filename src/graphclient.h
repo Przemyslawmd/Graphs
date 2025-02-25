@@ -23,14 +23,16 @@ public:
     void addNodes(const std::vector<char>& keys);
 
     void removeNode(char key);
+    void removeNodes(const std::vector<char>& key);
 
     void addEdge(char src, char dst);
     void addEdgeWeighted(char src, char dst, size_t weight);
 
-    void removeEdge(char src, char dst);
-
     void addEdges(char src, const std::vector<char>& dst);
     void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
+
+    void removeEdge(char src, char dst);
+    void removeEdges(const std::vector<std::tuple<char, char>>& edges);
 
     std::unique_ptr<std::vector<char>> traverseBFS(char src);
     std::unique_ptr<std::vector<char>> traverseDFS(char src);
