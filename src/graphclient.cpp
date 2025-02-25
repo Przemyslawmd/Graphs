@@ -74,9 +74,9 @@ void GraphClient::removeEdge(char src, char dst)
 }
 
 
-void GraphClient::removeEdges(const std::vector<std::tuple<char, char>>& edges)
+void GraphClient::removeEdges(std::unique_ptr<std::vector<std::tuple<char, char>>> edges)
 {
-    for (const auto& edge : edges) {
+    for (const auto& edge : *edges) {
         graph->removeEdge(std::get<0>(edge), std::get<1>(edge));
     }
 }

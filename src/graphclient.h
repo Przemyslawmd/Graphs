@@ -32,7 +32,7 @@ public:
     void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
 
     void removeEdge(char src, char dst);
-    void removeEdges(const std::vector<std::tuple<char, char>>& edges);
+    void removeEdges(std::unique_ptr<std::vector<std::tuple<char, char>>> edges);
 
     std::unique_ptr<std::vector<char>> traverseBFS(char src);
     std::unique_ptr<std::vector<char>> traverseDFS(char src);
