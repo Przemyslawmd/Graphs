@@ -12,8 +12,8 @@ Kruskal::Kruskal(Graph& graph) : graph(graph) {}
 
 std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
 {
-    auto sortedEdges = sortEdges();
-    auto trees = initPartialTrees();
+    auto sortedEdges = createSortedEdges();
+    auto trees = createPartialTrees();
 
     auto spanningTree = std::make_unique<std::vector<Edge>>();
     spanningTree->reserve(sortedEdges->size());
@@ -58,22 +58,22 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
 }
 
 
-std::unique_ptr<std::list<Edge>> Kruskal::sortEdges()
+std::unique_ptr<std::list<Edge>> Kruskal::createSortedEdges()
 {
-    auto sorted = std::make_unique<std::list<Edge>>();
+    auto sortedEdges = std::make_unique<std::list<Edge>>();
     for (const auto& edges : graph.getAdjacency() | std::views::values) {
         for (const auto& edge : edges) {
-            if (std::none_of(sorted->begin(), sorted->end(), [&edge](auto& e) { return e == edge; })) {
-                sorted->emplace_back(edge.src, edge.dst, edge.weight);
+            if (std::none_of(sortedEdges->begin(), sortedEdges->end(), [&edge](auto& e) { return e == edge; })) {
+                sortedEdges->emplace_back(edge.src, edge.dst, edge.weight);
             }
         }
     }
-    sorted->sort([](const Edge& edge1, const Edge& edge2) { return edge1.weight > edge2.weight; });
-    return sorted;
+    sortedEdges->sort([](const Edge& edge1, const Edge& edge2) { return edge1.weight > edge2.weight; });
+    return sortedEdges;
 }
 
 
-std::unique_ptr<std::vector<PartialTree>> Kruskal::initPartialTrees()
+std::unique_ptr<std::vector<PartialTree>> Kruskal::createPartialTrees()
 {
     auto trees = std::make_unique<std::vector<PartialTree>>();
     const auto& adjacency = graph.getAdjacency();

@@ -20,7 +20,7 @@ class DijkstraTest : public GraphTest
 {
 protected:
 
-    void checkRoute(const std::map<char, route>& routes, char dstKey, std::optional<char> predecessor, int distance)
+    void checkRoute(const std::map<char, Route>& routes, char dstKey, std::optional<char> predecessor, int distance)
     {
         ASSERT_TRUE(routes.find(dstKey) != routes.end());
         EXPECT_EQ(routes.at(dstKey).distance, distance);

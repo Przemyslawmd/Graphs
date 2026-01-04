@@ -11,11 +11,11 @@
 #include "graph/graph.h"
 
 
-typedef struct 
+struct Route 
 {
     int distance;
     std::optional<char> predecessor;
-} route;
+};
 
 
 class Dijkstra
@@ -29,7 +29,7 @@ public:
     Dijkstra& operator=(Dijkstra&&) = delete;
 
     void traverseGraph(char srcKey);
-    const std::map<char, route>& getRoutes();
+    const std::map<char, Route>& getRoutes();
 
 private:
 
@@ -37,7 +37,7 @@ private:
     std::optional<char> findNodeToProcess();
     
     Graph& graph;
-    std::map<char, route> routes;
+    std::map<char, Route> routes;
 };
 
 #endif

@@ -18,7 +18,7 @@ void Dijkstra::traverseGraph(char srcKey)
     }
     for (const auto& node : nodes) {
         int distance = node.key == srcKey ? 0 : INT_MAX;
-        routes.emplace(node.key, route{ distance });
+        routes.emplace(node.key, Route{ distance });
     }
 
     std::optional<char> key = findNodeToProcess();
@@ -60,7 +60,7 @@ std::optional<char> Dijkstra::findNodeToProcess()
 }
 
 
-const std::map<char, route>& Dijkstra::getRoutes()
+const std::map<char, Route>& Dijkstra::getRoutes()
 {
     return routes;
 }

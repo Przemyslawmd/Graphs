@@ -13,7 +13,7 @@
 struct PartialTree {
 
     PartialTree(char key, size_t tree) : key(key), tree(tree) {}
-    char key;
+    const char key;
     size_t tree;
 };
 
@@ -32,8 +32,8 @@ public:
 
 private:
 
-    std::unique_ptr<std::list<Edge>> sortEdges();
-    std::unique_ptr<std::vector<PartialTree>> initPartialTrees();
+    std::unique_ptr<std::list<Edge>> createSortedEdges();
+    std::unique_ptr<std::vector<PartialTree>> createPartialTrees();
 
     Graph& graph;
 };
