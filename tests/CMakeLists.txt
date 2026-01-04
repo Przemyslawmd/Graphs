@@ -1,6 +1,7 @@
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 set(LIB_BUILD "../build/src/")
+set(TARGET_NAME "tests")
 
 include(FetchContent)
 FetchContent_Declare(
@@ -20,7 +21,7 @@ configure_file (timeType.h.in ${CMAKE_CURRENT_SOURCE_DIR}/timeType.h @ONLY)
 enable_testing()
 
 add_executable(
-  GraphTests
+  ${TARGET_NAME}
   "testGraphClient.cpp"
   "testBfs.cpp"
   "testDfs.cpp"
@@ -31,17 +32,17 @@ add_executable(
   "baseTest.h"  )
 
 target_include_directories(
-  GraphTests 
+  ${TARGET_NAME} 
   PRIVATE 
   googletest/include 
   ${LIB_BUILD}
 ) 
 
 target_link_libraries(
-  GraphTests
+  ${TARGET_NAME}
   GTest::gtest_main
   GraphsLib
 )
 
 include(GoogleTest)
-gtest_discover_tests(GraphTests)
+gtest_discover_tests(${TARGET_NAME})
