@@ -25,7 +25,7 @@ private:
     void processNode(char key);
 
     Graph& graph;
-    std::unique_ptr<std::vector<char>> sequence;
+    std::unique_ptr<std::vector<char>> nodesSequence;
 };
 
 #endif

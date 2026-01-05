@@ -25,11 +25,11 @@ public:
 
 private:
 
-    void processQueue(const std::map<char, std::list<Edge>>& adjacency);
+    void processQueue(const std::map<char, std::list<Edge>>&);
 
     Graph& graph;
     std::queue<char> nodesQueue;
-    std::unique_ptr<std::vector<char>> sequence;
+    std::unique_ptr<std::vector<char>> nodesSequence;
 };
 
 #endif

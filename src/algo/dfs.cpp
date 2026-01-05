@@ -2,24 +2,22 @@
 #include "dfs.h"
 
 
-DFS::DFS(Graph& graph) : graph(graph) 
-{
-    sequence = std::make_unique<std::vector<char>>();
-}
+DFS::DFS(Graph& graph) : graph(graph) {}
 
 
 std::unique_ptr<std::vector<char>> DFS::traverseGraph(char key)
 {
+    nodesSequence = std::make_unique<std::vector<char>>();
     graph.setAllVisitedFlags(false);
     processNode(key);
-    return std::move(sequence);
+    return std::move(nodesSequence);
 }
 
 
 void DFS::processNode(char key)
 {
     graph.setNodeAsVisited(key);
-    sequence->push_back(key);
+    nodesSequence->push_back(key);
 
     if (graph.getAdjacency().contains(key) == false) {
         return;
