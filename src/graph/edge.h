@@ -2,6 +2,8 @@
 #ifndef GRAPHS_EDGE_H
 #define GRAPHS_EDGE_H
 
+#include <cstddef> 
+
 
 class Edge
 {
