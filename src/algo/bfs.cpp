@@ -22,7 +22,7 @@ std::unique_ptr<std::vector<char>> BFS::traverseGraph(char key)
 
 void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
 {
-    char key = nodesQueue.front();
+    const char key = nodesQueue.front();
     graph.setNodeAsVisited(key);
     nodesSequence->push_back(key);
 
@@ -32,7 +32,7 @@ void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
 
     for (const auto& edge : adjacency.at(key)) {
         if (graph.isNodeVisited(edge.dst) == false) {
-            nodesQueue.emplace(edge.dst);
+            nodesQueue.push(edge.dst);
             graph.setNodeAsVisited(edge.dst);
         }
     }

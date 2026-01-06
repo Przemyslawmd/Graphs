@@ -41,6 +41,7 @@ target_include_directories(
 target_link_libraries(
   ${TARGET_NAME}
   GTest::gtest_main
+  GTest::gmock
   GraphsLib
 )
 

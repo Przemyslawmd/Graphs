@@ -6,6 +6,7 @@
 #include <map>
 #include <memory>
 #include <queue>
+#include <vector>
 
 #include "graph/edge.h"
 #include "graph/graph.h"
