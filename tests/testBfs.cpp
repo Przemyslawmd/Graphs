@@ -101,7 +101,7 @@ TEST_F(BFSTest, NodeNotSource)
 }
 
 
-// Repeat traverse for other source node
+// Repeat traverse in the same BSF object for other source node
 TEST_F(BFSTest, RepeatTraverse)
 {
     Graph graph{ false };

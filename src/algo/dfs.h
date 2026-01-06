@@ -18,11 +18,11 @@ public:
     DFS& operator=(const DFS&) = delete;
     DFS& operator=(DFS&&) = delete;
 
-    std::unique_ptr<std::vector<char>> traverseGraph(char key);
+    std::unique_ptr<std::vector<char>> traverseGraph(const char key);
 
 private:
 
-    void processNode(char key);
+    void processNode(const char key);
 
     Graph& graph;
     std::unique_ptr<std::vector<char>> nodesSequence;

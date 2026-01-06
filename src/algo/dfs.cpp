@@ -5,7 +5,7 @@
 DFS::DFS(Graph& graph) : graph(graph) {}
 
 
-std::unique_ptr<std::vector<char>> DFS::traverseGraph(char key)
+std::unique_ptr<std::vector<char>> DFS::traverseGraph(const char key)
 {
     nodesSequence = std::make_unique<std::vector<char>>();
     graph.setAllVisitedFlags(false);
@@ -14,16 +14,17 @@ std::unique_ptr<std::vector<char>> DFS::traverseGraph(char key)
 }
 
 
-void DFS::processNode(char key)
+void DFS::processNode(const char key)
 {
     graph.setNodeAsVisited(key);
     nodesSequence->push_back(key);
 
-    if (graph.getAdjacency().contains(key) == false) {
+    const auto& adjacency = graph.getAdjacency();
+    if (adjacency.contains(key) == false) {
         return;
     }
 
-    const auto& adjacentNodes = graph.getAdjacency().at(key);
+    const auto& adjacentNodes = adjacency.at(key);
     for (const auto& edge : adjacentNodes) {
         if (graph.isNodeVisited(edge.dst) == false) {
             processNode(edge.dst);
