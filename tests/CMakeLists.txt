@@ -28,8 +28,9 @@ add_executable(
   "testDijkstra.cpp"
   "testCreatingGraph.cpp"
   "testKruskal.cpp"
+  "testColor.cpp"
   "graphFactory.h"
-  "baseTest.h"  )
+  "baseTest.h")
 
 target_include_directories(
   ${TARGET_NAME} 

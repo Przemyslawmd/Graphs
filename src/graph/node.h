@@ -2,6 +2,8 @@
 #ifndef GRAPHS_NODE_H
 #define GRAPHS_NODE_H
 
+#include <cstdint>
+
 
 class Node
 {
@@ -13,6 +15,7 @@ public:
     void setVisited(bool isVisited);
 
     char key;
+    uint16_t colour;
 
 private:
 
