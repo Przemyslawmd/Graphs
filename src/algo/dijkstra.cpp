@@ -39,7 +39,7 @@ void Dijkstra::processRoutesTable(const std::map<char, std::list<Edge>>& adjacen
     const auto& adjacentNodes = adjacency.at(key);
     for (const auto& edge : adjacentNodes) {
         int currentWeight = routes[key].distance + edge.weight;
-        if (graph.isNodeVisited(edge.dst) == false && routes[edge.dst].distance > currentWeight) {
+        if (graph.isNodeVisited(edge.dst) == IsProperty::NO && routes[edge.dst].distance > currentWeight) {
             routes[edge.dst] = { currentWeight, std::optional<char>{ key }};
         }
     }   
@@ -51,7 +51,7 @@ std::optional<char> Dijkstra::findNodeToProcess()
     int initial = INT_MAX;
     std::optional<char> nodeToProcess;
     for (const auto& [nodeKey, route] : routes) {
-        if (graph.isNodeVisited(nodeKey) == false && route.distance < initial) {
+        if (graph.isNodeVisited(nodeKey) == IsProperty::NO && route.distance < initial) {
             initial = route.distance;
             nodeToProcess = nodeKey;
         }

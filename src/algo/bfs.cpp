@@ -31,7 +31,7 @@ void BFS::processQueue(const std::map<char, std::list<Edge>>& adjacency)
     }
 
     for (const auto& edge : adjacency.at(key)) {
-        if (graph.isNodeVisited(edge.dst) == false) {
+        if (graph.isNodeVisited(edge.dst) == IsProperty::NO) {
             nodesQueue.push(edge.dst);
             graph.setNodeAsVisited(edge.dst);
         }

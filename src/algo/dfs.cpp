@@ -26,7 +26,7 @@ void DFS::processNode(const char key)
 
     const auto& adjacentNodes = adjacency.at(key);
     for (const auto& edge : adjacentNodes) {
-        if (graph.isNodeVisited(edge.dst) == false) {
+        if (graph.isNodeVisited(edge.dst) == IsProperty::NO) {
             processNode(edge.dst);
         }
     }

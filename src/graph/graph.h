@@ -11,6 +11,14 @@
 #include "node.h"
 
 
+enum class IsProperty 
+{
+    NO, 
+    YES,
+    UNKNOWN
+};
+
+
 class Graph
 {
 public:
@@ -32,12 +40,12 @@ public:
 
     void removeEdge(char srcKey, char dst);
 
-    bool isNodeVisited(char key);
+    IsProperty isNodeVisited(char key);
     void setNodeAsVisited(char key);
     void setAllVisitedFlags(bool isVisited);
 
     void resetColors();
-    bool isNodeColored(char key);
+    IsProperty isNodeColored(char key);
     void setNodeColor(char key, uint16_t color);
 
     size_t getSize();
