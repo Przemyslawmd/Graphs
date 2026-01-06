@@ -94,9 +94,8 @@ void Graph::removeEdge(char src, char dst)
 
 bool Graph::isNodeVisited(char key)
 {
-    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    auto it = findNode(key);
     if (it == nodes.end()) {
-        LogCollector::putError(Error::NODE_NOT_EXISTS);
         return false;
     }
     return it->isVisited();
@@ -105,9 +104,8 @@ bool Graph::isNodeVisited(char key)
 
 void Graph::setNodeAsVisited(char key)
 {
-    const auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    auto it = findNode(key);
     if (it == nodes.end()) {
-        LogCollector::putError(Error::NODE_NOT_EXISTS);
         return;
     }
     it->setVisited(true);
@@ -120,6 +118,41 @@ void Graph::setAllVisitedFlags(bool isVisited)
         node.setVisited(isVisited);
     }
 }
+
+
+void Graph::resetColors()
+{
+    for (auto& node : nodes) {
+        node.colour = std::nullopt;
+    }
+}
+
+
+bool Graph::isNodeColored(char key)
+{
+    auto it = findNode(key);
+    if (it == nodes.end()) {
+        return false;
+    }
+    return it->colour.has_value();
+}
+
+
+void Graph::setNodeColor(char key, uint16_t color)
+{
+    auto it = findNode(key);
+    if (it == nodes.end()) {
+        return;
+    }
+    it->colour = color;
+}
+
+
+size_t Graph::getSize()
+{
+    return nodes.size();
+}
+
 
 /************************************** PRIVATE ***********************************************/
 /**********************************************************************************************/
@@ -179,5 +212,15 @@ void Graph::updateAdjacency(char src, char dst, size_t weight)
 bool Graph::isNodeExist(char key)
 {
     return std::any_of(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+}
+
+
+std::vector<Node>::iterator Graph::findNode(const char key)
+{
+    auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    if (it == nodes.end()) {
+        LogCollector::putError(Error::NODE_NOT_EXISTS);
+    }
+    return it;
 }
 

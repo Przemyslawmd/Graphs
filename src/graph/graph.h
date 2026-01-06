@@ -5,7 +5,6 @@
 #include <list>
 #include <map>
 #include <memory>
-#include <tuple>
 #include <vector>
 
 #include "edge.h"
@@ -37,6 +36,12 @@ public:
     void setNodeAsVisited(char key);
     void setAllVisitedFlags(bool isVisited);
 
+    void resetColors();
+    bool isNodeColored(char key);
+    void setNodeColor(char key, uint16_t color);
+
+    size_t getSize();
+
     const std::map<char, std::list<Edge>>& getAdjacency();
 
 private:
@@ -46,6 +51,7 @@ private:
     void updateAdjacency(char src, char dst, size_t weight);
 
     bool isNodeExist(char key);
+    std::vector<Node>::iterator findNode(const char key);
 
     const bool isDirected;
 
