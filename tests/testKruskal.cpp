@@ -20,10 +20,10 @@ class KruskalTest : public GraphTest
 {
 protected:
 
-    bool checkEdge(std::vector<Edge>* edges, char src, char dst, size_t weight)
+    bool checkEdge(std::vector<Edge>& edges, char src, char dst, size_t weight)
     {
-        const Edge edgeToCheck{ src, dst, weight };
-        return std::any_of(edges->begin(), edges->end(), [&edgeToCheck](auto& edge) { return edge == edgeToCheck; });
+        const Edge edgeTest{ src, dst, weight };
+        return std::any_of(edges.begin(), edges.end(), [&edgeTest](auto& edge) { return edge == edgeTest; });
     }
 };
 
@@ -45,11 +45,11 @@ TEST_F(KruskalTest, FiveNodes_Directional)
     const auto end = std::chrono::high_resolution_clock::now();
     showDuration(begin, end);
 
-    EXPECT_EQ(edges.get()->size(), 4);
-    EXPECT_TRUE(checkEdge(edges.get(), 'a', 'b', 1));
-    EXPECT_TRUE(checkEdge(edges.get(), 'd', 'e', 2));
-    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'b', 3));
-    EXPECT_TRUE(checkEdge(edges.get(), 'b', 'c', 5));
+    EXPECT_EQ(edges->size(), 4);
+    EXPECT_TRUE(checkEdge(*edges, 'a', 'b', 1));
+    EXPECT_TRUE(checkEdge(*edges, 'd', 'e', 2));
+    EXPECT_TRUE(checkEdge(*edges, 'e', 'b', 3));
+    EXPECT_TRUE(checkEdge(*edges, 'b', 'c', 5));
 }
 
 
@@ -64,15 +64,15 @@ TEST_F(KruskalTest, NineNodes_Nodirectional)
     const auto end = std::chrono::high_resolution_clock::now();
     showDuration(begin, end);
 
-    EXPECT_EQ(edges.get()->size(), 8);
-    EXPECT_TRUE(checkEdge(edges.get(), 'a', 'b', 4));
-    EXPECT_TRUE(checkEdge(edges.get(), 'a', 'h', 8));
-    EXPECT_TRUE(checkEdge(edges.get(), 'h', 'g', 1));
-    EXPECT_TRUE(checkEdge(edges.get(), 'g', 'f', 2));
-    EXPECT_TRUE(checkEdge(edges.get(), 'f', 'c', 4));
-    EXPECT_TRUE(checkEdge(edges.get(), 'c', 'i', 2));
-    EXPECT_TRUE(checkEdge(edges.get(), 'c', 'd', 7));
-    EXPECT_TRUE(checkEdge(edges.get(), 'd', 'e', 9));
+    EXPECT_EQ(edges->size(), 8);
+    EXPECT_TRUE(checkEdge(*edges, 'a', 'b', 4));
+    EXPECT_TRUE(checkEdge(*edges, 'a', 'h', 8));
+    EXPECT_TRUE(checkEdge(*edges, 'h', 'g', 1));
+    EXPECT_TRUE(checkEdge(*edges, 'g', 'f', 2));
+    EXPECT_TRUE(checkEdge(*edges, 'f', 'c', 4));
+    EXPECT_TRUE(checkEdge(*edges, 'c', 'i', 2));
+    EXPECT_TRUE(checkEdge(*edges, 'c', 'd', 7));
+    EXPECT_TRUE(checkEdge(*edges, 'd', 'e', 9));
 }
 
 
@@ -87,15 +87,15 @@ TEST_F(KruskalTest, TenNodes_Nodirectional)
     const auto end = std::chrono::high_resolution_clock::now();
     showDuration(begin, end);
 
-    EXPECT_EQ(edges.get()->size(), 9);
-    EXPECT_TRUE(checkEdge(edges.get(), 'a', 'b', 3));
-    EXPECT_TRUE(checkEdge(edges.get(), 'a', 'f', 2));
-    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'f', 1));
-    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'g', 6));
-    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'h', 5));
-    EXPECT_TRUE(checkEdge(edges.get(), 'e', 'i', 10));
-    EXPECT_TRUE(checkEdge(edges.get(), 'c', 'd', 8));
-    EXPECT_TRUE(checkEdge(edges.get(), 'd', 'i', 4));
-    EXPECT_TRUE(checkEdge(edges.get(), 'i', 'j', 9));
+    EXPECT_EQ(edges->size(), 9);
+    EXPECT_TRUE(checkEdge(*edges, 'a', 'b', 3));
+    EXPECT_TRUE(checkEdge(*edges, 'a', 'f', 2));
+    EXPECT_TRUE(checkEdge(*edges, 'e', 'f', 1));
+    EXPECT_TRUE(checkEdge(*edges, 'e', 'g', 6));
+    EXPECT_TRUE(checkEdge(*edges, 'e', 'h', 5));
+    EXPECT_TRUE(checkEdge(*edges, 'e', 'i', 10));
+    EXPECT_TRUE(checkEdge(*edges, 'c', 'd', 8));
+    EXPECT_TRUE(checkEdge(*edges, 'd', 'i', 4));
+    EXPECT_TRUE(checkEdge(*edges, 'i', 'j', 9));
 }
 
