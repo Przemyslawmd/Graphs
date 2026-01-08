@@ -6,7 +6,7 @@
 Color::Color(Graph& graph) : graph(graph) {}
 
 
-void Color::colorGraph(const char key)
+void Color::colorGraph()
 {
     graph.setAllVisitedFlags(false);
     graph.resetColors();
@@ -16,7 +16,7 @@ void Color::colorGraph(const char key)
     }
 
     const auto& adjacency = graph.getAdjacency();
-    nodesQueue.push(key);
+    nodesQueue.push(adjacency.begin()->first);
 
     while (nodesQueue.empty() == false) {
         processQueue(adjacency);

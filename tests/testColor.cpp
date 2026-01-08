@@ -25,7 +25,7 @@ TEST_F(ColorTest, FirstTest)
     Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_FiveNodes);
     Color color{ graph };
-    color.colorGraph('a');
+    color.colorGraph();
 
     const std::map<char, uint16_t> expected = { {'a', 1 }, { 'b', 2 }, { 'c', 1 }, { 'd', 2 }, { 'e', 3 }};
     const auto& nodes = graph.getNodes();
@@ -38,7 +38,7 @@ TEST_F(ColorTest, SecondTest)
     Graph graph{ false };
     GraphFactory::createGraph(graph, GraphType::Unweighted_SevenNodes);
     Color color{ graph };
-    color.colorGraph('a');
+    color.colorGraph();
 
     const std::map<char, uint16_t> expected = 
         {{ 'a', 1 }, { 'b', 2 } , { 'c', 1 }, { 'd', 3 }, { 'e', 2 }, { 'f', 1 }, { 'g', 3 }};

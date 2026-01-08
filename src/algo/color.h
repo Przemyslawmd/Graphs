@@ -18,7 +18,7 @@ public:
     Color& operator=(const Color&) = delete;
     Color& operator=(Color&&) = delete;
 
-    void colorGraph(const char key);
+    void colorGraph();
 
 private:
 
