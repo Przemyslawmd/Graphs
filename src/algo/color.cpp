@@ -11,7 +11,7 @@ void Color::colorGraph(const char key)
     graph.setAllVisitedFlags(false);
     graph.resetColors();
 
-    for (uint16_t i = 0; i < graph.getSize(); i++) {
+    for (uint16_t i = 1; i <= graph.getSize(); i++) {
         colorPool.insert({ i, false });
     }
 
@@ -41,8 +41,8 @@ void Color::processQueue(const std::map<char, std::list<Edge>>& adjacency)
             nodesQueue.push(edge.dst);
         }
         auto nodeColor = graph.getNodeColor(edge.dst);
-        if (nodeColor.has_value()) {
-            colorPool.at(nodeColor.value()) = true;
+        if (nodeColor) {
+            colorPool.at(nodeColor) = true;
         }
     }
 

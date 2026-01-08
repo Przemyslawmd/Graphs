@@ -16,7 +16,7 @@ public:
     void setVisited(bool isVisited);
 
     char key;
-    std::optional<uint16_t> colour;
+    uint16_t color;
 
 private:
 

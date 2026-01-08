@@ -124,19 +124,19 @@ void Graph::setAllVisitedFlags(bool isVisited)
 void Graph::resetColors()
 {
     for (auto& node : nodes) {
-        node.colour = std::nullopt;
+        node.color = 0;
     }
 }
 
 
-std::optional<uint16_t> Graph::getNodeColor(char key)
+uint16_t Graph::getNodeColor(char key)
 {
     auto it = findNode(key);
     if (it == nodes.end()) {
         LogCollector::putError(Error::NODE_NOT_EXISTS);
-        return std::nullopt;
+        return 0;
     }
-    return it->colour;
+    return it->color;
 }
 
 
@@ -146,7 +146,7 @@ void Graph::setNodeColor(char key, uint16_t color)
     if (it == nodes.end()) {
         return;
     }
-    it->colour = color;
+    it->color = color;
 }
 
 
