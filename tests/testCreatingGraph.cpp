@@ -41,7 +41,7 @@ void checkNodes(const std::vector<Node>& nodes, const std::vector<char>& expecte
 
     auto it = nodes.cbegin();
     for (const auto key : expectedKeys) {
-        ASSERT_EQ(key, it->key);
+        ASSERT_EQ(key, it->getKey());
         std::advance(it, 1);
     }
 }

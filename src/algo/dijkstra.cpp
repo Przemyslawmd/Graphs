@@ -11,14 +11,14 @@ void Dijkstra::traverseGraph(char srcKey)
 {
     const auto& nodes = graph.getNodes();
     const auto& adjacency = graph.getAdjacency();
-    graph.setAllVisitedFlags(false);
+    graph.resetVisitFlags();
 
     if (routes.empty() == false) {
         routes.clear(); 
     }
     for (const auto& node : nodes) {
-        int distance = node.key == srcKey ? 0 : INT_MAX;
-        routes.emplace(node.key, Route{ distance });
+        int distance = node.getKey() == srcKey ? 0 : INT_MAX;
+        routes.emplace(node.getKey(), Route{ distance });
     }
 
     std::optional<char> key = findNodeToProcess();

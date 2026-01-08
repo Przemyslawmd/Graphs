@@ -8,7 +8,7 @@ Color::Color(Graph& graph) : graph(graph) {}
 
 void Color::colorGraph()
 {
-    graph.setAllVisitedFlags(false);
+    graph.resetVisitFlags();
     graph.resetColors();
 
     for (uint16_t i = 1; i <= graph.getSize(); i++) {

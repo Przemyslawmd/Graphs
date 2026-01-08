@@ -2,9 +2,11 @@
 #ifndef GRAPHS_COLOUR_H
 #define GRAPHS_COLOUR_H
 
+#include <list>
 #include <map>
 #include <queue>
 
+#include "graph/edge.h"
 #include "graph/graph.h"
 
 

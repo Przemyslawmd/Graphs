@@ -10,16 +10,29 @@ class Node
 {
 public:
 
-    explicit Node(char key);
+    explicit Node(char key)
+    : key{key}, visited{false}, color{0} {};
 
-    bool isVisited() const;
-    void setVisited(bool isVisited);
+    const char getKey() const
+    {
+        return key;
+    };
 
-    char key;
+    bool isVisited() const
+    {
+        return visited;
+    };
+
+    void setVisited(bool isVisited)
+    {
+        visited = isVisited;
+    };
+
     uint16_t color;
 
 private:
 
+    char key;
     bool visited;
 };
 

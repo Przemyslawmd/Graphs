@@ -11,7 +11,7 @@ void checkNodesColors(const std::vector<Node>& nodes, const std::map<char, uint1
 {
     auto it = nodes.cbegin();
     for (const auto& [key, colorID] : expected) {
-        auto it = std::find_if(nodes.begin(), nodes.end(), [&key](const auto& node) { return node.key == key;});
+        auto it = std::find_if(nodes.begin(), nodes.end(), [&key](const auto& node) { return node.getKey() == key;});
         ASSERT_EQ(it->color, colorID);
     }
 }

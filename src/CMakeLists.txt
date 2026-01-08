@@ -7,7 +7,6 @@ add_library(
     STATIC 
     ${GRAPH_DIR}edge.cpp 
     ${GRAPH_DIR}graph.cpp 
-    ${GRAPH_DIR}node.cpp
     ${ALGO_DIR}bfs.cpp 
     ${ALGO_DIR}dfs.cpp 
     ${ALGO_DIR}dijkstra.cpp 

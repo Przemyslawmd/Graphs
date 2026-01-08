@@ -8,7 +8,7 @@ DFS::DFS(Graph& graph) : graph(graph) {}
 std::unique_ptr<std::vector<char>> DFS::traverseGraph(const char key)
 {
     nodesSequence = std::make_unique<std::vector<char>>();
-    graph.setAllVisitedFlags(false);
+    graph.resetVisitFlags();
     processNode(key);
     return std::move(nodesSequence);
 }

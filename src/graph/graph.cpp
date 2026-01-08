@@ -31,7 +31,7 @@ void Graph::removeNode(char key)
         LogCollector::putError(Error::NODE_NOT_EXISTS);
         return;
     }
-    std::erase_if(nodes, [key](const auto& node) { return node.key == key; });
+    std::erase_if(nodes, [key](const auto& node) { return node.getKey() == key; });
 
     if (adjacency.contains(key)) {
         adjacency.erase(key);
@@ -113,10 +113,10 @@ void Graph::setNodeAsVisited(char key)
 }
 
 
-void Graph::setAllVisitedFlags(bool isVisited)
+void Graph::resetVisitFlags()
 {
     for (auto& node : nodes) {
-        node.setVisited(isVisited);
+        node.setVisited(false);
     }
 }
 
@@ -213,13 +213,13 @@ void Graph::updateAdjacency(char src, char dst, size_t weight)
 
 bool Graph::isNodeExist(char key)
 {
-    return std::any_of(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    return std::any_of(nodes.begin(), nodes.end(), [key](const auto& node) { return node.getKey() == key; });
 }
 
 
 std::vector<Node>::iterator Graph::findNode(const char key)
 {
-    auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.key == key; });
+    auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.getKey() == key; });
     if (it == nodes.end()) {
         LogCollector::putError(Error::NODE_NOT_EXISTS);
     }

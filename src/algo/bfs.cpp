@@ -8,7 +8,7 @@ BFS::BFS(Graph& graph) : graph(graph) {}
 std::unique_ptr<std::vector<char>> BFS::traverseGraph(char key)
 {
     nodesSequence = std::make_unique<std::vector<char>>();
-    graph.setAllVisitedFlags(false);
+    graph.resetVisitFlags();
     const auto& adjacency = graph.getAdjacency();
     nodesQueue.push(key);
 

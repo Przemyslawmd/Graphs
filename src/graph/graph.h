@@ -42,7 +42,7 @@ public:
 
     IsProperty isNodeVisited(char key);
     void setNodeAsVisited(char key);
-    void setAllVisitedFlags(bool isVisited);
+    void resetVisitFlags();
 
     void resetColors();
     void setNodeColor(char key, uint16_t color);
