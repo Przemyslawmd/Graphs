@@ -45,8 +45,8 @@ public:
     void setAllVisitedFlags(bool isVisited);
 
     void resetColors();
-    IsProperty isNodeColored(char key);
     void setNodeColor(char key, uint16_t color);
+    std::optional<uint16_t> getNodeColor(char key);
 
     size_t getSize();
 

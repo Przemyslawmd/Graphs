@@ -129,13 +129,14 @@ void Graph::resetColors()
 }
 
 
-IsProperty Graph::isNodeColored(char key)
+std::optional<uint16_t> Graph::getNodeColor(char key)
 {
     auto it = findNode(key);
     if (it == nodes.end()) {
-        return IsProperty::UNKNOWN;
+        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        return std::nullopt;
     }
-    return it->colour.has_value() ? IsProperty::YES : IsProperty::NO;
+    return it->colour;
 }
 
 
