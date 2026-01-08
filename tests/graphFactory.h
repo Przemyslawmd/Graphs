@@ -3,8 +3,8 @@
 
 
 enum class GraphType {
-    Unweighted_FiveNodes,
-    Unweighted_SevenNodes,
+    Unweighted_FiveNodes,               // A graph on a picture
+    Unweighted_SevenNodes,              // B
     Unweighted_FourteenNodes,
     Unweighted_TwentyNodes,
     Weighted_EightNodes,
