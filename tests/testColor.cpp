@@ -46,3 +46,17 @@ TEST_F(ColorTest, SecondTest)
     checkNodesColors(nodes, expected);
 }
 
+
+TEST_F(ColorTest, TwoConnectedDiamonds)
+{
+    Graph graph{ false };
+    GraphFactory::createGraph(graph, GraphType::TwoConnectedDiamonds);
+    Color color{ graph };
+    color.colorGraph();
+
+    const std::map<char, uint16_t> expected = 
+        {{ 'a', 1 }, { 'b', 2 } , { 'c', 1 }, { 'd', 3 }, { 'e', 2 }, { 'f', 1 }, { 'g', 3 }, {'h', 1 }};
+    const auto& nodes = graph.getNodes();
+    checkNodesColors(nodes, expected);
+}
+

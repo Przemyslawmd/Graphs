@@ -5,12 +5,13 @@
 enum class GraphType {
     Unweighted_FiveNodes,               // A graph on a picture
     Unweighted_SevenNodes,              // B
-    Unweighted_FourteenNodes,
+    Unweighted_FourteenNodes,           // C
     Unweighted_TwentyNodes,
     Weighted_EightNodes,
     Weighted_NineNodes_Nondirectorial,
     Weighted_TenNodes_Nondirectorial,
     Weighted_TwelveNodes,
+    TwoConnectedDiamonds                // D
 };
 
 
@@ -118,6 +119,16 @@ public:
             graph.addEdgesWeighted('j', {{ 'c', 8 }});
             graph.addEdgesWeighted('k', {{ 'g', 3 }, { 'j', 5 }});
             graph.addEdgesWeighted('l', {{ 'g', 2 }, { 'e', 5 }, {'f', 12 }});
+        }
+        else if (type == GraphType::TwoConnectedDiamonds) {
+            graph.addEdges('a', { 'b', 'd' });
+            graph.addEdges('b', { 'a', 'c', 'd', 'f' });
+            graph.addEdges('c', { 'b', 'd' });
+            graph.addEdges('d', { 'a', 'b', 'c', 'h' });
+            graph.addEdges('e', { 'f', 'g', 'h' });
+            graph.addEdges('f', { 'b', 'e', 'g' });
+            graph.addEdges('g', { 'e', 'f', 'h' });
+            graph.addEdges('h', { 'd', 'e', 'g' });
         }
     }
 };
