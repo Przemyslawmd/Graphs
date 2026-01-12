@@ -40,6 +40,8 @@ public:
     std::unique_ptr<std::vector<char>> findShortestPath(char src, char dst);
     std::unique_ptr<std::vector<std::tuple<char, char>>> findMinSpanningTree();
 
+    void colorGraph();
+
     std::optional<std::string> getLastErrorMessage();
 
 private:

@@ -3,6 +3,7 @@
 
 #include "algo/bfs.h"
 #include "algo/dfs.h"
+#include "algo/color.h"
 #include "algo/dijkstra.h"
 #include "algo/kruskal.h"
 #include "logs/logCollector.h"
@@ -130,6 +131,13 @@ std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpannin
     }
 
     return edgesAsChars;
+}
+
+
+void GraphClient::colorGraph()
+{
+    Color color{ *graph };
+    color.colorGraph();
 }
 
 
