@@ -28,7 +28,7 @@ void Graph::addNodes(const std::vector<char>& keys)
 void Graph::removeNode(char key)
 {
     if (isNodeExist(key) == false) {
-        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        LogCollector::putError(Error::NO_NODE);
         return;
     }
     std::erase_if(nodes, [key](const auto& node) { return node.getKey() == key; });
@@ -96,7 +96,7 @@ IsProperty Graph::isNodeVisited(char key)
 {
     auto it = findNode(key);
     if (it == nodes.end()) {
-        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        LogCollector::putError(Error::NO_NODE);
         return IsProperty::UNKNOWN;
     }
     return it->isVisited() ? IsProperty::YES : IsProperty::NO;
@@ -133,7 +133,7 @@ uint16_t Graph::getNodeColor(char key)
 {
     auto it = findNode(key);
     if (it == nodes.end()) {
-        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        LogCollector::putError(Error::NO_NODE);
         return 0;
     }
     return it->color;
@@ -155,6 +155,11 @@ size_t Graph::getSize()
     return nodes.size();
 }
 
+
+bool Graph::isEmpty()
+{
+    return nodes.empty();
+}
 
 /************************************** PRIVATE ***********************************************/
 /**********************************************************************************************/
@@ -179,14 +184,14 @@ void Graph::createEdge(char src, char dst, size_t weight)
 void Graph::deleteEdge(char src, char dst)
 {
     if (adjacency.contains(src) == false) {
-        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
+        LogCollector::putError(Error::NO_CONNECTION);
         return;
     }
 
     auto& edges = adjacency.at(src);
     auto it = std::find_if(edges.begin(), edges.end(), [dst](const auto& edge) { return edge.dst == dst; });
     if (it == edges.end()) {
-        LogCollector::putError(Error::CONNECTION_NOT_EXISTS);
+        LogCollector::putError(Error::NO_CONNECTION);
         return;
     }
     edges.erase(it);
@@ -221,7 +226,7 @@ std::vector<Node>::iterator Graph::findNode(const char key)
 {
     auto it = std::find_if(nodes.begin(), nodes.end(), [key](const auto& node) { return node.getKey() == key; });
     if (it == nodes.end()) {
-        LogCollector::putError(Error::NODE_NOT_EXISTS);
+        LogCollector::putError(Error::NO_NODE);
     }
     return it;
 }

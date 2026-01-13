@@ -39,8 +39,10 @@ private:
 
     inline static const std::map<Error, std::string> message =
     {
-        { Error::NODE_NOT_EXISTS,  "Node does not exist" },
-        { Error::ROUTE_NOT_EXISTS, "Route does not exists" }
+        { Error::NO_CONNECTION, "Connection does not exist" },
+        { Error::NO_GRAPH,      "Graph does not exist" },
+        { Error::NO_NODE,       "Node does not exist" },
+        { Error::NO_ROUTE,      "Route does not exists" }
     };
 };
 

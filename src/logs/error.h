@@ -5,9 +5,10 @@
 
 enum class Error
 {
-    CONNECTION_NOT_EXISTS,
-    NODE_NOT_EXISTS,
-    ROUTE_NOT_EXISTS,
+    NO_CONNECTION,
+    NO_GRAPH,
+    NO_NODE,
+    NO_ROUTE,
 };
 
 #endif

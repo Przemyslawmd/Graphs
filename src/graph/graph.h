@@ -49,6 +49,7 @@ public:
     uint16_t getNodeColor(char key);
 
     size_t getSize();
+    bool isEmpty();
 
     const std::map<char, std::list<Edge>>& getAdjacency();
 

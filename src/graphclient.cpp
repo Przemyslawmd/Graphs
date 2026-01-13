@@ -106,7 +106,7 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
     const auto& routes = dijkstra.getRoutes();
 
     if (routes.at(dst).distance == INT_MAX) {
-        LogCollector::putError(Error::ROUTE_NOT_EXISTS);
+        LogCollector::putError(Error::NO_ROUTE);
         return nullptr;
     }
 
@@ -134,10 +134,31 @@ std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpannin
 }
 
 
-void GraphClient::colorGraph()
+std::unique_ptr<std::vector<std::tuple<char, uint16_t>>> GraphClient::colorGraph()
 {
+    if (graph->isEmpty()) {
+        LogCollector::putError(Error::NO_GRAPH);
+        return nullptr;
+    }
+
     Color color{ *graph };
     color.colorGraph();
+
+    auto colors = std::make_unique<std::vector<std::tuple<char, uint16_t>>>();
+    for (const auto& node : graph->getNodes()) {
+        colors->emplace_back(node.getKey(), node.color);
+    }
+    return colors;
+}
+
+
+void GraphClient::resetColors()
+{
+    if (graph->isEmpty()) {
+        LogCollector::putError(Error::NO_GRAPH);
+        return;
+    }
+    graph->resetColors();
 }
 
 
