@@ -55,7 +55,7 @@ public:
 
 private:
 
-    void createEdge(char src, char dst, size_t  weight);
+    void createEdge(char src, char dst, size_t weight);
     void deleteEdge(char src, char dst);
     void updateAdjacency(char src, char dst, size_t weight);
 

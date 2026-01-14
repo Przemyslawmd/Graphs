@@ -85,6 +85,10 @@ void GraphClient::removeEdges(std::unique_ptr<std::vector<std::tuple<char, char>
 
 std::unique_ptr<std::vector<char>> GraphClient::traverseBFS(char src)
 {
+    if (graph->isEmpty()) {
+        LogCollector::putError(Error::NO_GRAPH);
+        return nullptr;
+    }
     BFS bfs{ *graph };
     return bfs.traverseGraph(src);
 }
@@ -92,6 +96,10 @@ std::unique_ptr<std::vector<char>> GraphClient::traverseBFS(char src)
 
 std::unique_ptr<std::vector<char>> GraphClient::traverseDFS(char src)
 {
+    if (graph->isEmpty()) {
+        LogCollector::putError(Error::NO_GRAPH);
+        return nullptr;
+    }
     DFS dfs{ *graph };
     return dfs.traverseGraph(src);
 }
@@ -99,6 +107,11 @@ std::unique_ptr<std::vector<char>> GraphClient::traverseDFS(char src)
 
 std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char dst)
 {
+    if (graph->isEmpty()) {
+        LogCollector::putError(Error::NO_GRAPH);
+        return nullptr;
+    }
+
     const auto nodes = std::make_unique<std::list<char>>();
     nodes->push_front(dst);
     Dijkstra dijkstra{ *graph };
@@ -122,19 +135,23 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
 
 std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpanningTree()
 {
-    Kruskal kruskal{ *graph };
-    const auto edges = kruskal.makeMinSpanningTree();
-    auto edgesAsChars = std::make_unique<std::vector<std::tuple<char, char>>>();
-
-    for (const Edge& edge : *edges) {
-        edgesAsChars->emplace_back(edge.src, edge.dst);
+    if (graph->isEmpty()) {
+        LogCollector::putError(Error::NO_GRAPH);
+        return nullptr;
     }
 
-    return edgesAsChars;
+    Kruskal kruskal{ *graph };
+    const auto edges = kruskal.makeMinSpanningTree();
+    auto edgesToSend = std::make_unique<std::vector<std::tuple<char, char>>>();
+
+    for (const Edge& edge : *edges) {
+        edgesToSend->emplace_back(edge.src, edge.dst);
+    }
+    return edgesToSend;
 }
 
 
-std::unique_ptr<std::vector<std::tuple<char, uint16_t>>> GraphClient::colorGraph()
+std::unique_ptr<std::vector<std::tuple<char, uint8_t>>> GraphClient::colorGraph()
 {
     if (graph->isEmpty()) {
         LogCollector::putError(Error::NO_GRAPH);
@@ -144,7 +161,7 @@ std::unique_ptr<std::vector<std::tuple<char, uint16_t>>> GraphClient::colorGraph
     Color color{ *graph };
     color.colorGraph();
 
-    auto colors = std::make_unique<std::vector<std::tuple<char, uint16_t>>>();
+    auto colors = std::make_unique<std::vector<std::tuple<char, uint8_t>>>();
     for (const auto& node : graph->getNodes()) {
         colors->emplace_back(node.getKey(), node.color);
     }
