@@ -31,7 +31,7 @@ TEST_F(BFSTest, FirstTest)
     EXPECT_THAT(*sequence, ElementsAre('a', 'b', 'c', 'd', 'e'));
 
     const auto& nodes = graph.getNodes();
-    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.visited; }));
 }
 
 
@@ -45,7 +45,7 @@ TEST_F(BFSTest, SecondTest)
     EXPECT_THAT(*sequence, ElementsAre('a', 'b', 'd', 'c', 'g', 'f', 'e'));
 
     const auto& nodes = graph.getNodes();
-    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.visited; }));
 }
 
 
@@ -63,7 +63,7 @@ TEST_F(BFSTest, ThirdTest)
     EXPECT_THAT(*sequence, ElementsAre('a', 'd', 'h', 'b', 'e', 'f', 'g', 'j', 'c', 'k', 'i', 'l', 'n', 'm'));
 
     const auto& nodes = graph.getNodes();
-    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.visited; }));
 }
 
 
@@ -81,7 +81,7 @@ TEST_F(BFSTest, FourthTest)
     EXPECT_THAT(*sequence, ElementsAre('a', 'd', 'h', 'b', 'e', 'f', 'g', 'j', 'c', 'k', 'i', 'o', 'l', 'n', 'p', 'u', 'm', 'r', 's', 't'));
 
     const auto& nodes = graph.getNodes();
-    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.visited; }));
 }
 
 
@@ -97,7 +97,7 @@ TEST_F(BFSTest, NodeNotSource)
     EXPECT_THAT(*sequence, ElementsAre('a', 'b', 'c'));
 
     const auto& nodes = graph.getNodes();
-    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.visited; }));
 }
 
 
@@ -115,6 +115,6 @@ TEST_F(BFSTest, RepeatTraverse)
     EXPECT_THAT(*sequence, ElementsAre('c', 'b', 'd', 'e', 'a'));
 
     const auto& nodes = graph.getNodes();
-    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.isVisited(); }));
+    ASSERT_TRUE(std::all_of(nodes.begin(), nodes.end(), [](const auto& node) { return node.visited; }));
 }
 

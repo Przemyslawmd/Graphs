@@ -99,7 +99,7 @@ IsProperty Graph::isNodeVisited(char key)
         LogCollector::putError(Error::NO_NODE);
         return IsProperty::UNKNOWN;
     }
-    return it->isVisited() ? IsProperty::YES : IsProperty::NO;
+    return it->visited ? IsProperty::YES : IsProperty::NO;
 }
 
 
@@ -109,14 +109,14 @@ void Graph::setNodeAsVisited(char key)
     if (it == nodes.end()) {
         return;
     }
-    it->setVisited(true);
+    it->visited = true;
 }
 
 
 void Graph::resetVisitFlags()
 {
     for (auto& node : nodes) {
-        node.setVisited(false);
+        node.visited = false;
     }
 }
 
