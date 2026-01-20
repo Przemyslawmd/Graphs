@@ -23,7 +23,7 @@ public:
     void addNodes(const std::vector<char>& keys);
 
     void removeNode(char key);
-    void removeNodes(std::unique_ptr<std::vector<char>>& keys);
+    void removeNodes(const std::vector<char>& keys);
 
     void addEdge(char src, char dst);
     void addEdgeWeighted(char src, char dst, size_t weight);
@@ -32,7 +32,7 @@ public:
     void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
 
     void removeEdge(char src, char dst);
-    void removeEdges(std::unique_ptr<std::vector<std::tuple<char, char>>> edges);
+    void removeEdges(const std::vector<std::tuple<char, char>>& edges);
 
     std::unique_ptr<std::vector<char>> traverseBFS(char src);
     std::unique_ptr<std::vector<char>> traverseDFS(char src);
@@ -48,6 +48,8 @@ public:
 private:
 
     std::unique_ptr<Graph> graph;
+
+    bool graphEmpty();
 };
 
 #endif

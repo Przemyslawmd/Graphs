@@ -33,13 +33,18 @@ void GraphClient::addNodes(const std::vector<char>& keys)
 
 void GraphClient::removeNode(char key)
 {
-    graph->removeNode(key);
+    if (!graphEmpty()) {
+        graph->removeNode(key);
+    }
 }
 
 
-void GraphClient::removeNodes(std::unique_ptr<std::vector<char>>& keys)
+void GraphClient::removeNodes(const std::vector<char>& keys)
 {
-    for (char key : *keys) {
+    if (graphEmpty()) {
+        return;
+    }
+    for (char key : keys) {
         graph->removeNode(key);
     }
 }
@@ -47,37 +52,55 @@ void GraphClient::removeNodes(std::unique_ptr<std::vector<char>>& keys)
 
 void GraphClient::addEdge(char src, char dst)
 {
+    if (graphEmpty()) {
+        return;
+    }
     graph->addEdge(src, dst);
 }
 
 
 void GraphClient::addEdgeWeighted(char src, char dst, size_t weight)
 {
+    if (graphEmpty()) {
+        return;
+    }
     graph->addEdgeWeighted(src, dst, weight);
 }
 
 
 void GraphClient::addEdges(char src, const std::vector<char>& dst)
 {
+    if (graphEmpty()) {
+        return;
+    }
     graph->addEdges(src, dst);
 }
 
 
 void GraphClient::addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges)
 {
+    if (graphEmpty()) {
+        return;
+    }
     graph->addEdgesWeighted(src, edges);
 }
 
 
 void GraphClient::removeEdge(char src, char dst)
 {
+    if (graphEmpty()) {
+        return;
+    }
     graph->removeEdge(src, dst);
 }
 
 
-void GraphClient::removeEdges(std::unique_ptr<std::vector<std::tuple<char, char>>> edges)
+void GraphClient::removeEdges(const std::vector<std::tuple<char, char>>& edges)
 {
-    for (const auto& edge : *edges) {
+    if (graphEmpty()) {
+        return;
+    }
+    for (const auto& edge : edges) {
         graph->removeEdge(std::get<0>(edge), std::get<1>(edge));
     }
 }
@@ -85,8 +108,7 @@ void GraphClient::removeEdges(std::unique_ptr<std::vector<std::tuple<char, char>
 
 std::unique_ptr<std::vector<char>> GraphClient::traverseBFS(char src)
 {
-    if (graph->isEmpty()) {
-        LogCollector::putError(Error::NO_GRAPH);
+    if (graphEmpty()) {
         return nullptr;
     }
     BFS bfs{ *graph };
@@ -96,8 +118,7 @@ std::unique_ptr<std::vector<char>> GraphClient::traverseBFS(char src)
 
 std::unique_ptr<std::vector<char>> GraphClient::traverseDFS(char src)
 {
-    if (graph->isEmpty()) {
-        LogCollector::putError(Error::NO_GRAPH);
+    if (graphEmpty()) {
         return nullptr;
     }
     DFS dfs{ *graph };
@@ -107,8 +128,7 @@ std::unique_ptr<std::vector<char>> GraphClient::traverseDFS(char src)
 
 std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char dst)
 {
-    if (graph->isEmpty()) {
-        LogCollector::putError(Error::NO_GRAPH);
+    if (graphEmpty()) {
         return nullptr;
     }
 
@@ -135,8 +155,7 @@ std::unique_ptr<std::vector<char>> GraphClient::findShortestPath(char src, char 
 
 std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpanningTree()
 {
-    if (graph->isEmpty()) {
-        LogCollector::putError(Error::NO_GRAPH);
+    if (graphEmpty()) {
         return nullptr;
     }
 
@@ -153,8 +172,7 @@ std::unique_ptr<std::vector<std::tuple<char, char>>> GraphClient::findMinSpannin
 
 std::unique_ptr<std::vector<std::tuple<char, uint8_t>>> GraphClient::colorGraph()
 {
-    if (graph->isEmpty()) {
-        LogCollector::putError(Error::NO_GRAPH);
+    if (graphEmpty()) {
         return nullptr;
     }
 
@@ -171,16 +189,26 @@ std::unique_ptr<std::vector<std::tuple<char, uint8_t>>> GraphClient::colorGraph(
 
 void GraphClient::resetColors()
 {
-    if (graph->isEmpty()) {
-        LogCollector::putError(Error::NO_GRAPH);
-        return;
+    if (!graphEmpty()) {
+        graph->resetColors();
     }
-    graph->resetColors();
 }
 
 
 std::optional<std::string> GraphClient::getLastErrorMessage()
 {
     return LogCollector::getLastMessage();
+}
+
+/************************************** PRIVATE ***********************************************/
+/**********************************************************************************************/
+
+bool GraphClient::graphEmpty()
+{
+    if (graph->isEmpty()) {
+        LogCollector::putError(Error::NO_GRAPH);
+        return true;
+    }
+    return false;
 }
 
