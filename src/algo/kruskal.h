@@ -10,9 +10,9 @@
 #include "graph/edge.h"
 
 
-struct PartialTree {
-
-    PartialTree(char key, size_t tree) : key(key), tree(tree) {}
+struct PartialTree
+{
+    PartialTree(char key, size_t tree) : key{ key }, tree{ tree } {}
     const char key;
     size_t tree;
 };

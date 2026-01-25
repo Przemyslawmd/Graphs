@@ -4,10 +4,10 @@
 #include <algorithm>
 #include <ranges>
 
-constexpr int NOT_ATTACHED = 0;
+constexpr size_t NOT_ATTACHED = 0;
 
 
-Kruskal::Kruskal(Graph& graph) : graph(graph) {}
+Kruskal::Kruskal(Graph& graph) : graph{ graph } {}
 
 
 std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
@@ -17,32 +17,31 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
 
     auto spanningTree = std::make_unique<std::vector<Edge>>();
     spanningTree->reserve(sortedEdges->size());
-
-    int lastPartialTree = 0;
+    size_t lastPartialTree = 0;
 
     while (sortedEdges->empty() == false) {
 
         Edge edge = sortedEdges->back();
         sortedEdges->pop_back();
 
-        auto src = std::find_if(trees->begin(), trees->end(), [&edge](const auto& tree) { return tree.key == edge.src; });
-        auto dst = std::find_if(trees->begin(), trees->end(), [&edge](const auto& tree) { return tree.key == edge.dst; });
+        auto src = std::ranges::find_if(*trees, [&edge](const auto& tree) { return tree.key == edge.src; });
+        auto dst = std::ranges::find_if(*trees, [&edge](const auto& tree) { return tree.key == edge.dst; });
 
-        if (src->tree != NOT_ATTACHED && src->tree == dst->tree) {
+        if (src->tree && src->tree == dst->tree) {
             continue;
         }
 
-        if (src->tree == NOT_ATTACHED && dst->tree == NOT_ATTACHED) {
+        if (!src->tree && !dst->tree) {
             lastPartialTree++;
             src->tree = lastPartialTree;
             dst->tree = lastPartialTree;
         }
-        else if (src->tree == NOT_ATTACHED) {
+        else if (!src->tree) {
             src->tree = dst->tree;
         }
-        else if (src->tree != NOT_ATTACHED && dst->tree != NOT_ATTACHED && src->tree != dst->tree) {
-            int toExtend = src->tree < dst->tree ? src->tree : dst->tree;
-            int toDelete = toExtend == src->tree ? dst->tree : src->tree;
+        else if (src->tree && dst->tree && src->tree != dst->tree) {
+            size_t toExtend = src->tree < dst->tree ? src->tree : dst->tree;
+            size_t toDelete = toExtend == src->tree ? dst->tree : src->tree;
             for (auto& tree : *trees) {
                 if (tree.tree == toDelete) {
                     tree.tree = toExtend;
