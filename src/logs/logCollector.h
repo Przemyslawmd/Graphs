@@ -39,6 +39,7 @@ private:
 
     inline static const std::map<Error, std::string> message =
     {
+        { Error::NO_COLOR,      "Coloring graph failed" },
         { Error::NO_CONNECTION, "Connection does not exist" },
         { Error::NO_GRAPH,      "Graph does not exist" },
         { Error::NO_NODE,       "Node does not exist" },

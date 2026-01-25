@@ -45,8 +45,8 @@ public:
     void resetVisitFlags();
 
     void resetColors();
-    void setNodeColor(char key, uint16_t color);
-    uint16_t getNodeColor(char key);
+    void setNodeColor(char key, uint8_t color);
+    uint8_t getNodeColor(char key);
 
     size_t getSize();
     bool isEmpty();

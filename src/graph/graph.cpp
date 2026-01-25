@@ -6,7 +6,7 @@
 #include "logs/logCollector.h"
 
 
-Graph::Graph(bool isDirected): isDirected(isDirected) {}
+Graph::Graph(bool isDirected): isDirected{ isDirected } {}
 
 
 void Graph::addNode(char key)
@@ -129,7 +129,7 @@ void Graph::resetColors()
 }
 
 
-uint16_t Graph::getNodeColor(char key)
+uint8_t Graph::getNodeColor(char key)
 {
     auto it = findNode(key);
     if (it == nodes.end()) {
@@ -140,10 +140,11 @@ uint16_t Graph::getNodeColor(char key)
 }
 
 
-void Graph::setNodeColor(char key, uint16_t color)
+void Graph::setNodeColor(char key, uint8_t color)
 {
     auto it = findNode(key);
     if (it == nodes.end()) {
+        LogCollector::putError(Error::NO_NODE);
         return;
     }
     it->color = color;

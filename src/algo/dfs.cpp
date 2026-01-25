@@ -2,7 +2,7 @@
 #include "dfs.h"
 
 
-DFS::DFS(Graph& graph) : graph(graph) {}
+DFS::DFS(Graph& graph) : graph{ graph } {}
 
 
 std::unique_ptr<std::vector<char>> DFS::traverseGraph(const char key)

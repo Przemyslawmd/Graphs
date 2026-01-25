@@ -3,7 +3,7 @@
 
 #include <bits/stdc++.h>
 
-Color::Color(Graph& graph) : graph(graph) {}
+Color::Color(Graph& graph) : graph{ graph } {}
 
 
 void Color::colorGraph()

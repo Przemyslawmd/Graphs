@@ -2,7 +2,7 @@
 #include "bfs.h"
 
 
-BFS::BFS(Graph& graph) : graph(graph) {}
+BFS::BFS(Graph& graph) : graph{ graph } {}
 
 
 std::unique_ptr<std::vector<char>> BFS::traverseGraph(char key)

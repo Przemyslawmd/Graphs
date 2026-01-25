@@ -5,6 +5,7 @@
 
 enum class Error
 {
+    NO_COLOR,
     NO_CONNECTION,
     NO_GRAPH,
     NO_NODE,

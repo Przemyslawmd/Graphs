@@ -181,6 +181,10 @@ std::unique_ptr<std::vector<std::tuple<char, uint8_t>>> GraphClient::colorGraph(
 
     auto colors = std::make_unique<std::vector<std::tuple<char, uint8_t>>>();
     for (const auto& node : graph->getNodes()) {
+        if (!node.color) {
+            LogCollector::putError(Error::NO_COLOR);
+            return nullptr;
+        }
         colors->emplace_back(node.getKey(), node.color);
     }
     return colors;
