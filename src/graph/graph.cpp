@@ -11,6 +11,10 @@ Graph::Graph(bool isDirected): isDirected{ isDirected } {}
 
 void Graph::addNode(char key)
 {
+    if (nodes.size() == MAX_NODES_NUMBER) {
+        LogCollector::putError(Error::MAX_NODES);
+        return;
+    }
     if (isNodeExist(key) == false) {
         nodes.emplace_back(key);
     }
@@ -19,6 +23,10 @@ void Graph::addNode(char key)
 
 void Graph::addNodes(const std::vector<char>& keys)
 {
+    if (nodes.size() == MAX_NODES_NUMBER) {
+        LogCollector::putError(Error::MAX_NODES);
+        return;
+    }
     for (const auto key : keys) {
         addNode(key);
     }

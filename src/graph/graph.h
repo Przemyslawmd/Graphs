@@ -10,6 +10,7 @@
 #include "edge.h"
 #include "node.h"
 
+constexpr size_t MAX_NODES_NUMBER = 255;
 
 enum class IsProperty 
 {

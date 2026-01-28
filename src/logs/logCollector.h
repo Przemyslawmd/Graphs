@@ -39,6 +39,7 @@ private:
 
     inline static const std::map<Error, std::string> message =
     {
+        { Error::MAX_NODES,     "Maximum number of nodes in the graph - 255" },
         { Error::NO_COLOR,      "Coloring graph failed" },
         { Error::NO_CONNECTION, "Connection does not exist" },
         { Error::NO_GRAPH,      "Graph does not exist" },
