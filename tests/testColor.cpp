@@ -67,7 +67,7 @@ TEST_F(ColorTest, SixteenNodesA)
     Color color{ graph };
     color.colorGraph();
 
-    const std::map<char, uint8_t> expected = 
+    const std::map<char, uint8_t> expected =
         {{ 'a', 1 }, { 'b', 2 }, { 'c', 3 }, { 'd', 1 }, { 'e', 2 }, { 'f', 3 }, { 'g', 3 }, { 'h', 4 },
          { 'i', 4 }, { 'j', 2 }, { 'k', 5 }, { 'l', 6 }, { 'm', 6 }, { 'n', 1 }, { 'o', 5 }, { 'p', 4 }};
     const auto& nodes = graph.getNodes();
@@ -100,6 +100,20 @@ TEST_F(ColorTest, SixteenNodesC)
     const std::map<char, uint8_t> expected = 
         {{ 'a', 1 }, { 'b', 2 }, { 'c', 2 }, { 'd', 1 }, { 'e', 2 }, { 'f', 1 }, { 'g', 3 }, { 'h', 3 },
          { 'i', 1 }, { 'j', 3 }, { 'k', 3 }, { 'l', 2 }, { 'm', 2 }, { 'n', 1 }, { 'o', 4 }, { 'p', 2 }};
+    const auto& nodes = graph.getNodes();
+    checkNodesColors(nodes, expected);
+}
+
+
+TEST_F(ColorTest, FourNodes_Directed)
+{
+    Graph graph{ true };
+    GraphFactory::createGraph(graph, GraphType::Unweighted_FourNodes);
+    Color color{ graph };
+    color.colorGraph();
+
+    const std::map<char, uint8_t> expected = 
+        {{ 'a', 1 }, { 'b', 2 }, { 'c', 3 }, { 'd', 1 }};
     const auto& nodes = graph.getNodes();
     checkNodesColors(nodes, expected);
 }

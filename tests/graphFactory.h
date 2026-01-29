@@ -3,6 +3,7 @@
 
 
 enum class GraphType {
+    Unweighted_FourNodes,
     Unweighted_FiveNodes,               // A graph on a picture
     Unweighted_SevenNodes,              // B
     Unweighted_FourteenNodes,           // C
@@ -26,12 +27,18 @@ public:
     {
         switch(type)
         {
+            case GraphType::Unweighted_FourNodes:
+                graph.addEdges('a', { 'b' });
+                graph.addEdges('b', { 'c', 'd' });
+                graph.addEdges('c', { 'a', 'b', 'd' });
+                graph.addEdges('d', { 'c' });
+                break;
             case GraphType::Unweighted_FiveNodes:
                 graph.addEdges('a', { 'b' });
                 graph.addEdges('b', { 'a', 'c' });
                 graph.addEdges('c', { 'b', 'd', 'e' });
-                graph.addEdges('d', { 'c', 'e' });
-                graph.addEdges('e', { 'c', 'd' });
+                graph.addEdges('d', { 'c' });
+                graph.addEdges('e', { 'd' });
                 break;
             case GraphType::Unweighted_SevenNodes:
                 graph.addEdges('a', { 'b', 'd' });

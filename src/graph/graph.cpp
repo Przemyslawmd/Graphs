@@ -6,7 +6,7 @@
 #include "logs/logCollector.h"
 
 
-Graph::Graph(bool isDirected): isDirected{ isDirected } {}
+Graph::Graph(bool isDirected): directed{ isDirected } {}
 
 
 void Graph::addNode(char key)
@@ -94,7 +94,7 @@ void Graph::addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t
 void Graph::removeEdge(char src, char dst)
 {
     deleteEdge(src, dst);
-    if (!isDirected) {
+    if (!directed) {
         deleteEdge(dst, src);
     }
 }
@@ -170,6 +170,12 @@ bool Graph::isEmpty()
     return nodes.empty();
 }
 
+
+bool Graph::isDirected()
+{
+    return directed;
+}
+
 /************************************** PRIVATE ***********************************************/
 /**********************************************************************************************/
 
@@ -184,9 +190,9 @@ void Graph::createEdge(char src, char dst, size_t weight)
     }
 
     updateAdjacency(src, dst, weight);
-    if (!isDirected) {
+    if (!directed) {
         updateAdjacency(dst, src, weight);
-    } 
+    }
 }
 
 

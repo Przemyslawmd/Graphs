@@ -39,7 +39,7 @@ public:
     void addEdgeWeighted(char src, char dstKeys, size_t weight);
     void addEdgesWeighted(char src, const std::vector<std::tuple<char, size_t>>& edges);
 
-    void removeEdge(char srcKey, char dst);
+    void removeEdge(char src, char dst);
 
     IsProperty isNodeVisited(char key);
     void setNodeAsVisited(char key);
@@ -51,6 +51,7 @@ public:
 
     size_t getSize();
     bool isEmpty();
+    bool isDirected();
 
     const std::map<char, std::list<Edge>>& getAdjacency();
 
@@ -63,7 +64,7 @@ private:
     bool isNodeExist(char key);
     std::vector<Node>::iterator findNode(const char key);
 
-    const bool isDirected;
+    const bool directed;
 
     std::vector<Node> nodes;
     std::map<char, std::list<Edge>> adjacency;

@@ -25,9 +25,10 @@ public:
 private:
 
     void processQueue(const std::map<char, std::list<Edge>>&);
+    void biDirectAdjacency(std::map<char, std::list<Edge>>&);
 
     Graph& graph;
-    std::map<uint16_t, bool> colorPool;
+    std::map<uint8_t, bool> colorPool;
     std::queue<char> nodesQueue;
 };
 

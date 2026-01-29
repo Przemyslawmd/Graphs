@@ -2,6 +2,8 @@
 #include "color.h"
 
 #include <bits/stdc++.h>
+#include <ranges>
+
 
 Color::Color(Graph& graph) : graph{ graph } {}
 
@@ -11,13 +13,16 @@ void Color::colorGraph()
     graph.resetVisitFlags();
     graph.resetColors();
 
-    for (uint16_t i = 1; i <= graph.getSize(); i++) {
+    for (uint8_t i = 1; i <= graph.getSize(); i++) {
         colorPool.insert({ i, false });
     }
 
-    const auto& adjacency = graph.getAdjacency();
-    nodesQueue.push(adjacency.begin()->first);
+    auto adjacency{ graph.getAdjacency() };
+    if (graph.isDirected()) {
+        biDirectAdjacency(adjacency);
+    }
 
+    nodesQueue.push(adjacency.begin()->first);
     while (nodesQueue.empty() == false) {
         processQueue(adjacency);
         nodesQueue.pop();
@@ -30,11 +35,11 @@ void Color::processQueue(const std::map<char, std::list<Edge>>& adjacency)
     const char key = nodesQueue.front();
     graph.setNodeAsVisited(key);
 
-    for (auto& [_, value] : colorPool) value = false;
-
     if (adjacency.contains(key) == false) {
         return;
     }
+
+    for (auto& [_, value] : colorPool) value = false;
 
     for (const auto& edge : adjacency.at(key)) {
         if (graph.isNodeVisited(edge.dst) == IsProperty::NO) {
@@ -46,10 +51,23 @@ void Color::processQueue(const std::map<char, std::list<Edge>>& adjacency)
         }
     }
 
-    for (const auto& [colorID, value] : colorPool) {
-        if (value == false) {
+    for (const auto& [colorID, isUsed] : colorPool) {
+        if (!isUsed) {
             graph.setNodeColor(key, colorID);
             break;
+        }
+    }
+}
+
+
+void Color::biDirectAdjacency(std::map<char, std::list<Edge>>& adjacency)
+{
+    for (auto& [key, edges] : adjacency) {
+        for (auto& edge : edges) {
+            auto& adjacencyDst = adjacency.at(edge.dst);
+            if (std::ranges::find_if(adjacencyDst, [key](const auto& edge) { return edge.dst == key; }) == adjacencyDst.end()) {
+                adjacencyDst.emplace_back(edge.dst, key, edge.weight);
+            }
         }
     }
 }
