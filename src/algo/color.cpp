@@ -19,7 +19,7 @@ void Color::colorGraph()
 
     auto adjacency{ graph.getAdjacency() };
     if (graph.isDirected()) {
-        biDirectAdjacency(adjacency);
+        extendAdjacency(adjacency);
     }
 
     nodesQueue.push(adjacency.begin()->first);
@@ -60,10 +60,13 @@ void Color::processQueue(const std::map<char, std::list<Edge>>& adjacency)
 }
 
 
-void Color::biDirectAdjacency(std::map<char, std::list<Edge>>& adjacency)
+void Color::extendAdjacency(std::map<char, std::list<Edge>>& adjacency)
 {
     for (auto& [key, edges] : adjacency) {
         for (auto& edge : edges) {
+            if (!adjacency.contains(edge.dst)) {
+                adjacency.insert(std::make_pair(edge.dst, std::list<Edge>{}));
+            }
             auto& adjacencyDst = adjacency.at(edge.dst);
             if (std::ranges::find_if(adjacencyDst, [key](const auto& edge) { return edge.dst == key; }) == adjacencyDst.end()) {
                 adjacencyDst.emplace_back(edge.dst, key, edge.weight);
