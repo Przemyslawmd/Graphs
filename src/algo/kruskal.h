@@ -10,11 +10,11 @@
 #include "graph/edge.h"
 
 
-struct PartialTree
+struct Tree
 {
-    PartialTree(char key, size_t tree) : key{ key }, tree{ tree } {}
+    Tree(char key, size_t treeID) : key{ key }, treeID{ treeID } {}
     const char key;
-    size_t tree;
+    size_t treeID;
 };
 
 
@@ -33,7 +33,7 @@ public:
 private:
 
     std::unique_ptr<std::list<Edge>> createSortedEdges();
-    std::unique_ptr<std::vector<PartialTree>> createPartialTrees();
+    std::unique_ptr<std::vector<Tree>> createInitialTrees();
 
     Graph& graph;
 };

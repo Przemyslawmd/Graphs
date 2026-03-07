@@ -13,11 +13,11 @@ Kruskal::Kruskal(Graph& graph) : graph{ graph } {}
 std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
 {
     auto sortedEdges = createSortedEdges();
-    auto trees = createPartialTrees();
+    auto trees = createInitialTrees();
 
     auto spanningTree = std::make_unique<std::vector<Edge>>();
     spanningTree->reserve(sortedEdges->size());
-    size_t lastPartialTree = 0;
+    size_t lastTreeID = 0;
 
     while (sortedEdges->empty() == false) {
 
@@ -27,29 +27,29 @@ std::unique_ptr<std::vector<Edge>> Kruskal::makeMinSpanningTree()
         auto src = std::ranges::find_if(*trees, [&edge](const auto& tree) { return tree.key == edge.src; });
         auto dst = std::ranges::find_if(*trees, [&edge](const auto& tree) { return tree.key == edge.dst; });
 
-        if (src->tree && src->tree == dst->tree) {
+        if (src->treeID && src->treeID == dst->treeID) {
             continue;
         }
 
-        if (!src->tree && !dst->tree) {
-            lastPartialTree++;
-            src->tree = lastPartialTree;
-            dst->tree = lastPartialTree;
+        if (src->treeID == NOT_ATTACHED && dst->treeID == NOT_ATTACHED) {
+            lastTreeID++;
+            src->treeID = lastTreeID;
+            dst->treeID = lastTreeID;
         }
-        else if (!src->tree) {
-            src->tree = dst->tree;
+        else if (src->treeID == NOT_ATTACHED) {
+            src->treeID = dst->treeID;
         }
-        else if (src->tree && dst->tree && src->tree != dst->tree) {
-            size_t toExtend = src->tree < dst->tree ? src->tree : dst->tree;
-            size_t toDelete = toExtend == src->tree ? dst->tree : src->tree;
+        else if (src->treeID && dst->treeID && src->treeID != dst->treeID) {
+            size_t toExtend = src->treeID < dst->treeID ? src->treeID : dst->treeID;
+            size_t toDelete = toExtend == src->treeID ? dst->treeID : src->treeID;
             for (auto& tree : *trees) {
-                if (tree.tree == toDelete) {
-                    tree.tree = toExtend;
+                if (tree.treeID == toDelete) {
+                    tree.treeID = toExtend;
                 }
             }
         }
         else {
-            dst->tree = src->tree;
+            dst->treeID = src->treeID;
         }
         spanningTree->push_back(std::move(edge));
     }
@@ -72,9 +72,9 @@ std::unique_ptr<std::list<Edge>> Kruskal::createSortedEdges()
 }
 
 
-std::unique_ptr<std::vector<PartialTree>> Kruskal::createPartialTrees()
+std::unique_ptr<std::vector<Tree>> Kruskal::createInitialTrees()
 {
-    auto trees = std::make_unique<std::vector<PartialTree>>();
+    auto trees = std::make_unique<std::vector<Tree>>();
     const auto& adjacency = graph.getAdjacency();
     trees->reserve(adjacency.size());
     for (const auto& key : adjacency | std::views::keys) {
