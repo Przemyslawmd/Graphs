@@ -1,7 +1,6 @@
 
 #include "color.h"
 
-#include <bits/stdc++.h>
 #include <ranges>
 
 
